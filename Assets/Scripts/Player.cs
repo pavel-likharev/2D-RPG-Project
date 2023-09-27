@@ -30,6 +30,11 @@ public class Player : MonoBehaviour
     public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
     #endregion
 
+    public bool IsBusy { get; private set; }
+
+    [Header("Attack info")]
+    public Vector2[] attackMovements;
+
     [Header("Move info")]
     public float moveSpeed = 8f;
     public float jumpForce = 15f;
@@ -80,31 +85,24 @@ public class Player : MonoBehaviour
         CheckForDashInput();
     }
 
-    public void SetVelocity(float xVelocity, float yVelocity)
+    public IEnumerator BusyFor(float seconds)
     {
-        Rb.velocity = new Vector2(xVelocity, yVelocity);
-        FlipSpriteController(xVelocity);
-    }
+        IsBusy = true;
+        Debug.Log(IsBusy);
 
-    public bool IsGroundedDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * MoveDir, wallCheckDistance, groundLayer);
+        yield return new WaitForSeconds(seconds);
+        Debug.Log(IsBusy);
+        IsBusy = false;
+    }
+    private void CheckTimers()
+    {
+        if (dashCooldownTimer > 0)
+        {
+            dashCooldownTimer -= Time.deltaTime;
+        }
+    }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-
-    public void FlipSprite()
-    {
-        MoveDir = -MoveDir;
-        isMoveRight = !isMoveRight;
-        transform.localScale = new Vector3(MoveDir, transform.localScale.y);
-    }
-
-    public void FlipSpriteController(float xDir)
-    {
-        if (xDir > 0 && !isMoveRight)
-            FlipSprite();
-        else if (xDir < 0 && isMoveRight) 
-            FlipSprite();
-    }
 
     private void CheckForDashInput()
     {
@@ -123,17 +121,40 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CheckTimers()
+    #region Velocity
+    public void SetVelocity(float xVelocity, float yVelocity)
     {
-        if (dashCooldownTimer > 0)
-        {
-            dashCooldownTimer -= Time.deltaTime;
-        }
+        Rb.velocity = new Vector2(xVelocity, yVelocity);
+        FlipSpriteController(xVelocity);
     }
 
+    public void ZeroVelocity() => Rb.velocity = new Vector2(0, 0);
+    #endregion
+
+    #region Flip
+    public void FlipSprite()
+    {
+        MoveDir = -MoveDir;
+        isMoveRight = !isMoveRight;
+        transform.localScale = new Vector3(MoveDir, transform.localScale.y);
+    }
+
+    public void FlipSpriteController(float xDir)
+    {
+        if (xDir > 0 && !isMoveRight)
+            FlipSprite();
+        else if (xDir < 0 && isMoveRight) 
+            FlipSprite();
+    }
+    #endregion
+
+    #region Collision
+    public bool IsGroundedDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * MoveDir, wallCheckDistance, groundLayer);
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
+    #endregion
 }

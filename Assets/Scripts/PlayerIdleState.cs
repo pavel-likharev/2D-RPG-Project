@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        player.SetVelocity(0, 0);
+        player.ZeroVelocity();
     }
 
     public override void Exit()
@@ -29,7 +29,7 @@ public class PlayerIdleState : PlayerGroundedState
             return;
         }
 
-        if (xInput != 0)
+        if (xInput != 0 && !player.IsBusy)
         {
             stateMachine.ChangeState(player.MoveState);
         }
