@@ -22,10 +22,10 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Update();
 
-        if ((xInput != 0 && xInput != player.MoveDir))
-        {
-            stateMachine.ChangeState(player.IdleState);
-        }
+        //if ((xInput != 0 && xInput != player.MoveDir))
+        //{
+        //    stateMachine.ChangeState(player.IdleState);
+        //}
 
         if (yInput < 0)
         {
