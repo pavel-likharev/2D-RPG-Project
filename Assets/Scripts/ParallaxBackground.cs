@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(300)]
 public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] private GameObject cam;

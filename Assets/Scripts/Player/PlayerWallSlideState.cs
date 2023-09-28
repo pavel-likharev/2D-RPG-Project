@@ -22,6 +22,8 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Update();
 
+        // When player press button a or d if he do moveskide - he fall from wall 
+
         //if ((xInput != 0 && xInput != player.MoveDir))
         //{
         //    stateMachine.ChangeState(player.IdleState);
@@ -36,15 +38,16 @@ public class PlayerWallSlideState : PlayerState
             player.SetVelocity(0, rb.velocity.y * 0.7f);
         }
 
+        if (player.IsGroundedDetected() || !player.IsWallDetected())
+        {
+            stateMachine.ChangeState(player.IdleState);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             stateMachine.ChangeState(player.WallJumpState);
         }
 
 
-        if (player.IsGroundedDetected())
-        {
-            stateMachine.ChangeState(player.IdleState);
-        }
     }
 }
