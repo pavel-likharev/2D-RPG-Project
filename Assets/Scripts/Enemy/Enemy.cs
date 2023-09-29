@@ -13,7 +13,7 @@ public class Enemy : Character
     [SerializeField] public float moveSpeed = 1.5f;
     [SerializeField] public float idleTime = 1.5f;
 
-    [Header("Attack info")]
+    [Header("Battle info")]
     public float agressiveDistance = 10f;
     public float visibleDistance = 2f;
     public float attackDistance = 1f;

@@ -14,6 +14,8 @@ public class Character : MonoBehaviour
     #region Components
     public Animator Animator { get; private set; }
     public Rigidbody2D Rb { get; private set; }
+
+    public CharacterFX CharacterFX { get; private set; }
     #endregion
 
     public int MoveDir { get; private set; } = 1;
@@ -26,22 +28,33 @@ public class Character : MonoBehaviour
     [SerializeField] protected float wallCheckDistance = 1f;
     protected LayerMask groundLayer;
 
+    [Header("Attack info")]
+    public Transform attackCheck;
+    public float attackCheckRadius;
+
     protected virtual void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
         Rb = GetComponent<Rigidbody2D>();
+        CharacterFX = GetComponentInChildren<CharacterFX>();
 
         groundLayer = LayerMask.GetMask("Ground");
     }
 
     protected virtual void Start()
     {
-
+  
     }
 
     protected virtual void Update()
     {
         
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log(this + " was damage");
+        CharacterFX.StartCoroutine("HitFX");
     }
 
     #region Collision
@@ -51,6 +64,7 @@ public class Character : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * MoveDir, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
 
