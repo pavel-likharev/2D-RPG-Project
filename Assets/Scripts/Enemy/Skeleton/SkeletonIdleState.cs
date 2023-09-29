@@ -12,8 +12,6 @@ public class SkeletonIdleState : SkeletonGroundedState
     {
         base.Enter();
 
-        enemySkeleton.ZeroVelocity();
-
         stateTimer = enemySkeleton.idleTime;
     }
 

@@ -50,16 +50,16 @@ public class Character : MonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * MoveDir, wallCheck.position.y));
     }
     #endregion
 
     #region Flip
     public void FlipSprite()
-    {
+    {       
         MoveDir = -MoveDir;
         isMoveRight = !isMoveRight;
-        transform.localScale = new Vector3(MoveDir, transform.localScale.y);
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public void FlipSpriteController(float xDir)
@@ -78,6 +78,6 @@ public class Character : MonoBehaviour
         FlipSpriteController(xVelocity);
     }
 
-    public void ZeroVelocity() => Rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity() => Rb.velocity = new Vector2(0, 0);
     #endregion
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-
     [SerializeField] protected Transform playerCheck;
     [SerializeField] protected float playerCheckDistance = 5f;
     protected LayerMask playerLayer;
@@ -13,6 +12,15 @@ public class Enemy : Character
     [Header("Move info")]
     [SerializeField] public float moveSpeed = 1.5f;
     [SerializeField] public float idleTime = 1.5f;
+
+    [Header("Attack info")]
+    public float agressiveDistance = 10f;
+    public float visibleDistance = 2f;
+    public float attackDistance = 1f;
+    public float attackCooldown = 2f;
+    public float battleTime = 2f;
+    [HideInInspector] public float lastTimeAttack;
+
 
     public EnemyStateMachine StateMachine { get; private set; }
 
@@ -23,7 +31,7 @@ public class Enemy : Character
 
         StateMachine = new EnemyStateMachine();
 
-        groundLayer = LayerMask.GetMask("Player");
+        playerLayer = LayerMask.GetMask("Player");
     }
 
     protected override void Start()
@@ -39,12 +47,18 @@ public class Enemy : Character
         StateMachine.CurrentState.Update();
     }
 
+    public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
     #region Collusion
     public RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance, playerLayer);
 
     protected override void OnDrawGizmos()
     {
-        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + playerCheckDistance, playerCheck.position.y));
+        base.OnDrawGizmos();
+
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + playerCheckDistance * MoveDir, playerCheck.position.y));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + attackDistance * MoveDir, playerCheck.position.y));
     }
     #endregion
 }
