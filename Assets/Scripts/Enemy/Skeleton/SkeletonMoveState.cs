@@ -24,16 +24,11 @@ public class SkeletonMoveState : SkeletonGroundedState
     {
         base.Update();
 
-        enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * enemySkeleton.MoveDir, rb.velocity.y);
-
-        if (!enemySkeleton.IsGroundedDetected() || enemySkeleton.IsWallDetected())
-        {
-            enemySkeleton.FlipSprite();
-        }
-
         if (stateTimer <= 0)
         {
             stateMachine.ChangeState(enemySkeleton.IdleState);
         }
+
+        enemySkeleton.SetVelocity(enemy.moveSpeed * enemySkeleton.MoveDir, rb.velocity.y);
     }
 }

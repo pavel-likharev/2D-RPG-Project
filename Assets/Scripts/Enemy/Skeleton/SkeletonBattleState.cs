@@ -30,6 +30,28 @@ public class SkeletonBattleState : EnemyState
     {
         base.Update();
 
+        if (enemySkeleton.IsPlayerDetected())
+        {
+            stateTimer = enemySkeleton.battleTime;
+
+            if (enemySkeleton.IsPlayerDetected().distance < enemySkeleton.attackDistance)
+            {
+                if (CanAttack())
+                {
+                    stateMachine.ChangeState(enemySkeleton.AttackState);
+                }
+            }
+        }
+        else
+        {
+            if (stateTimer <= 0 || Vector2.Distance(enemySkeleton.transform.position, player.position) > enemySkeleton.agressiveDistance)
+            {
+                stateMachine.ChangeState(enemySkeleton.IdleState);
+            }
+        }
+
+        
+
         if (player.position.x > enemySkeleton.transform.position.x)
         {
             moveDir = 1;
@@ -40,5 +62,9 @@ public class SkeletonBattleState : EnemyState
         }
 
         enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * moveDir, rb.velocity.y);
+
     }
+
+    private bool CanAttack() => Time.time >= enemySkeleton.lastTimeAttack + enemySkeleton.attackCooldown;
+    
 }
