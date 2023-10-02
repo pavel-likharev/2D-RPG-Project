@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    protected const string IS_STUNNED = "IsStunned";
+
     [SerializeField] protected Transform playerCheck;
     [SerializeField] protected float playerCheckDistance = 5f;
     protected LayerMask playerLayer;
@@ -13,7 +15,7 @@ public class Enemy : Character
     [SerializeField] public float moveSpeed = 1.5f;
     [SerializeField] public float idleTime = 1.5f;
 
-    [Header("Attack info")]
+    [Header("Battle info")]
     public float agressiveDistance = 10f;
     public float visibleDistance = 2f;
     public float attackDistance = 1f;
@@ -21,6 +23,11 @@ public class Enemy : Character
     public float battleTime = 2f;
     [HideInInspector] public float lastTimeAttack;
 
+    [Header("Stun info")]
+    public float stunDuration = 2f;
+    public Vector2 stunDir;
+    protected bool isCanBeStunned;
+    [SerializeField] protected GameObject counterImage;
 
     public EnemyStateMachine StateMachine { get; private set; }
 
@@ -45,9 +52,35 @@ public class Enemy : Character
         base.Update();
 
         StateMachine.CurrentState.Update();
+
     }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+    public virtual void OpenCounterAttackWindow()
+    {
+        isCanBeStunned = true;
+
+        counterImage.SetActive(true);
+    }
+
+    public virtual void CloseCounterAttackWindow()
+    {
+        isCanBeStunned = false;
+
+        counterImage.SetActive(false);
+    }
+
+    public virtual bool CanBeStunned()
+    {
+        if (isCanBeStunned)
+        {
+            CloseCounterAttackWindow();
+            return true;
+        }
+
+        return false;
+    }
 
     #region Collusion
     public RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance, playerLayer);

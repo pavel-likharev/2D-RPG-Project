@@ -14,6 +14,8 @@ public class Character : MonoBehaviour
     #region Components
     public Animator Animator { get; private set; }
     public Rigidbody2D Rb { get; private set; }
+
+    public CharacterFX CharacterFX { get; private set; }
     #endregion
 
     public int MoveDir { get; private set; } = 1;
@@ -26,22 +28,52 @@ public class Character : MonoBehaviour
     [SerializeField] protected float wallCheckDistance = 1f;
     protected LayerMask groundLayer;
 
+    [Header("Attack info")]
+    public Transform attackCheck;
+    public float attackCheckRadius;
+
+    [Header("Knockback info")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration = 0.07f;
+    protected bool isKnocbacked;
+
+
     protected virtual void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
         Rb = GetComponent<Rigidbody2D>();
+        CharacterFX = GetComponentInChildren<CharacterFX>();
 
         groundLayer = LayerMask.GetMask("Ground");
     }
 
     protected virtual void Start()
     {
-
+  
     }
 
     protected virtual void Update()
     {
         
+    }
+
+    public void TakeDamage(int knockbackDir)
+    {
+        Debug.Log(this + " was damage");
+        CharacterFX.StartCoroutine("HitFX");
+
+        StartCoroutine("HitKnockback", knockbackDir);
+    }
+
+    protected virtual IEnumerator HitKnockback(int knockbackDir)
+    {
+        isKnocbacked = true;
+
+        Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y); 
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnocbacked = false;
     }
 
     #region Collision
@@ -51,6 +83,7 @@ public class Character : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance * MoveDir, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
     #endregion
 
@@ -74,10 +107,19 @@ public class Character : MonoBehaviour
     #region Velocity
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocbacked)
+            return;
+
         Rb.velocity = new Vector2(xVelocity, yVelocity);
         FlipSpriteController(xVelocity);
     }
 
-    public void SetZeroVelocity() => Rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity() 
+    {
+        if (isKnocbacked)
+            return;
+
+        Rb.velocity = new Vector2(0, 0); 
+    }
     #endregion
 }

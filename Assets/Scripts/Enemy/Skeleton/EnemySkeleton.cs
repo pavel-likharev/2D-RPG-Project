@@ -9,6 +9,7 @@ public class EnemySkeleton : Enemy
     public SkeletonMoveState MoveState { get; private set; }
     public SkeletonBattleState BattleState { get; private set; }
     public SkeletonAttackState AttackState { get; private set; }
+    public SkeletonStunnedState StunnedState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -19,6 +20,7 @@ public class EnemySkeleton : Enemy
         MoveState = new SkeletonMoveState(this, StateMachine, IS_MOVE, this);
         BattleState = new SkeletonBattleState(this, StateMachine, IS_MOVE, this);
         AttackState = new SkeletonAttackState(this, StateMachine, IS_ATTACK, this);
+        StunnedState = new SkeletonStunnedState(this, StateMachine, IS_STUNNED, this);
     }
 
     protected override void Start()
@@ -33,5 +35,22 @@ public class EnemySkeleton : Enemy
     protected override void Update()
     {
         base.Update();
+
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            StateMachine.ChangeState(StunnedState);
+        }
+    }
+
+    public override bool CanBeStunned()
+    {
+        if (base.CanBeStunned())
+        {
+            StateMachine.ChangeState(StunnedState);
+            return true;
+        }
+
+        return false;
     }
 }
