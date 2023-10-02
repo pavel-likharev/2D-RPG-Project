@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerDashState : PlayerState
@@ -11,6 +12,8 @@ public class PlayerDashState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        SkillManager.Instance.SkillClone.CreateClone(player.transform);
 
         stateTimer = player.dashDuration;
     }
