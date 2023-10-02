@@ -59,7 +59,6 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(int knockbackDir)
     {
-        Debug.Log(this + " was damage");
         CharacterFX.StartCoroutine("HitFX");
 
         StartCoroutine("HitKnockback", knockbackDir);

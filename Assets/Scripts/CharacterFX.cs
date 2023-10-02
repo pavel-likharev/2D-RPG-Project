@@ -34,19 +34,16 @@ public class CharacterFX : MonoBehaviour
         
         if (spriteRenderer.color != Color.white)
         {
-            Debug.Log("whitecolor");
             spriteRenderer.color = Color.white;
         }
         else
         {
-            Debug.Log("redcolor");
             spriteRenderer.color = Color.red;
         }
     }
 
     private void CancelRedColorBlink()
     {
-        Debug.Log("cancel");
         CancelInvoke();
         spriteRenderer.color = Color.white;
     }

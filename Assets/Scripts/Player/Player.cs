@@ -38,8 +38,6 @@ public class Player : Character
     public float wallJumpForce = 5f;
 
     [Header("Dash info")]
-    [SerializeField] private float dashCooldown = 1f;
-    private float dashCooldownTimer;
     public float dashForce = 12f;
     public float dashDuration = 0.3f;
     public float DashDir { get; private set; }    
@@ -75,7 +73,6 @@ public class Player : Character
 
         StateMachine.CurrentState.Update();
 
-        CheckTimers();
         CheckForDashInput();
 
     }
@@ -88,13 +85,6 @@ public class Player : Character
 
         IsBusy = false;
     }
-    private void CheckTimers()
-    {
-        if (dashCooldownTimer > 0)
-        {
-            dashCooldownTimer -= Time.deltaTime;
-        }
-    }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
@@ -103,7 +93,7 @@ public class Player : Character
         if (IsWallDetected())
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCooldownTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.SkillDash.CanUseSkill())
         {
             DashDir = Input.GetAxisRaw("Horizontal");
 
@@ -111,7 +101,6 @@ public class Player : Character
                 DashDir = MoveDir;
 
             StateMachine.ChangeState(DashState);
-            dashCooldownTimer = dashCooldown;
         }
     }
 }

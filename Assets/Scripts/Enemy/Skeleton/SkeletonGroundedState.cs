@@ -18,7 +18,7 @@ public class SkeletonGroundedState : EnemyState
 
         enemySkeleton.SetZeroVelocity();
 
-        player = GameObject.Find("Player").gameObject.transform;
+        player = PlayerManager.Instance.Player.transform;
     }
 
     public override void Exit()
@@ -37,7 +37,6 @@ public class SkeletonGroundedState : EnemyState
 
         if (enemySkeleton.IsPlayerDetected() || Vector2.Distance(enemySkeleton.transform.position, player.position) < enemySkeleton.visibleDistance)
         {
-            Debug.Log("Plauer detected");
             stateMachine.ChangeState(enemySkeleton.BattleState);
         }
     }

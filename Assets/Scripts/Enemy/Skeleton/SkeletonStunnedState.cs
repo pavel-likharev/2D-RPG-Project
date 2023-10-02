@@ -10,7 +10,7 @@ public class SkeletonStunnedState : EnemyState
     public SkeletonStunnedState(Enemy enemy, EnemyStateMachine stateMachine, string animationBoolName, EnemySkeleton enemySkeleton) : base(enemy, stateMachine, animationBoolName)
     {
         this.enemySkeleton = enemySkeleton;
-        player = GameObject.FindAnyObjectByType<Player>();
+        player = PlayerManager.Instance.Player;
     }
 
     public override void Enter()
