@@ -42,7 +42,7 @@ public class Player : Character
     public float dashDuration = 0.3f;
     public float DashDir { get; private set; }    
 
-
+    public SkillManager Skill { get; private set; }
 
     protected override void Awake()
     {
@@ -65,6 +65,8 @@ public class Player : Character
         base.Start();
 
         StateMachine.Initialize(IdleState);
+
+        Skill = SkillManager.Instance;
     }
 
     protected override void Update()
