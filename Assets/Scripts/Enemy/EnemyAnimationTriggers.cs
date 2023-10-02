@@ -19,8 +19,11 @@ public class EnemyAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player>().TakeDamage();
+                hit.GetComponent<Player>().TakeDamage(enemy.MoveDir);
             }
         }
     }
+
+    private void OpenCounterAttackWindow() => enemy.OpenCounterAttackWindow();
+    private void CloseCounterAttackWindow() => enemy.CloseCounterAttackWindow();
 }

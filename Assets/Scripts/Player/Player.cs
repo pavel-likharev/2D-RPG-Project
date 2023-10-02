@@ -9,6 +9,7 @@ public class Player : Character
     private const string IS_JUMP = "IsJump";
     private const string IS_DASH = "IsDash";
     private const string IS_WALLSLIDE = "IsWallSlide";
+    private const string IS_COUNTER_ATTACK = "IsCounterAttack";
     #endregion
 
     #region States
@@ -21,12 +22,15 @@ public class Player : Character
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
+
+    public PlayerCounterAttackState CounterAttackState { get; private set; }
     #endregion
 
     public bool IsBusy { get; private set; }
 
     [Header("Attack info")]
     public Vector2[] attackMovements;
+    public float counterDuration = 0.5f;
 
     [Header("Move info")]
     public float moveSpeed = 8f;
@@ -55,7 +59,7 @@ public class Player : Character
         WallSlideState = new PlayerWallSlideState(this, StateMachine, IS_WALLSLIDE);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, IS_JUMP);
         PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, IS_ATTACK);
-
+        CounterAttackState = new PlayerCounterAttackState(this, StateMachine, IS_COUNTER_ATTACK);
     }
 
     protected override void Start()
@@ -73,6 +77,7 @@ public class Player : Character
 
         CheckTimers();
         CheckForDashInput();
+
     }
 
     public IEnumerator BusyFor(float seconds)
@@ -109,10 +114,4 @@ public class Player : Character
             dashCooldownTimer = dashCooldown;
         }
     }
-
-
-
-
-
-    
 }

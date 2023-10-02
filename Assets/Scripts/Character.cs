@@ -32,6 +32,12 @@ public class Character : MonoBehaviour
     public Transform attackCheck;
     public float attackCheckRadius;
 
+    [Header("Knockback info")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration = 0.07f;
+    protected bool isKnocbacked;
+
+
     protected virtual void Awake()
     {
         Animator = GetComponentInChildren<Animator>();
@@ -51,10 +57,23 @@ public class Character : MonoBehaviour
         
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int knockbackDir)
     {
         Debug.Log(this + " was damage");
         CharacterFX.StartCoroutine("HitFX");
+
+        StartCoroutine("HitKnockback", knockbackDir);
+    }
+
+    protected virtual IEnumerator HitKnockback(int knockbackDir)
+    {
+        isKnocbacked = true;
+
+        Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y); 
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnocbacked = false;
     }
 
     #region Collision
@@ -88,10 +107,19 @@ public class Character : MonoBehaviour
     #region Velocity
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocbacked)
+            return;
+
         Rb.velocity = new Vector2(xVelocity, yVelocity);
         FlipSpriteController(xVelocity);
     }
 
-    public void SetZeroVelocity() => Rb.velocity = new Vector2(0, 0);
+    public void SetZeroVelocity() 
+    {
+        if (isKnocbacked)
+            return;
+
+        Rb.velocity = new Vector2(0, 0); 
+    }
     #endregion
 }

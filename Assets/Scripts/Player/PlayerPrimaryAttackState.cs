@@ -27,6 +27,8 @@ public class PlayerPrimaryAttackState : PlayerState
 
         float attackDir = player.MoveDir;
 
+        xInput = Input.GetAxisRaw("Horizontal");
+
         if (xInput != 0)
             attackDir = xInput;
 

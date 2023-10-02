@@ -7,7 +7,7 @@ public class CharacterFX : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private Material hitMaterial;
-    SerializeField] private float flashDuration = 0.2f;
+    [SerializeField] private float flashDuration = 0.2f;
     private Material originalMaterial;
 
     private void Awake()
@@ -27,6 +27,28 @@ public class CharacterFX : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
 
         spriteRenderer.material = originalMaterial;
+    }
+
+    private void RedColorBlink()
+    {
+        
+        if (spriteRenderer.color != Color.white)
+        {
+            Debug.Log("whitecolor");
+            spriteRenderer.color = Color.white;
+        }
+        else
+        {
+            Debug.Log("redcolor");
+            spriteRenderer.color = Color.red;
+        }
+    }
+
+    private void CancelRedColorBlink()
+    {
+        Debug.Log("cancel");
+        CancelInvoke();
+        spriteRenderer.color = Color.white;
     }
 
 }
