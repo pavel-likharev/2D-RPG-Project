@@ -9625,6 +9625,7 @@ Transform:
   - {fileID: 1672728185}
   - {fileID: 1690762626}
   - {fileID: 1838963513}
+  - {fileID: 1724074983}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9988,6 +9989,37 @@ Transform:
   - {fileID: 1807027731}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1724074982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724074983}
+  m_Layer: 6
+  m_Name: DotsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724074983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724074982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1464002169}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1726772294
 GameObject:
@@ -15845,6 +15877,7 @@ GameObject:
   - component: {fileID: 1948117018}
   - component: {fileID: 1948117020}
   - component: {fileID: 1948117021}
+  - component: {fileID: 1948117022}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -15908,6 +15941,26 @@ MonoBehaviour:
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
   isAttack: 1
+--- !u!114 &1948117022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948117017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7330a76d62de6c49849460cf075791b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  swordPrefab: {fileID: 3412016933159843976, guid: 16624c07fcad1304095761d2f1d274be, type: 3}
+  swordLaunchForce: {x: 35, y: 25}
+  swordGravity: 4.5
+  dotPrefab: {fileID: 1885039530554401676, guid: 84c383570cb0d044a82141047cc48833, type: 3}
+  dotsParent: {fileID: 1724074983}
+  numberOfDots: 20
+  spaceBetweenDots: 0.07
 --- !u!1 &1957490975
 GameObject:
   m_ObjectHideFlags: 0
