@@ -39,6 +39,7 @@ public class Player : Character
     public float moveSpeed = 8f;
     public float jumpForce = 15f;
     public float wallJumpForce = 5f;
+    public float returnSwordImpact = 12f;
 
     [Header("Dash info")]
     public float dashForce = 12f;
@@ -103,8 +104,9 @@ public class Player : Character
         Sword = newSword;
     }
 
-    public void ClearTheSword()
+    public void CatchTheSword()
     {
+        StateMachine.ChangeState(CatchSwordState);
         Destroy(Sword);
     }
 

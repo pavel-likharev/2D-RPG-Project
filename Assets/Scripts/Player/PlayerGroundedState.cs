@@ -51,12 +51,14 @@ public class PlayerGroundedState : PlayerState
 
     private bool HasNoSword()
     {
-        if (!player.Sword)
+        if (!player.Sword && !player.IsBusy)
         {
             return true;
         }
-
-        player.Sword.GetComponent<SkillThrowSwordController>().ReturnSword();
+        if (!player.IsBusy)
+        {
+            player.Sword.GetComponent<SkillSwordController>().ReturnSword();
+        }
         return false;
     }
 }
