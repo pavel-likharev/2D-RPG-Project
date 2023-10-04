@@ -8,6 +8,7 @@ public class SkillManager : MonoBehaviour
 
     public SkillDash SkillDash { get; private set; }
     public SkillClone SkillClone { get; private set; }
+    public SkillSword SkillThrowSword { get; private set; }
 
     private void Awake()
     {
@@ -22,5 +23,6 @@ public class SkillManager : MonoBehaviour
 
         SkillDash = GetComponent<SkillDash>();
         SkillClone = GetComponent<SkillClone>();
+        SkillThrowSword = GetComponent<SkillSword>();
     }
 }

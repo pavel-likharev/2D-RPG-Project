@@ -10,6 +10,8 @@ public class Player : Character
     private const string IS_DASH = "IsDash";
     private const string IS_WALLSLIDE = "IsWallSlide";
     private const string IS_COUNTER_ATTACK = "IsCounterAttack";
+    private const string IS_AIM_SWORD = "IsAimSword";
+    private const string IS_CATCH_SWORD = "IsCatchSword";
     #endregion
 
     #region States
@@ -22,8 +24,9 @@ public class Player : Character
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
-
     public PlayerCounterAttackState CounterAttackState { get; private set; }
+    public PlayerAimSwordState AimSwordState { get; private set; }
+    public PlayerCatchSwordState CatchSwordState { get; private set; }
     #endregion
 
     public bool IsBusy { get; private set; }
@@ -36,6 +39,7 @@ public class Player : Character
     public float moveSpeed = 8f;
     public float jumpForce = 15f;
     public float wallJumpForce = 5f;
+    public float returnSwordImpact = 12f;
 
     [Header("Dash info")]
     public float dashForce = 12f;
@@ -43,21 +47,28 @@ public class Player : Character
     public float DashDir { get; private set; }    
 
     public SkillManager Skill { get; private set; }
+    public GameObject Sword { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
         StateMachine = new PlayerStateMachine();
+
         IdleState = new PlayerIdleState(this, StateMachine, IS_IDLE);
         MoveState = new PlayerMoveState(this, StateMachine, IS_MOVE);
         AirState = new PlayerAirState(this, StateMachine, IS_JUMP);
         JumpState = new PlayerJumpState(this, StateMachine, IS_JUMP);
         DashState = new PlayerDashState(this, StateMachine, IS_DASH);
+
         WallSlideState = new PlayerWallSlideState(this, StateMachine, IS_WALLSLIDE);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, IS_JUMP);
+
         PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, IS_ATTACK);
         CounterAttackState = new PlayerCounterAttackState(this, StateMachine, IS_COUNTER_ATTACK);
+
+        AimSwordState = new PlayerAimSwordState(this, StateMachine, IS_AIM_SWORD);
+        CatchSwordState = new PlayerCatchSwordState(this, StateMachine, IS_CATCH_SWORD);
     }
 
     protected override void Start()
@@ -86,6 +97,17 @@ public class Player : Character
         yield return new WaitForSeconds(seconds);
 
         IsBusy = false;
+    }
+
+    public void AssignNewSword(GameObject newSword)
+    {
+        Sword = newSword;
+    }
+
+    public void CatchTheSword()
+    {
+        StateMachine.ChangeState(CatchSwordState);
+        Destroy(Sword);
     }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
