@@ -14,6 +14,7 @@ public class Enemy : Character
     [Header("Move info")]
     [SerializeField] public float moveSpeed = 1.5f;
     [SerializeField] public float idleTime = 1.5f;
+    private float defaultMoveSpeed;
 
     [Header("Battle info")]
     public float agressiveDistance = 10f;
@@ -45,6 +46,7 @@ public class Enemy : Character
     {
         base.Start();
 
+        defaultMoveSpeed = moveSpeed;
     }
 
     protected override void Update()
@@ -55,8 +57,30 @@ public class Enemy : Character
 
     }
 
-    public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    public void FreezeTime(bool isFreeze)
+    {
+        if (isFreeze)
+        {
+            moveSpeed = 0;
+            Animator.speed = 0;
+        }
+        else
+        {
+            moveSpeed = defaultMoveSpeed;
+            Animator.speed = 1;
+        }
+    }
 
+    protected virtual IEnumerator FreezeTimeFor(float seconds)
+    {
+        FreezeTime(true);
+
+        yield return new WaitForSeconds(seconds);
+
+        FreezeTime(false);
+    }
+
+    #region Counter Attack Window
     public virtual void OpenCounterAttackWindow()
     {
         isCanBeStunned = true;
@@ -70,6 +94,7 @@ public class Enemy : Character
 
         counterImage.SetActive(false);
     }
+    #endregion
 
     public virtual bool CanBeStunned()
     {
@@ -81,6 +106,7 @@ public class Enemy : Character
 
         return false;
     }
+    public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     #region Collusion
     public RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance, playerLayer);

@@ -14,10 +14,12 @@ public class SkillSwordController : MonoBehaviour
     private bool canRotate = true;
     private bool isReturning;
     private float distanceToDestoy = 1f;
-    [SerializeField] private float returnSpeed = 12f;
-    
+    private float returnSpeed;
+
+    private float freezeDuration;
+
     [Header("Bounce info")]
-    [SerializeField] private float bouncingForce = 20f;
+    private float bouncingForce;
     private bool isBouncing;
     private int amountOfBounce;
     private List<Transform> enemiesInTarget;
@@ -72,17 +74,22 @@ public class SkillSwordController : MonoBehaviour
         SpinLogic();
     }
 
-    public void SetupSword(Vector2 dir, float gravityScale, Player player)
+    public void SetupSword(Vector2 force, float gravityScale, Player player, float freezeDuration, float returnSpeed)
     {
         this.player = player;
 
-        rb.velocity = dir;
+        rb.velocity = force;
         rb.gravityScale = gravityScale;
+
+        this.freezeDuration = freezeDuration;
+        this.returnSpeed = returnSpeed;
 
         if (!isPiercing)
             animator.SetBool(IS_ROTATION, true);
 
         spinDir = Mathf.Clamp(rb.velocity.x, -1, 1);
+
+        Invoke("Destroy", 7);
     }
 
     public void ReturnSword()
@@ -102,7 +109,9 @@ public class SkillSwordController : MonoBehaviour
             if (Vector2.Distance(transform.position, enemiesInTarget[targetIndex].position) < 0.1f)
             {
                 int knockbackDir = transform.position.x > enemiesInTarget[targetIndex].position.x ? -1 : 1;
-                enemiesInTarget[targetIndex].GetComponent<Enemy>().TakeDamage(knockbackDir);
+                SkillSwordDamage(enemiesInTarget[targetIndex].GetComponent<Enemy>(), knockbackDir);
+
+                
                 targetIndex++;
                 amountOfBounce--;
 
@@ -153,7 +162,7 @@ public class SkillSwordController : MonoBehaviour
                     {
                         if (hit.GetComponent<Enemy>() != null)
                         {
-                            hit.GetComponent<Enemy>().TakeDamage(player.MoveDir);
+                            SkillSwordDamage(hit.GetComponent<Enemy>(), player.MoveDir);
                         }
                     }
                 }
@@ -168,10 +177,11 @@ public class SkillSwordController : MonoBehaviour
         spinTimer = spinDuration;
     }
 
-    public void SetupBouncing(bool isBouncing, int bounceAmount)
+    public void SetupBouncing(bool isBouncing, int bounceAmount, float bouncingForce)
     {
         this.isBouncing = isBouncing;
         this.amountOfBounce = bounceAmount;
+        this.bouncingForce = bouncingForce;
 
         enemiesInTarget = new List<Transform>();
     }
@@ -195,11 +205,27 @@ public class SkillSwordController : MonoBehaviour
         if (isReturning)
             return;
 
-        collision.GetComponent<Enemy>()?.TakeDamage(player.MoveDir);
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+
+            SkillSwordDamage(enemy, player.MoveDir);
+        }
 
         SetupTargetForBounce(collision);
 
         StuckInto(collision);
+    }
+
+    private void SkillSwordDamage(Enemy enemy, int knockbackDir)
+    {
+        enemy.TakeDamage(knockbackDir);
+        enemy.StartCoroutine("FreezeTimeFor", freezeDuration);
+    }
+
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     private void SetupTargetForBounce(Collider2D collision)

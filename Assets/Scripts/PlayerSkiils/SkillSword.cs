@@ -16,12 +16,15 @@ public class SkillSword : Skill
     [SerializeField] private GameObject swordPrefab;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private Vector2 swordLaunchForce;
+    [SerializeField] private float returnSpeed;
     [SerializeField] private float swordGravity;
+    [SerializeField] private float freezeDuration;
     private Vector2 finalDir;
 
     [Header("Bounce info")]
     [SerializeField] private int bounceAmount;
     [SerializeField] private float bounceGravity;
+    [SerializeField] private float bouncingForce;
 
     [Header("Pierce info")]
     [SerializeField] private int pierceAmount;
@@ -93,7 +96,7 @@ public class SkillSword : Skill
 
         if (swordType == SwordType.Bounce)
         {
-            skillController.SetupBouncing(true, bounceAmount);
+            skillController.SetupBouncing(true, bounceAmount, bouncingForce);
         }
         else if (swordType == SwordType.Pierce)
         {
@@ -104,7 +107,7 @@ public class SkillSword : Skill
             skillController.SetupSpinning(true, spinDuration, maxTravelDistance, hitCooldown);
         }
 
-        skillController.SetupSword(finalDir, swordGravity, player);
+        skillController.SetupSword(finalDir, swordGravity, player, freezeDuration, returnSpeed);
         player.AssignNewSword(newSword);
 
         DotsActive(false);
