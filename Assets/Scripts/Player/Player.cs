@@ -27,6 +27,7 @@ public class Player : Character
     public PlayerCounterAttackState CounterAttackState { get; private set; }
     public PlayerAimSwordState AimSwordState { get; private set; }
     public PlayerCatchSwordState CatchSwordState { get; private set; }
+    public PlayerBlackholeState BlackholeState { get; private set; }
     #endregion
 
     public bool IsBusy { get; private set; }
@@ -69,6 +70,7 @@ public class Player : Character
 
         AimSwordState = new PlayerAimSwordState(this, StateMachine, IS_AIM_SWORD);
         CatchSwordState = new PlayerCatchSwordState(this, StateMachine, IS_CATCH_SWORD);
+        BlackholeState = new PlayerBlackholeState(this, StateMachine, IS_JUMP);
     }
 
     protected override void Start()
@@ -108,6 +110,11 @@ public class Player : Character
     {
         StateMachine.ChangeState(CatchSwordState);
         Destroy(Sword);
+    }
+
+    public void ExitBlackholeSkill()
+    {
+        StateMachine.ChangeState(AirState);
     }
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();

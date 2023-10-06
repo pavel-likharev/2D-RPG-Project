@@ -29,7 +29,7 @@ public class SkillCloneController : MonoBehaviour
     private void Start()
     {
         attackCheckRadius = PlayerManager.Instance.Player.attackCheckRadius;
-        MoveToClosestTarger();
+        RotateToClosestTarger();
     }
 
     private void Update()
@@ -50,9 +50,9 @@ public class SkillCloneController : MonoBehaviour
         }
     }
 
-    public void SetupClone(Transform newTransform, float cloneDuration, bool isCanAttack)
+    public void SetupClone(Transform newTransform, float cloneDuration, bool isCanAttack, Vector3 offset)
     {
-        transform.position = newTransform.position;
+        transform.position = newTransform.position + offset;
         cloneTimer = cloneDuration;
 
         if (isCanAttack)
@@ -61,6 +61,7 @@ public class SkillCloneController : MonoBehaviour
         }
     }
 
+    #region Animation Setup
     private void AnimationTrigger()
     {
         cloneTimer = 0;
@@ -78,8 +79,9 @@ public class SkillCloneController : MonoBehaviour
             }
         }
     }
+    #endregion
 
-    private void MoveToClosestTarger()
+    private void RotateToClosestTarger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, checkRadiusClosestEnemy);
 

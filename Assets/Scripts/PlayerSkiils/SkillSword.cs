@@ -45,6 +45,11 @@ public class SkillSword : Skill
     [SerializeField] private float spaceBetweenDots;
     private GameObject[] dots;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -70,7 +75,13 @@ public class SkillSword : Skill
                 dots[i].transform.position = DotsPosition(i * spaceBetweenDots);
             }
         }
+    }
 
+    protected override void UseSkill()
+    {
+        base.UseSkill();
+
+        CreateSword();
     }
 
     private void SetupGravity()
