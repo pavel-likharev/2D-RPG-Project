@@ -16,7 +16,7 @@ public class PlayerAimSwordState : PlayerState
 
         player.SetZeroVelocity();
 
-        SkillManager.Instance.SkillThrowSword.DotsActive(true);
+        SkillManager.Instance.SkillSword.DotsActive(true);
     }
 
     public override void Exit()

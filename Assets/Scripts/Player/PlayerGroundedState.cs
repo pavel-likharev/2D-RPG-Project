@@ -47,6 +47,11 @@ public class PlayerGroundedState : PlayerState
         {
             stateMachine.ChangeState(player.JumpState);
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            stateMachine.ChangeState(player.BlackholeState);
+        }
     }
 
     private bool HasNoSword()

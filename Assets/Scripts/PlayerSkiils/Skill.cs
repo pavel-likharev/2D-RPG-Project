@@ -26,7 +26,7 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public virtual bool CanUseSkill()
+    public bool CanUseSkill()
     {
         if (cooldownTimer <= 0)
         {
@@ -40,6 +40,5 @@ public class Skill : MonoBehaviour
 
     protected virtual void UseSkill()
     {
-
     }
 }

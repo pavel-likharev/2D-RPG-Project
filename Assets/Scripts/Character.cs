@@ -14,8 +14,8 @@ public class Character : MonoBehaviour
     #region Components
     public Animator Animator { get; private set; }
     public Rigidbody2D Rb { get; private set; }
-
     public CharacterFX CharacterFX { get; private set; }
+    public SpriteRenderer SpriteRenderer { get; private set; }
     #endregion
 
     public int MoveDir { get; private set; } = 1;
@@ -40,9 +40,10 @@ public class Character : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Animator = GetComponentInChildren<Animator>();
         Rb = GetComponent<Rigidbody2D>();
+        Animator = GetComponentInChildren<Animator>();
         CharacterFX = GetComponentInChildren<CharacterFX>();
+        SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         groundLayer = LayerMask.GetMask("Ground");
     }
@@ -73,6 +74,18 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnocbacked = false;
+    }
+
+    public void MakeTransparent(bool isTransparent)
+    {
+        if (isTransparent)
+        {
+            SpriteRenderer.color = Color.clear;
+        }
+        else
+        {
+            SpriteRenderer.color = Color.white;
+        }
     }
 
     #region Collision
