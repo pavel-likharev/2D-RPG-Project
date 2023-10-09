@@ -16,8 +16,6 @@ public class SkillCloneController : MonoBehaviour
     private int moveDir = 1;
 
     private Transform closestEnemy;
-    private float checkRadiusClosestEnemy = 25f;
-
 
     private void Awake()
     {
@@ -29,6 +27,7 @@ public class SkillCloneController : MonoBehaviour
     private void Start()
     {
         attackCheckRadius = PlayerManager.Instance.Player.attackCheckRadius;
+
         RotateToClosestTarger();
     }
 
@@ -46,14 +45,16 @@ public class SkillCloneController : MonoBehaviour
 
         if (spriteRenderer.color.a <= 0)
         {
+            closestEnemy.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             Destroy(gameObject);
         }
     }
 
-    public void SetupClone(Transform newTransform, float cloneDuration, bool isCanAttack, Vector3 offset)
+    public void SetupClone(float cloneDuration, bool isCanAttack, Transform closestEnemy)
     {
-        transform.position = newTransform.position + offset;
+        //transform.position = newTransform.position + offset;
         cloneTimer = cloneDuration;
+        this.closestEnemy = closestEnemy;
 
         if (isCanAttack)
         {
@@ -83,29 +84,11 @@ public class SkillCloneController : MonoBehaviour
 
     private void RotateToClosestTarger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, checkRadiusClosestEnemy);
-
-        float closestDistance = Mathf.Infinity;
-
-        foreach (Collider2D hit in colliders)
-        {
-            if (hit.GetComponent<Enemy>() != null)
-            {
-                float distanceToEnemy = Vector2.Distance(transform.position, hit.transform.position);
-
-                if (distanceToEnemy < closestDistance)
-                {
-                    closestDistance = distanceToEnemy;
-                    closestEnemy = hit.transform;
-                }
-            }
-        }
-
         if (closestEnemy != null)
         {
-            if (transform.position.x > closestEnemy.position.x)
+            if (transform.position.x >= closestEnemy.position.x)
             {
-                moveDir = -moveDir;
+                moveDir = -moveDir; 
             }
         }
         else

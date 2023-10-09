@@ -90,6 +90,10 @@ public class Player : Character
 
         CheckForDashInput();
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Skill.SkillCrystal.CanUseSkill();
+        }
     }
 
     public IEnumerator BusyFor(float seconds)
