@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6423374247449325874
 SpriteRenderer:
@@ -130,9 +130,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5856204346272985824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aaea221870a8d441b44c1751c738b60, type: 3}
+  m_Script: {fileID: 11500000, guid: 87f409cc8d5719b4d818fa2bd719b878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
   hotKeyPrefab: {fileID: 8760662526855170559, guid: bceb2f3909f84cb4dbc710bf9a95153c, type: 3}
   keyCodeList: 770000006500000074000000

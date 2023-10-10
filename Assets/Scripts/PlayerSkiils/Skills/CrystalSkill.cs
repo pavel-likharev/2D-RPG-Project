@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillCrystalController : MonoBehaviour
+public class CrystalSkill : MonoBehaviour
 {
     private const string EXPLODE = "Explode";
 
@@ -84,5 +82,5 @@ public class SkillCrystalController : MonoBehaviour
     }
 
     public void SelfDestroy() => Destroy(gameObject);
-    
+
 }

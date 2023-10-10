@@ -44,7 +44,7 @@ public class PlayerCounterAttackState : PlayerState
                     if (canCloneCreate)
                     {
                         canCloneCreate = false;
-                        player.Skill.SkillClone.CreateCloneOnCounterAttack(hit.transform);
+                        player.Skill.CloneSkillController.CreateCloneOnCounterAttack(hit.transform);
                     }
                 }
             }

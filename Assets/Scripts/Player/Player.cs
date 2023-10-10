@@ -92,7 +92,7 @@ public class Player : Character
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Skill.SkillCrystal.CanUseSkill();
+            Skill.CrystalSkillController.CanUseSkill();
         }
     }
 
@@ -128,7 +128,7 @@ public class Player : Character
         if (IsWallDetected())
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.SkillDash.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.DashSkillController.CanUseSkill())
         {
             DashDir = Input.GetAxisRaw("Horizontal");
 

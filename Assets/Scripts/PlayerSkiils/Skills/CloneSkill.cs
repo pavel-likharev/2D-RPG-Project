@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillCloneController : MonoBehaviour
+public class CloneSkill : MonoBehaviour
 {
     private const string ATTACK_NUMBER = "AttackNumber";
 

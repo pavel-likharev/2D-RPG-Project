@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillClone : Skill
+public class CloneSkillController : SkillController
 {
     [SerializeField] private GameObject clonePrefab;
     [SerializeField] private float cloneDuration;
@@ -39,7 +39,7 @@ public class SkillClone : Skill
     {
         GameObject newClone = Instantiate(clonePrefab, clonePosition.position + offset, Quaternion.identity);
 
-        newClone.GetComponent<SkillCloneController>().SetupClone(cloneDuration, isAttack, FindClosestEnemy(newClone.transform));
+        newClone.GetComponent<CloneSkill>().SetupClone(cloneDuration, isAttack, FindClosestEnemy(newClone.transform));
     }
 
     public void CreateCloneOnDashStart()

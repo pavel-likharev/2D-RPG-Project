@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5986664921338709235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9448399adc548478590a151222f9a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 165041b54343f004bb14ff9db1364988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colorLoosingSpeed: 1

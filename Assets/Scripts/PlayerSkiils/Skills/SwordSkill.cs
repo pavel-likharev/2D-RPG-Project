@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillSwordController : MonoBehaviour
+public class SwordSkill : MonoBehaviour
 {
     private const string IS_ROTATION = "IsRotation";
 

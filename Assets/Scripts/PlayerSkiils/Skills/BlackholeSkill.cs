@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBlackholeController : MonoBehaviour
+public class BlackholeSkill : MonoBehaviour
 {
     public bool CanExitState { get; private set; }
 
@@ -107,7 +107,7 @@ public class SkillBlackholeController : MonoBehaviour
                 xOffset = -1;
             }
 
-            SkillManager.Instance.SkillClone.CreateClone(targets[randomIndex], new Vector2(xOffset, 0));
+            SkillManager.Instance.CloneSkillController.CreateClone(targets[randomIndex], new Vector2(xOffset, 0));
             attackAmount--;
 
             if (attackAmount == 0)
@@ -185,7 +185,7 @@ public class SkillBlackholeController : MonoBehaviour
         KeyCode choosenKey = keyCodeList[Random.Range(0, keyCodeList.Count)];
         keyCodeList.Remove(choosenKey);
 
-        SkillBlackholeHotkey blackholeHotkeyScript = newHotKey.GetComponent<SkillBlackholeHotkey>();
+        BlackholeSkillHotkey blackholeHotkeyScript = newHotKey.GetComponent<BlackholeSkillHotkey>();
         blackholeHotkeyScript.SetupHotKey(choosenKey, collision.transform, this);
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkillSword : Skill
+public class SwordSkillController : SkillController
 {
     public enum SwordType
     {
@@ -35,8 +35,6 @@ public class SkillSword : Skill
     [SerializeField] private float spinGravity;
     [SerializeField] private float maxTravelDistance;
     [SerializeField] private float hitCooldown;
-
-
 
     [Header("Aim dots")]
     [SerializeField] private GameObject dotPrefab;
@@ -103,22 +101,22 @@ public class SkillSword : Skill
     public void CreateSword()
     {
         GameObject newSword = Instantiate(swordPrefab, spawnPosition.position, transform.rotation);
-        SkillSwordController skillController = newSword.GetComponent<SkillSwordController>();
+        SwordSkill skill = newSword.GetComponent<SwordSkill>();
 
         if (swordType == SwordType.Bounce)
         {
-            skillController.SetupBouncing(true, bounceAmount, bouncingForce);
+            skill.SetupBouncing(true, bounceAmount, bouncingForce);
         }
         else if (swordType == SwordType.Pierce)
         {
-            skillController.SetupPiercing(true, pierceAmount);
+            skill.SetupPiercing(true, pierceAmount);
         }
         else if (swordType == SwordType.Spin)
         {
-            skillController.SetupSpinning(true, spinDuration, maxTravelDistance, hitCooldown);
+            skill.SetupSpinning(true, spinDuration, maxTravelDistance, hitCooldown);
         }
 
-        skillController.SetupSword(finalDir, swordGravity, player, freezeDuration, returnSpeed);
+        skill.SetupSword(finalDir, swordGravity, player, freezeDuration, returnSpeed);
         player.AssignNewSword(newSword);
 
         DotsActive(false);

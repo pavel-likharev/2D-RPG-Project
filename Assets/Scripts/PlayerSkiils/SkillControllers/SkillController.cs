@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+public class SkillController : MonoBehaviour
 {
     [SerializeField] protected float cooldown;
     protected float checkRadiusClosestEnemy = 25f;

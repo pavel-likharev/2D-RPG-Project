@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SkillBlackholeHotkey : MonoBehaviour
+public class BlackholeSkillHotkey : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private KeyCode hotKey;
     private TextMeshProUGUI hotKeyText;
 
     private Transform enemy;
-    private SkillBlackholeController blackhole;
+    private BlackholeSkill blackhole;
 
-    public void SetupHotKey(KeyCode hotKey, Transform enemy, SkillBlackholeController blackhole)
+    public void SetupHotKey(KeyCode hotKey, Transform enemy, BlackholeSkill blackhole)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hotKeyText = GetComponentInChildren<TextMeshProUGUI>();

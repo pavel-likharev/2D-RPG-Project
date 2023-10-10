@@ -6,12 +6,12 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance { get; private set; }
 
-    public SkillDash SkillDash { get; private set; }
-    public SkillClone SkillClone { get; private set; }
-    public SkillSword SkillSword { get; private set; }
-    public SkillBlackhole SkillBlackhole { get; private set; }
+    public DashSkillController DashSkillController { get; private set; }
+    public CloneSkillController CloneSkillController { get; private set; }
+    public SwordSkillController SwordSkillController { get; private set; }
+    public BlackholeSkillController BlackholeSkillController { get; private set; }
 
-    public SkillCrystal SkillCrystal { get; private set; }
+    public CrystalSkillController CrystalSkillController { get; private set; }
 
     private void Awake()
     {
@@ -24,10 +24,10 @@ public class SkillManager : MonoBehaviour
             Instance = this;
         }
 
-        SkillDash = GetComponent<SkillDash>();
-        SkillClone = GetComponent<SkillClone>();
-        SkillSword = GetComponent<SkillSword>();
-        SkillBlackhole = GetComponent<SkillBlackhole>();
-        SkillCrystal = GetComponent<SkillCrystal>();
+        DashSkillController = GetComponent<DashSkillController>();
+        CloneSkillController = GetComponent<CloneSkillController>();
+        SwordSkillController = GetComponent<SwordSkillController>();
+        BlackholeSkillController = GetComponent<BlackholeSkillController>();
+        CrystalSkillController = GetComponent<CrystalSkillController>();
     }
 }

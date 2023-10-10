@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillCrystal : Skill
+public class CrystalSkillController : SkillController
 {
     [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private float crystalDuration;
@@ -46,9 +46,9 @@ public class SkillCrystal : Skill
         {
 
             currentCrystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            SkillCrystalController crystalController = currentCrystal.GetComponent<SkillCrystalController>();
+            CrystalSkill crystalSkill = currentCrystal.GetComponent<CrystalSkill>();
 
-            crystalController.SetupCrystal(crystalDuration, canExplode, canMove, moveSpeed, FindClosestEnemy(currentCrystal.transform));
+            crystalSkill.SetupCrystal(crystalDuration, canExplode, canMove, moveSpeed, FindClosestEnemy(currentCrystal.transform));
         }
         else
         {
@@ -61,12 +61,12 @@ public class SkillCrystal : Skill
 
             if (isCloneMirage)
             {
-                player.Skill.SkillClone.CreateClone(currentCrystal.transform, Vector3.zero);
+                player.Skill.CloneSkillController.CreateClone(currentCrystal.transform, Vector3.zero);
                 Destroy(currentCrystal);
             }
             else
             {
-                currentCrystal.GetComponent<SkillCrystalController>()?.FinishedCrystal();
+                currentCrystal.GetComponent<CrystalSkill>()?.FinishedCrystal();
             }
 
         }
@@ -88,7 +88,7 @@ public class SkillCrystal : Skill
 
                 crystals.Remove(spawnedCrystal);
 
-                newCrystal.GetComponent<SkillCrystalController>().
+                newCrystal.GetComponent<CrystalSkill>().
                     SetupCrystal(crystalDuration, canExplode, canMove, moveSpeed, FindClosestEnemy(newCrystal.transform));
 
                 if (crystals.Count <= 0)
