@@ -407,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &448472339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 165842577}
-  groundCheckDistance: 1.5
+  groundCheckDistance: 3
   wallCheck: {fileID: 1991472106}
   wallCheckDistance: 0.3
   attackCheck: {fileID: 895701987}
@@ -15503,9 +15503,12 @@ MonoBehaviour:
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
   isAttack: 1
-  isCloneOnDashStart: 0
-  isCloneOnDashEnd: 0
+  isCloneOnDashStart: 1
+  isCloneOnDashEnd: 1
   canCreateCloneOnCounterAttack: 1
+  canDuplicate: 1
+  chanceDuplicate: 0
+  canCrystalFromClone: 1
 --- !u!114 &1948117022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15548,17 +15551,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1948117017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec232f452949a1648bc72a7f3eb0ba7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ae7376be13310b4cb08c3aae37e666f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
   blackholePrefab: {fileID: 5856204346272985824, guid: 8078c7b23af60f241af6eaf642357832, type: 3}
   maxSize: 15
-  growSpeed: 3
-  shrinkSpeed: 6
+  growSpeed: 0.2
+  shrinkSpeed: 2
   blackholeDuration: 3
   attackAmount: 3
-  cloneAttackCooldown: 0.3
+  cloneAttackCooldown: 0.2
 --- !u!114 &1948117024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15576,9 +15579,9 @@ MonoBehaviour:
   crystalDuration: 3
   canMove: 1
   moveSpeed: 5
-  canUseMultiStacks: 1
+  canUseMultiStacks: 0
   stackAmount: 3
-  multiStackCooldown: 0
+  multiStackCooldown: 3
   useTimeWindow: 2.5
   isCloneMirage: 0
 --- !u!1 &1957490975

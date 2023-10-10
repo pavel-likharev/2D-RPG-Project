@@ -83,7 +83,8 @@ public class BlackholeSkill : MonoBehaviour
         canCloneAttack = true;
         canCreateHotKey = false;
 
-        PlayerManager.Instance.Player.MakeTransparent(true);
+        if (!SkillManager.Instance.CloneSkillController.canCrystalFromClone)
+            PlayerManager.Instance.Player.MakeTransparent(true);
     }
 
     private void CloneAttackLogic()
@@ -107,7 +108,16 @@ public class BlackholeSkill : MonoBehaviour
                 xOffset = -1;
             }
 
-            SkillManager.Instance.CloneSkillController.CreateClone(targets[randomIndex], new Vector2(xOffset, 0));
+            if (SkillManager.Instance.CloneSkillController.canCrystalFromClone)
+            {
+                SkillManager.Instance.CrystalSkillController.CreateCrystal();
+                SkillManager.Instance.CrystalSkillController.CurrentCrystalChooseRandomTarget();
+            }
+            else
+            {
+                SkillManager.Instance.CloneSkillController.CreateClone(targets[randomIndex], new Vector2(xOffset, 0));
+            }
+
             attackAmount--;
 
             if (attackAmount == 0)

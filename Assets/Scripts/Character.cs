@@ -69,8 +69,6 @@ public class Character : MonoBehaviour
     {
         isKnocbacked = true;
 
-        Debug.Log(knockbackDirection.x);
-        Debug.Log(knockbackDir);
         Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y);
 
         yield return new WaitForSeconds(knockbackDuration);

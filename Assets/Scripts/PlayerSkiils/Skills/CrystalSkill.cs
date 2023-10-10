@@ -20,6 +20,8 @@ public class CrystalSkill : MonoBehaviour
     private Transform target;
     private float distanceTrigger = 1f;
 
+    [SerializeField] private LayerMask enemyLayer;
+
     public void SetupCrystal(float crystalDuration, bool canExplode, bool canMove, float moveSpeed, Transform target)
     {
         this.crystalDuration = crystalDuration;
@@ -53,6 +55,14 @@ public class CrystalSkill : MonoBehaviour
                 canMove = false;
             }
         }
+    }
+
+    public void ChooseRandomEnemy()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, SkillManager.Instance.BlackholeSkillController.GetBlackholeRadius(), enemyLayer);
+
+        if (colliders.Length > 0)
+            target = colliders[Random.Range(0, colliders.Length)].transform;
     }
 
     private void AnimationExplodeEvent()

@@ -15,6 +15,9 @@ public class CloneSkill : MonoBehaviour
     private float attackCheckRadius;
     private int moveDir = 1;
 
+    private bool canDuplicate;
+    private float chanceDuplicate;
+
     private Transform closestEnemy;
 
     private void Awake()
@@ -27,8 +30,6 @@ public class CloneSkill : MonoBehaviour
     private void Start()
     {
         attackCheckRadius = PlayerManager.Instance.Player.attackCheckRadius;
-
-        RotateToClosestTarger();
     }
 
     private void Update()
@@ -50,11 +51,14 @@ public class CloneSkill : MonoBehaviour
         }
     }
 
-    public void SetupClone(float cloneDuration, bool isCanAttack, Transform closestEnemy)
+    public void SetupClone(float cloneDuration, bool isCanAttack, Transform closestEnemy, bool canDuplicate, float chanceDuplicate)
     {
-        //transform.position = newTransform.position + offset;
         cloneTimer = cloneDuration;
         this.closestEnemy = closestEnemy;
+        this.canDuplicate = canDuplicate;
+        this.chanceDuplicate = chanceDuplicate;
+
+        RotateToClosestTarger();
 
         if (isCanAttack)
         {
@@ -77,7 +81,16 @@ public class CloneSkill : MonoBehaviour
             if (hit.GetComponent<Enemy>() != null)
             {
                 hit.GetComponent<Enemy>().TakeDamage(moveDir);
+
+                if (canDuplicate)
+                {
+                    if (Random.Range(0, 100) < chanceDuplicate)
+                    { 
+                        SkillManager.Instance.CloneSkillController.CreateClone(hit.transform, new Vector3(1f * moveDir, 0, 0));
+                    }
+                }
             }
+
         }
     }
     #endregion
