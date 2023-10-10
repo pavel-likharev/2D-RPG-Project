@@ -62,7 +62,7 @@ public class PlayerGroundedState : PlayerState
         }
         if (!player.IsBusy)
         {
-            player.Sword.GetComponent<SkillSwordController>().ReturnSword();
+            player.Sword.GetComponent<SwordSkill>().ReturnSword();
         }
         return false;
     }

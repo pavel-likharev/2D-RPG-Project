@@ -380,7 +380,7 @@ Transform:
   - {fileID: 6018105135437087908}
   - {fileID: 6560918149418734377}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6441603785690318230
 Rigidbody2D:
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 1693903509981736540}
-  groundCheckDistance: 1.5
+  groundCheckDistance: 3
   wallCheck: {fileID: 1569714107018936267}
   wallCheckDistance: 0.3
   attackCheck: {fileID: 6018105135437087908}

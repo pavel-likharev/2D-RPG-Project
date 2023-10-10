@@ -26,6 +26,6 @@ public class PlayerAnimationTriggers : MonoBehaviour
 
     private void SkillSwordTrigger()
     {
-        SkillManager.Instance.SkillSword.CanUseSkill();
+        SkillManager.Instance.SwordSkillController.CanUseSkill();
     }
 }

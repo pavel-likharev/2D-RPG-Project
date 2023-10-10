@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
         
     }
 
-    public void TakeDamage(int knockbackDir)
+    public void TakeDamage(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
     {
         CharacterFX.StartCoroutine("HitFX");
 
@@ -69,7 +69,7 @@ public class Character : MonoBehaviour
     {
         isKnocbacked = true;
 
-        Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y); 
+        Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y);
 
         yield return new WaitForSeconds(knockbackDuration);
 

@@ -1,12 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillSwordController : MonoBehaviour
+public class SwordSkill : MonoBehaviour
 {
     private const string IS_ROTATION = "IsRotation";
 
-    private Animator animator; 
+    private Animator animator;
     private Rigidbody2D rb;
     private CircleCollider2D circleCollider;
     private Player player;
@@ -111,7 +110,7 @@ public class SkillSwordController : MonoBehaviour
                 int knockbackDir = transform.position.x > enemiesInTarget[targetIndex].position.x ? -1 : 1;
                 SkillSwordDamage(enemiesInTarget[targetIndex].GetComponent<Enemy>(), knockbackDir);
 
-                
+
                 targetIndex++;
                 amountOfBounce--;
 
@@ -261,7 +260,10 @@ public class SkillSwordController : MonoBehaviour
 
         if (isSpinning)
         {
-            StopSpinning();
+            if (!wasStopSpin)
+            {
+                StopSpinning();
+            }
             return;
         }
 

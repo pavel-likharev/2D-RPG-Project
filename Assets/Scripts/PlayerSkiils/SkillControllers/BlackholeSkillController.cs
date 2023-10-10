@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillBlackhole : Skill
+public class BlackholeSkillController : SkillController
 {
     [SerializeField] private GameObject blackholePrefab;
 
-    [SerializeField] private float maxSize = 10;
+    [SerializeField] private float maxSize = 15;
     [SerializeField] private float growSpeed = 0.2f;
     [SerializeField] private float shrinkSpeed;
     [SerializeField] private float blackholeDuration;
@@ -14,7 +14,7 @@ public class SkillBlackhole : Skill
     [SerializeField] private int attackAmount;
     [SerializeField] private float cloneAttackCooldown;
 
-    SkillBlackholeController currentBlackhole;
+    BlackholeSkill currentBlackhole;
 
     protected override void Awake()
     {
@@ -41,7 +41,7 @@ public class SkillBlackhole : Skill
     public void CreateBlackhole()
     {
         GameObject newBlackhole = Instantiate(blackholePrefab, player.transform.position, Quaternion.identity);
-        currentBlackhole = newBlackhole.GetComponent<SkillBlackholeController>();
+        currentBlackhole = newBlackhole.GetComponent<BlackholeSkill>();
 
         currentBlackhole.SetupBlackhole(maxSize, growSpeed, shrinkSpeed, attackAmount, cloneAttackCooldown, blackholeDuration);
     }
@@ -57,5 +57,10 @@ public class SkillBlackhole : Skill
             return true;
         }
         return false;
+    }
+
+    public float GetBlackholeRadius()
+    {
+        return maxSize / 2;
     }
 }

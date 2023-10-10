@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7204524299047489678}
   - component: {fileID: 8226782033794966193}
   - component: {fileID: 1122173469994560124}
-  - component: {fileID: 8279505941529562774}
   m_Layer: 0
   m_Name: Clone
   m_TagString: Untagged
@@ -118,23 +117,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5986664921338709235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc9448399adc548478590a151222f9a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 165041b54343f004bb14ff9db1364988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   colorLoosingSpeed: 1
   attackCheck: {fileID: 6464138530067356451}
---- !u!114 &8279505941529562774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5986664921338709235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82634995a7a1ab7498698214a3f4ffa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6959250288306621063
 GameObject:
   m_ObjectHideFlags: 0

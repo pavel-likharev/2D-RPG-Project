@@ -90,6 +90,10 @@ public class Player : Character
 
         CheckForDashInput();
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Skill.CrystalSkillController.CanUseSkill();
+        }
     }
 
     public IEnumerator BusyFor(float seconds)
@@ -124,7 +128,7 @@ public class Player : Character
         if (IsWallDetected())
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.SkillDash.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.DashSkillController.CanUseSkill())
         {
             DashDir = Input.GetAxisRaw("Horizontal");
 

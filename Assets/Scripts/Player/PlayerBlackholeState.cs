@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBlackholeState : PlayerState
 {
     private float flyTime = 0.4f;
-    private float flySpeed = 15;
+    private float flySpeed = 12;
     private bool isSkillUse;
 
     private float defaultGravity;
@@ -48,14 +48,14 @@ public class PlayerBlackholeState : PlayerState
 
             if (!isSkillUse)
             {
-                if (player.Skill.SkillBlackhole.CanUseSkill())
+                if (player.Skill.BlackholeSkillController.CanUseSkill())
                 {
                     isSkillUse = true;
                 }
             }
         }
 
-        if (player.Skill.SkillBlackhole.SkillFinished())
+        if (player.Skill.BlackholeSkillController.SkillFinished())
         {
             stateMachine.ChangeState(player.AirState);
         }
