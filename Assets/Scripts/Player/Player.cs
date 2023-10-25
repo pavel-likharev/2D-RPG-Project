@@ -28,7 +28,10 @@ public class Player : Character
     public PlayerAimSwordState AimSwordState { get; private set; }
     public PlayerCatchSwordState CatchSwordState { get; private set; }
     public PlayerBlackholeState BlackholeState { get; private set; }
+    public PlayerDeadState DeadState { get; private set; }
     #endregion
+
+    public static Player Instance { get; private set; }
 
     public bool IsBusy { get; private set; }
 
@@ -52,6 +55,9 @@ public class Player : Character
 
     protected override void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+
         base.Awake();
 
         StateMachine = new PlayerStateMachine();
@@ -61,6 +67,7 @@ public class Player : Character
         AirState = new PlayerAirState(this, StateMachine, IS_JUMP);
         JumpState = new PlayerJumpState(this, StateMachine, IS_JUMP);
         DashState = new PlayerDashState(this, StateMachine, IS_DASH);
+        DeadState = new PlayerDeadState(this, StateMachine, IS_DEAD);
 
         WallSlideState = new PlayerWallSlideState(this, StateMachine, IS_WALLSLIDE);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, IS_JUMP);
@@ -94,6 +101,13 @@ public class Player : Character
         {
             Skill.CrystalSkillController.CanUseSkill();
         }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        StateMachine.ChangeState(DeadState);
     }
 
     public IEnumerator BusyFor(float seconds)

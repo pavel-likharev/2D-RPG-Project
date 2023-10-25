@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,13 +10,18 @@ public class Character : MonoBehaviour
     protected const string IS_IDLE = "IsIdle";
     protected const string IS_MOVE = "IsMove";
     protected const string IS_ATTACK = "IsAttack";
+    protected const string IS_DEAD = "IsDead";
     #endregion
+
+    public event EventHandler OnFlipped;
 
     #region Components
     public Animator Animator { get; private set; }
     public Rigidbody2D Rb { get; private set; }
+    public CapsuleCollider2D capsuleCollider { get; private set; }
     public CharacterFX CharacterFX { get; private set; }
     public SpriteRenderer SpriteRenderer { get; private set; }
+    public CharacterStats Stats { get; private set; }
     #endregion
 
     public int MoveDir { get; private set; } = 1;
@@ -41,9 +47,11 @@ public class Character : MonoBehaviour
     protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         Animator = GetComponentInChildren<Animator>();
         CharacterFX = GetComponentInChildren<CharacterFX>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Stats = GetComponent<CharacterStats>();
 
         groundLayer = LayerMask.GetMask("Ground");
     }
@@ -58,7 +66,7 @@ public class Character : MonoBehaviour
         
     }
 
-    public void TakeDamage(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
+    public void DamageEffect(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
     {
         CharacterFX.StartCoroutine("HitFX");
 
@@ -88,6 +96,10 @@ public class Character : MonoBehaviour
         }
     }
 
+    public virtual void Die()
+    {
+    }
+
     #region Collision
     public bool IsGroundedDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * MoveDir, wallCheckDistance, groundLayer);
@@ -105,6 +117,8 @@ public class Character : MonoBehaviour
         MoveDir = -MoveDir;
         isMoveRight = !isMoveRight;
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+        OnFlipped?.Invoke(this, EventArgs.Empty);
     }
 
     public void FlipSpriteController(float xDir)

@@ -73,7 +73,7 @@ public class CrystalSkill : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().TakeDamage(0);
+                hit.GetComponent<Enemy>().DamageEffect(0);
             }
         }
     }

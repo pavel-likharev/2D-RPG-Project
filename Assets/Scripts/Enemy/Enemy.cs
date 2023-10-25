@@ -31,6 +31,7 @@ public class Enemy : Character
     [SerializeField] protected GameObject counterImage;
 
     public EnemyStateMachine StateMachine { get; private set; }
+    public string LastAnimationBool { get; private set; }
 
 
     protected override void Awake()
@@ -55,6 +56,11 @@ public class Enemy : Character
 
         StateMachine.CurrentState.Update();
 
+    }
+
+    public virtual void AssignLastAnimatorName(string animationBool)
+    {
+        LastAnimationBool = animationBool;
     }
 
     public void FreezeTime(bool isFreeze)

@@ -218,7 +218,7 @@ public class SwordSkill : MonoBehaviour
 
     private void SkillSwordDamage(Enemy enemy, int knockbackDir)
     {
-        enemy.TakeDamage(knockbackDir);
+        enemy.DamageEffect(knockbackDir);
         enemy.StartCoroutine("FreezeTimeFor", freezeDuration);
     }
 

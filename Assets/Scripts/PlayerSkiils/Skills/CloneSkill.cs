@@ -80,7 +80,7 @@ public class CloneSkill : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().TakeDamage(moveDir);
+                hit.GetComponent<Enemy>().DamageEffect(moveDir);
 
                 if (canDuplicate)
                 {
