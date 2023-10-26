@@ -19,6 +19,7 @@ public class CrystalSkill : MonoBehaviour
 
     private Transform target;
     private float distanceTrigger = 1f;
+    private int moveDir;
 
     [SerializeField] private LayerMask enemyLayer;
 
@@ -29,6 +30,8 @@ public class CrystalSkill : MonoBehaviour
         this.canMove = canMove;
         this.moveSpeed = moveSpeed;
         this.target = target;
+
+        moveDir = GetMoveDir();
     }
 
     private void Update()
@@ -73,7 +76,7 @@ public class CrystalSkill : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                hit.GetComponent<Enemy>().DamageEffect(0);
+                PlayerManager.Instance.Player.Stats.DoMagicalDamage(hit.GetComponent<CharacterStats>(), moveDir);
             }
         }
     }
@@ -89,6 +92,14 @@ public class CrystalSkill : MonoBehaviour
         {
             SelfDestroy();
         }
+    }
+
+    private int GetMoveDir()
+    {
+        if (transform.position.x < target.position.x)
+            return 1;
+        else
+            return -1;
     }
 
     public void SelfDestroy() => Destroy(gameObject);

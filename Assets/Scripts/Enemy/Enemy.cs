@@ -58,6 +58,26 @@ public class Enemy : Character
 
     }
 
+    public override void SlowDownCharacter(float speedPercentage, float duration)
+    {
+        base.SlowDownCharacter(speedPercentage, duration);
+
+        float value = 1 - speedPercentage;
+
+        moveSpeed *= value;
+
+        Animator.speed *= value;
+
+        Invoke("ReturnDefaultSpeed", duration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+
+        moveSpeed = defaultMoveSpeed;
+    }
+
     public virtual void AssignLastAnimatorName(string animationBool)
     {
         LastAnimationBool = animationBool;

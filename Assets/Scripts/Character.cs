@@ -66,10 +66,18 @@ public class Character : MonoBehaviour
         
     }
 
-    public void DamageEffect(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
+    public virtual void SlowDownCharacter(float speedPercentage, float duration)
     {
-        CharacterFX.StartCoroutine("HitFX");
+    }
 
+    protected virtual void ReturnDefaultSpeed()
+    {
+        Animator.speed = 1;
+    }
+
+    public void DamageImpact(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
+    {
+        
         StartCoroutine("HitKnockback", knockbackDir);
     }
 
@@ -82,18 +90,6 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnocbacked = false;
-    }
-
-    public void MakeTransparent(bool isTransparent)
-    {
-        if (isTransparent)
-        {
-            SpriteRenderer.color = Color.clear;
-        }
-        else
-        {
-            SpriteRenderer.color = Color.white;
-        }
     }
 
     public virtual void Die()

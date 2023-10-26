@@ -15046,13 +15046,13 @@ MonoBehaviour:
   cooldown: 1
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
-  isAttack: 0
-  isCloneOnDashStart: 0
+  isAttack: 1
+  isCloneOnDashStart: 1
   isCloneOnDashEnd: 0
-  canCreateCloneOnCounterAttack: 0
-  canDuplicate: 0
-  chanceDuplicate: 0
-  canCrystalFromClone: 1
+  canCreateCloneOnCounterAttack: 1
+  canDuplicate: 1
+  chanceDuplicate: 33
+  canCrystalFromClone: 0
 --- !u!114 &1948117022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15437,13 +15437,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8829462115714992960, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
+      propertyPath: maxHealth.baseValue
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4783230969334357023, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_Name
       value: Enemy_Skeleton (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4783230969334357023, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5661241182525559764, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_RootOrder
@@ -15451,7 +15455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5661241182525559764, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08
+      value: 2.59
       objectReference: {fileID: 0}
     - target: {fileID: 5661241182525559764, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15489,6 +15493,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5777897457566030905, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777897457566030905, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15502,6 +15514,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8829462115714992960, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
+      propertyPath: iceDamage.baseValue
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -8829462115714992960, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: maxHealth.baseValue
       value: 1000
@@ -15581,7 +15597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2427413511337429929, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
       propertyPath: iceDamage.baseValue
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2427413511337429929, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
       propertyPath: maxHealth.baseValue
@@ -15589,6 +15605,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2427413511337429929, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
       propertyPath: fireDamage.baseValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2427413511337429929, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
+      propertyPath: lightingDamage.baseValue
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1298270592186682711, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}

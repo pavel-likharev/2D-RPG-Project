@@ -11,12 +11,6 @@ public class EnemyStats : CharacterStats
         enemy = GetComponent<Enemy>();
     }
 
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-        enemy.DamageEffect(Player.Instance.MoveDir);
-    }
-
     protected override void Die()
     {
         base.Die();

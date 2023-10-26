@@ -26,6 +26,18 @@ public class CharacterFX : MonoBehaviour
         originalMaterial = spriteRenderer.material;
     }
 
+    public void MakeTransparent(bool isTransparent)
+    {
+        if (isTransparent)
+        {
+            spriteRenderer.color = Color.clear;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
+    }
+
     private IEnumerator HitFX()
     {
         spriteRenderer.material = hitMaterial;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class SwordSkill : MonoBehaviour
@@ -218,7 +219,7 @@ public class SwordSkill : MonoBehaviour
 
     private void SkillSwordDamage(Enemy enemy, int knockbackDir)
     {
-        enemy.DamageEffect(knockbackDir);
+        PlayerManager.Instance.Player.Stats.DoDamage(enemy.GetComponent<CharacterStats>(), knockbackDir);
         enemy.StartCoroutine("FreezeTimeFor", freezeDuration);
     }
 

@@ -534,6 +534,7 @@ MonoBehaviour:
   isChilling: 0
   isShocking: 0
   igniteDamage: 0
+  thunderStrikePrefab: {fileID: 752339742679637899, guid: ecacec97faa192a48ad81d9f384059a7, type: 3}
 --- !u!1001 &3599287176701103001
 PrefabInstance:
   m_ObjectHideFlags: 0
