@@ -19,7 +19,8 @@ public class EnemyAnimationTriggers : MonoBehaviour
         {
             if (hit.GetComponent<Player>() != null)
             {
-                hit.GetComponent<Player>().TakeDamage(enemy.MoveDir);
+                PlayerStats target = hit.GetComponent<PlayerStats>();
+                enemy.Stats.DoDamage(target, enemy.MoveDir);
             }
         }
     }

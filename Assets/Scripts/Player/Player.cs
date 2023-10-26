@@ -28,8 +28,8 @@ public class Player : Character
     public PlayerAimSwordState AimSwordState { get; private set; }
     public PlayerCatchSwordState CatchSwordState { get; private set; }
     public PlayerBlackholeState BlackholeState { get; private set; }
+    public PlayerDeadState DeadState { get; private set; }
     #endregion
-
     public bool IsBusy { get; private set; }
 
     [Header("Attack info")]
@@ -41,11 +41,14 @@ public class Player : Character
     public float jumpForce = 15f;
     public float wallJumpForce = 5f;
     public float returnSwordImpact = 12f;
+    private float defaultMoveSpeed;
+    private float defaultJumpForce;
 
     [Header("Dash info")]
     public float dashForce = 12f;
     public float dashDuration = 0.3f;
-    public float DashDir { get; private set; }    
+    public float DashDir { get; private set; }
+    private float defaultDashForce;
 
     public SkillManager Skill { get; private set; }
     public GameObject Sword { get; private set; }
@@ -61,6 +64,7 @@ public class Player : Character
         AirState = new PlayerAirState(this, StateMachine, IS_JUMP);
         JumpState = new PlayerJumpState(this, StateMachine, IS_JUMP);
         DashState = new PlayerDashState(this, StateMachine, IS_DASH);
+        DeadState = new PlayerDeadState(this, StateMachine, IS_DEAD);
 
         WallSlideState = new PlayerWallSlideState(this, StateMachine, IS_WALLSLIDE);
         WallJumpState = new PlayerWallJumpState(this, StateMachine, IS_JUMP);
@@ -80,6 +84,10 @@ public class Player : Character
         StateMachine.Initialize(IdleState);
 
         Skill = SkillManager.Instance;
+
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpForce = jumpForce;
+        defaultDashForce = dashForce;
     }
 
     protected override void Update()
@@ -94,6 +102,37 @@ public class Player : Character
         {
             Skill.CrystalSkillController.CanUseSkill();
         }
+    }
+
+    public override void SlowDownCharacter(float speedPercentage, float duration)
+    {
+        base.SlowDownCharacter(speedPercentage, duration);
+
+        float value = 1 - speedPercentage;
+
+        moveSpeed *= value;
+        jumpForce *= value;
+        dashForce *= value;
+
+        Animator.speed *= value;
+
+        Invoke("ReturnDefaultSpeed", duration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+
+        moveSpeed = defaultMoveSpeed;
+        jumpForce = defaultJumpForce;
+        dashForce = defaultDashForce;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        StateMachine.ChangeState(DeadState);
     }
 
     public IEnumerator BusyFor(float seconds)

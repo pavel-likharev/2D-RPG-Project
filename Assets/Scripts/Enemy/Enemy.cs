@@ -31,6 +31,7 @@ public class Enemy : Character
     [SerializeField] protected GameObject counterImage;
 
     public EnemyStateMachine StateMachine { get; private set; }
+    public string LastAnimationBool { get; private set; }
 
 
     protected override void Awake()
@@ -55,6 +56,31 @@ public class Enemy : Character
 
         StateMachine.CurrentState.Update();
 
+    }
+
+    public override void SlowDownCharacter(float speedPercentage, float duration)
+    {
+        base.SlowDownCharacter(speedPercentage, duration);
+
+        float value = 1 - speedPercentage;
+
+        moveSpeed *= value;
+
+        Animator.speed *= value;
+
+        Invoke("ReturnDefaultSpeed", duration);
+    }
+
+    protected override void ReturnDefaultSpeed()
+    {
+        base.ReturnDefaultSpeed();
+
+        moveSpeed = defaultMoveSpeed;
+    }
+
+    public virtual void AssignLastAnimatorName(string animationBool)
+    {
+        LastAnimationBool = animationBool;
     }
 
     public void FreezeTime(bool isFreeze)

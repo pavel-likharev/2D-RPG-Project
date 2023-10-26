@@ -22,7 +22,7 @@ public class ParallaxBackground : MonoBehaviour
         
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
         float distanceToMove = cam.transform.position.x * parallaxEffect;
