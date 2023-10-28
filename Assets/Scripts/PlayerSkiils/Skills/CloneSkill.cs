@@ -46,7 +46,7 @@ public class CloneSkill : MonoBehaviour
 
         if (spriteRenderer.color.a <= 0)
         {
-            closestEnemy.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+            //closestEnemy.GetComponentInChildren<SpriteRenderer>().color = Color.white;
             Destroy(gameObject);
         }
     }

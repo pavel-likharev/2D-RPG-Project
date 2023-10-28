@@ -50,6 +50,9 @@ public class CrystalSkill : MonoBehaviour
 
         if (canMove)
         {
+            if (target == null)
+                return;
+
             transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, target.position) < distanceTrigger)
@@ -96,6 +99,9 @@ public class CrystalSkill : MonoBehaviour
 
     private int GetMoveDir()
     {
+        if (target == null)
+            return 0;
+
         if (transform.position.x < target.position.x)
             return 1;
         else
