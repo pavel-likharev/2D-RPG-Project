@@ -29,6 +29,7 @@ public class Enemy : Character
     public Vector2 stunDir;
     protected bool isCanBeStunned;
     [SerializeField] protected GameObject counterImage;
+    [SerializeField] private Color freezeColor;
 
     public EnemyStateMachine StateMachine { get; private set; }
     public string LastAnimationBool { get; private set; }
@@ -89,15 +90,23 @@ public class Enemy : Character
         {
             moveSpeed = 0;
             Animator.speed = 0;
+            SpriteRenderer.color = freezeColor;
         }
         else
         {
             moveSpeed = defaultMoveSpeed;
             Animator.speed = 1;
+            SpriteRenderer.color = Color.white;
         }
     }
 
-    protected virtual IEnumerator FreezeTimeFor(float seconds)
+    public virtual void FreezeTimeFor(float duration)
+    {
+        StartCoroutine(FreezeTimer(duration));
+    }
+
+
+    protected virtual IEnumerator FreezeTimer(float seconds)
     {
         FreezeTime(true);
 

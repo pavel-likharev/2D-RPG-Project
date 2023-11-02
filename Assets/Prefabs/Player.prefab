@@ -167,7 +167,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1312648595
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3318188226485093758, guid: ae72133dacba6ec4eb33ecde48f50e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 3747520151477250332}
   - component: {fileID: 8488682343312964092}
   - component: {fileID: -2427413511337429929}
+  - component: {fileID: 3954596672671612378}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -339,7 +340,7 @@ Transform:
   - {fileID: 4974128009029847296}
   - {fileID: 7165989906874826681}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &5627077208923006879
 CapsuleCollider2D:
@@ -493,38 +494,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength:
     baseValue: 2
+    modifiers: 
   agility:
     baseValue: 0
+    modifiers: 
   intelligence:
     baseValue: 0
+    modifiers: 
   vitality:
-    baseValue: 0
+    baseValue: 5
+    modifiers: 
   damage:
     baseValue: 10
+    modifiers: 
   critChance:
     baseValue: 0
+    modifiers: 
   critPower:
     baseValue: 0
+    modifiers: 
   currentHealth: 0
   maxHealth:
-    baseValue: 1000
+    baseValue: 1
+    modifiers: 
   armor:
     baseValue: 0
+    modifiers: 
   evasion:
     baseValue: 0
+    modifiers: 
   magicResistance:
     baseValue: 0
+    modifiers: 
   fireDamage:
     baseValue: 0
+    modifiers: 
   iceDamage:
     baseValue: 0
+    modifiers: 
   lightingDamage:
     baseValue: 0
+    modifiers: 
   isElementalState: 0
   isIgniting: 0
   isChilling: 0
   isShocking: 0
-  igniteDamage: 0
+  shockStrikePrefab: {fileID: 752339742679637899, guid: ecacec97faa192a48ad81d9f384059a7, type: 3}
+--- !u!114 &3954596672671612378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200499259118281349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec71e0a6c2d87fb4b8b20b4bb800ada8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPrefab: {fileID: 3886077770643883876, guid: 8e577dd1c7dbcc845ba5d370b25d6403, type: 3}
+  possibleDrops: []
+  amountItems: 0
+  chanceToLooseEquipment: 99
+  chanceToLooseMaterials: 99
 --- !u!1001 &8347537940366744311
 PrefabInstance:
   m_ObjectHideFlags: 0

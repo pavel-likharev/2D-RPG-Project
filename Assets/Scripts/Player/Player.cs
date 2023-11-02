@@ -102,6 +102,11 @@ public class Player : Character
         {
             Skill.CrystalSkillController.CanUseSkill();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Inventory.Instance.UseFlask();
+        }
     }
 
     public override void SlowDownCharacter(float speedPercentage, float duration)

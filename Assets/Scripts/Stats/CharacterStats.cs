@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Xml;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class CharacterStats : MonoBehaviour
 {
     public event EventHandler OnHealthChange;
     private CharacterFX fx;
+    public bool IsDead { get; private set; }
 
     #region Fields
     [Header("Major stats")]
@@ -14,7 +16,6 @@ public class CharacterStats : MonoBehaviour
     public Stat agility; // 1 point increase evasion by 1 and crit.chance by 1%
     public Stat intelligence; // 1 point increase magic damage by 1 and resistance by 3%
     public Stat vitality; // // 1 point increase health by 3 or 5 point
-    protected bool isDead;
 
     [Header("Offensive stats")]
     public Stat damage;
@@ -55,12 +56,11 @@ public class CharacterStats : MonoBehaviour
     private float shockDamageMultiplier = 0.1f;
     private int shockEffectReducer = 20;
     
-    [SerializeField] private GameObject thunderStrikePrefab;
-    private int thunderDamage;
+    [SerializeField] private GameObject shockStrikePrefab;
+    private int shockDamage;
 
     private float checkRadiusClosestEnemy = 25f;
     #endregion
-
 
     protected virtual void Start()
     {
@@ -98,8 +98,30 @@ public class CharacterStats : MonoBehaviour
         GetComponent<Character>().DamageImpact(knockBackDir);
         fx.StartCoroutine("HitFX");
 
-        if (currentHealth <= 0 && !isDead)
+        if (currentHealth <= 0 && !IsDead)
             Die();
+    }
+    public virtual void IncreaseStat(Stat stat, int value, float duration)
+    {
+        StartCoroutine(StatModify(stat, value, duration));
+    }
+    private IEnumerator StatModify(Stat stat, int value, float duration)
+    {
+        stat.AddModifier(value);
+
+        yield return new WaitForSeconds(duration);
+
+        stat.RemoveModifier(value);
+    }
+
+    public virtual void IncreaseHealth(int value)
+    {
+        currentHealth += value;
+
+        if (currentHealth > GetMaxHealtValue())
+            currentHealth = GetMaxHealtValue();
+
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
     }
     protected virtual void DecreaseHealth(int damage)
     {
@@ -109,7 +131,7 @@ public class CharacterStats : MonoBehaviour
     }
     protected virtual void Die()
     {
-        isDead = true;
+        IsDead = true;
     }
 
     #region Magical Damage and elements 
@@ -194,7 +216,7 @@ public class CharacterStats : MonoBehaviour
             {
                 canApplyShock = true;
                 target.ApplyElements(canApplyIgnite, canApplyChill, canApplyShock);
-                target.SetupThunderDamage(Mathf.RoundToInt(lightingDamage * shockDamageMultiplier));
+                target.SetupShockDamage(Mathf.RoundToInt(lightingDamage * shockDamageMultiplier));
                 return;
             }
         }
@@ -206,14 +228,14 @@ public class CharacterStats : MonoBehaviour
 
         if (canApplyShock)
         {
-            target.SetupThunderDamage(Mathf.RoundToInt(lightingDamage * shockDamageMultiplier));
+            target.SetupShockDamage(Mathf.RoundToInt(lightingDamage * shockDamageMultiplier));
         }
 
         target.ApplyElements(canApplyIgnite, canApplyChill, canApplyShock);
     }
 
     public void SetupIgniteDamage(int value) => igniteDamage = value;
-    public void SetupThunderDamage(int value) => thunderDamage = value;
+    public void SetupShockDamage(int value) => shockDamage = value;
 
     public void ApplyElements(bool isIgnite, bool isChill, bool isShock)
     {
@@ -224,7 +246,7 @@ public class CharacterStats : MonoBehaviour
                 if (GetComponent<Player>() != null)
                     return;
                 
-                HitThunderClosestEnemy();
+                HitShockClosestEnemy();
             }
 
             return;
@@ -265,10 +287,9 @@ public class CharacterStats : MonoBehaviour
         }
         else
         {
-            Debug.Log(igniteDamage);
             DecreaseHealth(igniteDamage);
 
-            if (currentHealth <= 0 && !isDead)
+            if (currentHealth <= 0 && !IsDead)
             {
                 Die();
             }
@@ -287,7 +308,7 @@ public class CharacterStats : MonoBehaviour
 
         fx.ShockFx(shockTimer);
     }
-    private void HitThunderClosestEnemy()
+    private void HitShockClosestEnemy()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, checkRadiusClosestEnemy);
         float closestDistance = Mathf.Infinity;
@@ -312,8 +333,8 @@ public class CharacterStats : MonoBehaviour
 
         if (closestEnemy != null)
         {
-            GameObject thunderStrike = Instantiate(thunderStrikePrefab, transform.position + new Vector3(1, 0), Quaternion.identity);
-            thunderStrike.GetComponent<ThunderStrikeContoller>().Setup(closestEnemy.GetComponent<CharacterStats>(), thunderDamage);
+            GameObject shockStrike = Instantiate(shockStrikePrefab, transform.position + new Vector3(1, 0), Quaternion.identity);
+            shockStrike.GetComponent<ShockStrikeContoller>().Setup(closestEnemy.GetComponent<CharacterStats>(), shockDamage);
         }
     }
     #endregion
