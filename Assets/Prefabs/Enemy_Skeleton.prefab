@@ -105,7 +105,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1886154959
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -85727878, guid: 687df074731fbf744b668d2275dbb675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -307,7 +307,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1886154959
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0.6862745}
@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 9075281793073097094}
   - component: {fileID: 3048799313300946181}
   - component: {fileID: -8829462115714992960}
+  - component: {fileID: 2315980862907835270}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -391,7 +392,7 @@ Transform:
   - {fileID: 6560918149418734377}
   - {fileID: 2403199008329330391}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6441603785690318230
 Rigidbody2D:
@@ -488,6 +489,7 @@ MonoBehaviour:
   stunDuration: 2
   stunDir: {x: 5, y: 12}
   counterImage: {fileID: 3829240105724368890}
+  freezeColor: {r: 0.054901954, g: 0.62352943, b: 0.80784315, a: 1}
 --- !u!114 &-8829462115714992960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,39 +504,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength:
     baseValue: 0
+    modifiers: 
   agility:
     baseValue: 0
+    modifiers: 
   intelligence:
     baseValue: 0
+    modifiers: 
   vitality:
     baseValue: 0
+    modifiers: 
   damage:
     baseValue: 7
+    modifiers: 
   critChance:
     baseValue: 0
+    modifiers: 
   critPower:
     baseValue: 0
+    modifiers: 
   currentHealth: 0
   maxHealth:
     baseValue: 50
+    modifiers: 
   armor:
     baseValue: 0
+    modifiers: 
   evasion:
     baseValue: 0
+    modifiers: 
   magicResistance:
     baseValue: 0
+    modifiers: 
   fireDamage:
     baseValue: 0
+    modifiers: 
   iceDamage:
-    baseValue: 0
+    baseValue: 2
+    modifiers: 
   lightingDamage:
     baseValue: 0
+    modifiers: 
   isElementalState: 0
   isIgniting: 0
   isChilling: 0
   isShocking: 0
-  igniteDamage: 0
-  thunderStrikePrefab: {fileID: 752339742679637899, guid: ecacec97faa192a48ad81d9f384059a7, type: 3}
+  shockStrikePrefab: {fileID: 752339742679637899, guid: ecacec97faa192a48ad81d9f384059a7, type: 3}
+  level: 1
+  percantageModifier: 0.4
+--- !u!114 &2315980862907835270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4783230969334357023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f98bda8cb5e0c499130ad310852095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPrefab: {fileID: 3886077770643883876, guid: 8e577dd1c7dbcc845ba5d370b25d6403, type: 3}
+  possibleDrops:
+  - {fileID: 11400000, guid: ea3ba559903e015459c862dcb8da3483, type: 2}
+  - {fileID: 11400000, guid: 8bc29639514f2184c851645933196a44, type: 2}
+  - {fileID: 11400000, guid: cda3e244499a2564198e81882f858db4, type: 2}
+  - {fileID: 11400000, guid: 8ad3d625f5642324f94d706880f7dce8, type: 2}
+  - {fileID: 11400000, guid: b4f97c7c0cf85d147abc0c25d6cdc94c, type: 2}
+  amountItems: 2
 --- !u!1001 &3599287176701103001
 PrefabInstance:
   m_ObjectHideFlags: 0

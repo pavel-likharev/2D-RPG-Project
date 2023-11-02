@@ -16,5 +16,13 @@ public class PlayerStats : CharacterStats
         base.Die();
 
         player.Die();
+        GetComponent<ItemDrop_Player>()?.GenerateDrop();
+    }
+
+    protected override void DecreaseHealth(int damage)
+    {
+        base.DecreaseHealth(damage);
+
+        Inventory.Instance.UseArmor();
     }
 }
