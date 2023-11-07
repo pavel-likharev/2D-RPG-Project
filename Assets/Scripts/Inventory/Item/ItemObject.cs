@@ -30,7 +30,16 @@ public class ItemObject : MonoBehaviour
 
     public void PickupItem()
     {
+        if (!Inventory.Instance.CanAddItemToInventory() &&
+            itemData.itemType == ItemType.Equipment &&
+            !Inventory.Instance.inventoryDictionary.ContainsKey(itemData))
+        {
+            rb.velocity = new Vector2 (0, 5);
+            return;
+        }
+        
         Inventory.Instance.AddItem(itemData);
         Destroy(gameObject);
+        
     }
 }

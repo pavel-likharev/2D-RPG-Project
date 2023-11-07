@@ -49,6 +49,8 @@ public class ItemData_Equipment : ItemData
         {
             effect.ExecuteEffect(target);
         }
+
+        Inventory.Instance.UpdateStatSlotsUI();
     }
 
     public void AddModifiers()
@@ -95,5 +97,42 @@ public class ItemData_Equipment : ItemData
         playerStats.fireDamage.RemoveModifier(fireDamage);
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
+    }
+
+    public override string GetDescription()
+    {
+        description.Length = 0;
+
+        AddItemDescription(strength, "Strenght");
+        AddItemDescription(agility, "Agility");
+        AddItemDescription(intelligence, "Intelligence");
+        AddItemDescription(vitality, "Vitality");
+
+        AddItemDescription(damage, "Damage");
+        AddItemDescription(critChance, "Crit.chance");
+        AddItemDescription(critPower, "Crit.power");
+
+        AddItemDescription(health, "Health");
+        AddItemDescription(evasion, "Evasion");
+        AddItemDescription(armor, "Armor");
+        AddItemDescription(magicResistance, "Magic Resist.");
+
+        AddItemDescription(fireDamage, "Fire Damage");
+        AddItemDescription(iceDamage, "Ice Damage");
+        AddItemDescription(lightingDamage, "Lighting Damage");
+
+        return description.ToString();
+    }
+
+    private void AddItemDescription(int value, string name)
+    {
+        if (value != 0)
+        {
+            if (description.Length > 0) 
+                description.AppendLine();
+
+            if (value > 0)
+                description.Append(name + ": " + value);
+        }
     }
 }
