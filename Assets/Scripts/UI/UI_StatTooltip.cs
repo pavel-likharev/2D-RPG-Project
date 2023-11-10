@@ -7,6 +7,11 @@ public class UI_StatTooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI description;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void ShowTooltip(string text)
     {
         description.text = text;

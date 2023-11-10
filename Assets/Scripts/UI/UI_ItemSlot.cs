@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image image;
-    [SerializeField] private TextMeshProUGUI itemText;
-    [SerializeField] private Color defaultColor;
+    [SerializeField] protected Image image;
+    [SerializeField] protected TextMeshProUGUI itemText;
+    [SerializeField] protected Color defaultColor;
 
     public InventoryItem item;
 
@@ -51,6 +51,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             {
                 Inventory.Instance.EquipItem(item.itemData);
             }
+
+            UI.Instance.MenuController.itemTooltip.HideTolltip();
         }
     }
 
@@ -59,7 +61,11 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if (item == null || item.itemData == null)
             return;
 
-        UI.Instance.itemTooltip.ShowTooltip(item.itemData as ItemData_Equipment);
+        if (item.itemData.itemType == ItemType.Equipment)
+            UI.Instance.MenuController.itemTooltip.ShowTooltip(item.itemData as ItemData_Equipment);
+
+        if (item.itemData.itemType == ItemType.Material)
+            UI.Instance.MenuController.materialTooltip.ShowTooltip(item.itemData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -67,6 +73,10 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
         if (item == null || item.itemData == null)
             return;
 
-        UI.Instance.itemTooltip.HideTolltip();
+        if (item.itemData.itemType == ItemType.Equipment)
+            UI.Instance.MenuController.itemTooltip.HideTolltip();
+
+        if (item.itemData.itemType == ItemType.Material)
+            UI.Instance.MenuController.materialTooltip.HideTolltip();
     }
 }

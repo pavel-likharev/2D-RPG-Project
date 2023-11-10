@@ -19,6 +19,8 @@ public class UI_EquipmentSlot : UI_ItemSlot
             Inventory.Instance.AddItem(item.itemData);
             Inventory.Instance.UnequipItem(item.itemData as ItemData_Equipment);
             CleanUp();
+
+            UI.Instance.MenuController.itemTooltip.HideTolltip();
         }
     }
 }

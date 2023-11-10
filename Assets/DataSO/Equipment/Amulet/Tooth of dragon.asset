@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5276f77ceaecda54a8b9d884716371f7, type: 3}
-  m_Name: Amulet of God
+  m_Name: Tooth of dragon
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Amulet of God
-  icon: {fileID: -245851270, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
+  itemName: Tooth of dragon
+  icon: {fileID: 1900874589, guid: a9ca9a41598dd2e44b125928045c518f, type: 3}
   dropChance: 0
   equipmentType: 2
-  effects:
-  - {fileID: -3941384277299913875, guid: db63be91e9ac6c649874c29cb0df7f8a, type: 3}
+  effects: []
   itemCooldown: 0
   strength: 0
   agility: 0
@@ -33,5 +32,9 @@ MonoBehaviour:
   magicResistance: 0
   fireDamage: 0
   iceDamage: 0
-  lightingDamage: 10
-  craftingMaterials: []
+  lightingDamage: 0
+  craftingMaterials:
+  - itemData: {fileID: 11400000, guid: b64bae95499c7c443b050a82551d11ea, type: 2}
+    stackSize: 1
+  - itemData: {fileID: 11400000, guid: b4f97c7c0cf85d147abc0c25d6cdc94c, type: 2}
+    stackSize: 1

@@ -41,7 +41,7 @@ public class ItemData_Equipment : ItemData
     public int lightingDamage;
 
     [Header("Craft requirements")]
-    public List<InventoryItem> craftingMaterials;
+    public List<InventoryItem> craftingMaterials; // max 4
 
     public void ApplyEffect(Transform target)
     {

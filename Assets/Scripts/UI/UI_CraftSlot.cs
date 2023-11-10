@@ -5,14 +5,21 @@ using UnityEngine.EventSystems;
 
 public class UI_CraftSlot : UI_ItemSlot
 {
-    private void OnEnable()
+    public void SetupCraftSlot(ItemData_Equipment data)
     {
-        UpdateSlot(item);
+        if (data == null)
+            return;
+
+        item.itemData = data;
+
+        image.sprite = data.icon;
+        itemText.text = data.itemName;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
         ItemData_Equipment craftData = item.itemData as ItemData_Equipment;
-        Inventory.Instance.CanCraft(craftData, craftData.craftingMaterials);
+        
+        UI.Instance.MenuController.craftingWindow.SetupCraftWindow(craftData);
     }
 }

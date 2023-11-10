@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> menuList;
-
-    public UI_ItemTooltip itemTooltip;
-    public UI_StatTooltip statTooltip;
+    public UI_MenuController MenuController { get; private set; }
 
     public static UI Instance { get; private set; }
 
@@ -23,16 +20,8 @@ public class UI : MonoBehaviour
         }
     }
 
-    public void SwitchMenu(GameObject menu)
+    private void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        if (menu != null)
-        {
-            menu.SetActive(true);
-        }
+        MenuController = GetComponentInChildren<UI_MenuController>();
     }
 }

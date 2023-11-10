@@ -47,7 +47,6 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     break;
                 case StatType.health:
                     statValueText.text = playerStats.GetMaxHealtValue().ToString();
-                    Debug.Log(playerStats.GetMaxHealtValue().ToString());
                     break;
                 case StatType.evasion:
                     statValueText.text = (playerStats.evasion.GetValue() + playerStats.agility.GetValue()).ToString();
@@ -66,11 +65,11 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        UI.Instance.statTooltip.ShowTooltip(description);
+        UI.Instance.MenuController.statTooltip.ShowTooltip(description);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        UI.Instance.statTooltip.HideTolltip();
+        UI.Instance.MenuController.statTooltip.HideTolltip();
     }
 }
