@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Windows;
 
 public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -65,6 +64,10 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Vector2 mousePosition = Input.mousePosition;
+
+        UI.Instance.MenuController.statTooltip.transform.position = new Vector2(mousePosition.x, mousePosition.y + 150);
+
         UI.Instance.MenuController.statTooltip.ShowTooltip(description);
     }
 
