@@ -26,6 +26,11 @@ public class UI_MenuController : MonoBehaviour
 
     public UI_CraftingWindow craftingWindow;
 
+    private void Start()
+    {
+        CloseMenu();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))

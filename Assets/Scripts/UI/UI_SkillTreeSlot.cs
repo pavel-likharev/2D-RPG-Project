@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,8 @@ using UnityEngine.UI;
 
 public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool Unlocked { get; private set; }
-
     [SerializeField] private string skillName;
+    [SerializeField] private int skillPrice;
     [TextArea][SerializeField] private string skillDescription;
 
     [SerializeField] private UI_SkillTreeSlot[] unlockedSlots;
@@ -28,32 +28,40 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         skillImage = GetComponent<Image>();
         skillImage.color = lockedColor;
 
-        GetComponent<Button>().onClick.AddListener(() => UnlockSlot());
     }
 
     public void UnlockSlot()
     {
-        foreach (var slot in unlockedSlots)
-        {
-            if (slot.Unlocked == false)
-            {
-                Debug.Log("unlock slot is locked");
-                return;
-            }
-        }
-
-        foreach (var slot in lockedSlots)
-        {
-            if (slot.Unlocked == true)
-            {
-                Debug.Log("lock slot is unlocked");
-                return;
-            }
-        }
-
-        Unlocked = true;
-        skillImage.color = Color.white; 
+        skillImage.color = Color.white;
     }
+
+    //public void UnlockSlot()
+    //{
+    //    if (!PlayerManager.Instance.HaveEnoughMoney(skillPrice)) 
+    //        return;
+
+    //    foreach (var slot in unlockedSlots)
+    //    {
+    //        if (slot.Unlocked == false)
+    //        {
+    //            Debug.Log("unlock slot is locked");
+    //            return;
+    //        }
+    //    }
+
+    //    foreach (var slot in lockedSlots)
+    //    {
+    //        if (slot.Unlocked == true)
+    //        {
+    //            Debug.Log("lock slot is unlocked");
+    //            return;
+    //        }
+    //    }
+
+    //    Debug.Log("slot unlocked");
+    //    Unlocked = true;
+    //    skillImage.color = Color.white; 
+    //}
 
     public void OnPointerEnter(PointerEventData eventData)
     {

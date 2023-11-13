@@ -205,6 +205,8 @@ public class Inventory : MonoBehaviour
     {
         if (stashDictionary.TryGetValue(item, out InventoryItem value))
         {
+
+            Debug.Log("before remove stack in stash " + value.stackSize);
             if (value.stackSize <= 1)
             {
                 stash.Remove(value);
@@ -214,8 +216,9 @@ public class Inventory : MonoBehaviour
             {
                 value.RemoveStack();
             }
-
         }
+
+        
 
         UpdateStashSlotsUI();
     }
@@ -235,7 +238,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    materialsToRemove.Add(stashValue);
+                    materialsToRemove.Add(requiredMaterials[i]);
                 }
             }
             else
@@ -243,11 +246,14 @@ public class Inventory : MonoBehaviour
                 Debug.Log("Not enough materials");
                 return false;
             }
-        }
+        }        
 
         foreach (InventoryItem item in materialsToRemove)
         {
-            RemoveItemFromStash(item.itemData);
+            for (int i = 0; i < item.stackSize; i++)
+            {
+                RemoveItemFromStash(item.itemData);
+            }
         }
 
         AddItem(itemToCraft);

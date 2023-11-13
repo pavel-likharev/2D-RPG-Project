@@ -10,8 +10,6 @@ public class CloneSkillController : SkillController
     [SerializeField] private bool isAttack;
 
     [Header("Spawn info")]
-    [SerializeField] private bool isCloneOnDashStart;
-    [SerializeField] private bool isCloneOnDashEnd;
     [SerializeField] private bool canCreateCloneOnCounterAttack;
 
     [Header("Diplicate info")]
@@ -55,22 +53,6 @@ public class CloneSkillController : SkillController
         GameObject newClone = Instantiate(clonePrefab, clonePosition.position + offset, Quaternion.identity);
 
         newClone.GetComponent<CloneSkill>().SetupClone(cloneDuration, isAttack, FindClosestEnemy(newClone.transform), canDuplicate, chanceDuplicate);
-    }
-
-    public void CreateCloneOnDashStart()
-    {
-        if (isCloneOnDashStart)
-        {
-            CreateClone(player.transform, Vector2.zero);
-        }
-    }
-
-    public void CreateCloneOnDashEnd()
-    {
-        if (isCloneOnDashEnd)
-        {
-            CreateClone(player.transform, Vector2.zero);
-        }
     }
 
     public void CreateCloneOnCounterAttack(Transform enemy)

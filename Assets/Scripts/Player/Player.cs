@@ -96,7 +96,10 @@ public class Player : Character
 
         StateMachine.CurrentState.Update();
 
-        CheckForDashInput();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            CheckForDashInput();
+        }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -169,10 +172,10 @@ public class Player : Character
 
     private void CheckForDashInput()
     {
-        if (IsWallDetected())
+        if (!Skill.DashSkillController.dashUnlocked || IsWallDetected())
             return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.DashSkillController.CanUseSkill())
+        if (SkillManager.Instance.DashSkillController.CanUseSkill())
         {
             DashDir = Input.GetAxisRaw("Horizontal");
 

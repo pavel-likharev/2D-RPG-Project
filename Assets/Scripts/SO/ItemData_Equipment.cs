@@ -15,8 +15,10 @@ public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
 
+    [Header("Unique effect")]
     public List<Effect> effects;
     public float itemCooldown;
+    [TextArea] public string effectDescriptionText;
 
     [Header("Major stats")]
     public int strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -120,6 +122,12 @@ public class ItemData_Equipment : ItemData
         AddItemDescription(fireDamage, "Fire Damage");
         AddItemDescription(iceDamage, "Ice Damage");
         AddItemDescription(lightingDamage, "Lighting Damage");
+
+        if (effectDescriptionText.Length > 0 && effectDescriptionText != null)
+        {
+            description.AppendLine();
+            description.Append(effectDescriptionText);
+        }
 
         return description.ToString();
     }

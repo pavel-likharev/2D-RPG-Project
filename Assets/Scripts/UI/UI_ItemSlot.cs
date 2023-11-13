@@ -63,17 +63,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
         if (item.itemData.itemType == ItemType.Equipment)
         {
-            Vector2 mousePosition = Input.mousePosition;
-
-            UI.Instance.MenuController.itemTooltip.transform.position = new Vector2(mousePosition.x - 200, mousePosition.y + 200);
+            SetTooltipPosition(UI.Instance.MenuController.itemTooltip.transform);
             UI.Instance.MenuController.itemTooltip.ShowTooltip(item.itemData as ItemData_Equipment);
         }
 
         if (item.itemData.itemType == ItemType.Material)
         {
-            Vector2 mousePosition = Input.mousePosition;
-
-            UI.Instance.MenuController.materialTooltip.transform.position = new Vector2(mousePosition.x, mousePosition.y + 100);
+            SetTooltipPosition(UI.Instance.MenuController.materialTooltip.transform);
             UI.Instance.MenuController.materialTooltip.ShowTooltip(item.itemData);
         }
     }
@@ -94,6 +90,19 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
     {
         Vector2 mousePosition = Input.mousePosition;
 
-        tooltip.position = new Vector2(mousePosition.x - 100, mousePosition.y + 100);
+        float xOffset = 0;
+        float yOffset = 0;
+
+        if (mousePosition.x > 600)
+            xOffset = -200;
+        else
+            xOffset = 200;
+
+        if (mousePosition.y > 300)
+            yOffset = -50;
+        else
+            yOffset = 50;
+
+        tooltip.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
 }

@@ -1547,6 +1547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Time Stop
+  skillPrice: 0
   skillDescription: When enemy hit by sword, his time stops.
   unlockedSlots:
   - {fileID: 558695402}
@@ -2173,6 +2174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Controlled Destruction
+  skillPrice: 0
   skillDescription: 'Crystal moves towards the enemy.
 
     You can no longer teleport
@@ -5034,6 +5036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Blackhole
+  skillPrice: 0
   skillDescription: Trap enemies in a blackhole which allows you to do tons of damage.
   unlockedSlots:
   - {fileID: 1809604165}
@@ -5286,6 +5289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Sword Throw
+  skillPrice: 0
   skillDescription: Throws sword into the enemy.
   unlockedSlots: []
   lockedSlots: []
@@ -5999,6 +6003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry
+  skillPrice: 0
   skillDescription: You can parry attack to avoid damage.
   unlockedSlots: []
   lockedSlots: []
@@ -6138,6 +6143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge
+  skillPrice: 0
   skillDescription: You getting 10% of a evasion.
   unlockedSlots: []
   lockedSlots: []
@@ -6684,6 +6690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Bouncy Sword
+  skillPrice: 0
   skillDescription: 'Sword can bounce between enemies.
 
     [Only one sword upgrade
@@ -8039,6 +8046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry with clones
+  skillPrice: 0
   skillDescription: You create a clone with succesful parry.
   unlockedSlots:
   - {fileID: 1103824180}
@@ -8959,6 +8967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
+  skillPrice: 0
   skillDescription: 'You can dash to avaid attacks.
 
     You are invincible in the
@@ -9385,7 +9394,7 @@ GameObject:
   - component: {fileID: 821427513}
   - component: {fileID: 821427512}
   m_Layer: 5
-  m_Name: SkillTreeSlot_Dash_Aggressive Illusion
+  m_Name: SkillTreeSlot_Dash_Double Illusion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9467,8 +9476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feccd178c8b5b264a9f9f2cd77e890b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Dash_Aggressive Illusion
-  skillDescription: You create clone at your arraval.
+  skillName: Dash_Double Illusion
+  skillPrice: 0
+  skillDescription: You create clone at your arrival.
   unlockedSlots:
   - {fileID: 918920006}
   lockedSlots: []
@@ -10222,6 +10232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash - Illusion
+  skillPrice: 0
   skillDescription: You leave clone when you dash.
   unlockedSlots:
   - {fileID: 792654093}
@@ -10572,6 +10583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiple Crystals
+  skillPrice: 0
   skillDescription: You can create up to 3 crystal at a time.
   unlockedSlots:
   - {fileID: 170387679}
@@ -11373,6 +11385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiple Clone
+  skillPrice: 0
   skillDescription: 'Clone have 30% by damage, but can chance spawn new clone.
 
     [Only
@@ -11453,6 +11466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Bullet Sword
+  skillPrice: 0
   skillDescription: 'Sword can piece enemies.
 
     [Only one sword upgrade can be
@@ -12587,6 +12601,7 @@ RectTransform:
   m_Children:
   - {fileID: 324425423}
   - {fileID: 1346228699}
+  - {fileID: 1373139425}
   m_Father: {fileID: 1668562808}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12664,8 +12679,6 @@ RectTransform:
   - {fileID: 101712010}
   - {fileID: 789042864}
   - {fileID: 674193266}
-  - {fileID: 1925554177}
-  - {fileID: 1829149257}
   m_Father: {fileID: 1346228699}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12707,6 +12720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Restore Parry
+  skillPrice: 0
   skillDescription: You restore a bit of health with succesful parry.
   unlockedSlots:
   - {fileID: 589794939}
@@ -21548,6 +21562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Clone
+  skillPrice: 0
   skillDescription: 'Create crystal insctead a clone.
 
     [Only one upgrade can
@@ -22170,6 +22185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Blink
+  skillPrice: 0
   skillDescription: 'You leave your clone instead of you when you blink.
 
     [Only
@@ -23534,6 +23550,45 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1283491195528104898, guid: 585b93c20c74fc048b3f7a59fdd11cd6, type: 3}
   m_PrefabInstance: {fileID: 820211111}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1373139424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373139425}
+  m_Layer: 5
+  m_Name: Tooltips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1373139425
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373139424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1925554177}
+  - {fileID: 1829149257}
+  - {fileID: 1939186663}
+  m_Father: {fileID: 1091609971}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1375280070 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1283491195528104898, guid: 585b93c20c74fc048b3f7a59fdd11cd6, type: 3}
@@ -24066,6 +24121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Agressive Clone
+  skillPrice: 0
   skillDescription: 'Clone damage increse. 80% by damage.
 
     Clone can apply on
@@ -24262,6 +24318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb12eedb345d8549bd2fd2b8f76f141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currency: 10000
   <Player>k__BackingField: {fileID: 1464002170}
 --- !u!4 &1474536774
 Transform:
@@ -24663,6 +24720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Vulnerability
+  skillPrice: 0
   skillDescription: Enemy hit by sword, takes 10% more damage.
   unlockedSlots:
   - {fileID: 558695402}
@@ -26232,7 +26290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1717425094
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26246,7 +26304,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1555786514}
-  - {fileID: 1939186663}
   m_Father: {fileID: 1346228699}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26726,6 +26783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Clone
+  skillPrice: 0
   skillDescription: "Your clone can attack enemies. \nHe have 30% by damage."
   unlockedSlots: []
   lockedSlots: []
@@ -27395,18 +27453,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829149252}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 139373025}
-  m_Father: {fileID: 1094310994}
+  m_Father: {fileID: 1373139425}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -72.67543}
   m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1829149258
@@ -32917,6 +32975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal
+  skillPrice: 0
   skillDescription: 'Create magic crystal that does magic damage.
 
     By clickin
@@ -33378,6 +33437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge Clone
+  skillPrice: 0
   skillDescription: You can create clone on dodge.
   unlockedSlots:
   - {fileID: 602620864}
@@ -34005,7 +34065,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925554176}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34013,12 +34073,12 @@ RectTransform:
   - {fileID: 1816639280}
   - {fileID: 876688782}
   - {fileID: 1531037760}
-  m_Father: {fileID: 1094310994}
+  m_Father: {fileID: 1373139425}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -10, y: -50}
+  m_AnchoredPosition: {x: -10, y: 270.44437}
   m_SizeDelta: {x: 400, y: 203.62999}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1925554178
@@ -34133,7 +34193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1939186663
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34141,19 +34201,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939186662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2060974692}
   - {fileID: 999344144}
-  m_Father: {fileID: 1717425094}
+  m_Father: {fileID: 1373139425}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -276}
+  m_AnchoredPosition: {x: 0, y: -348.6754}
   m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1939186664
@@ -34296,6 +34356,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
+  dashUnlocked: 0
+  dashPrice: 500
+  dashUnlockSlot: {fileID: 792654093}
+  cloneOnDashUnlocked: 0
+  cloneOnDashPrice: 1000
+  cloneOnDashUnlockSlot: {fileID: 918920006}
+  cloneOnArrivalUnlocked: 0
+  cloneOnArrivalPrice: 2000
+  cloneOnArrivalUnlockSlot: {fileID: 821427513}
 --- !u!114 &1948117021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34312,8 +34381,6 @@ MonoBehaviour:
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
   isAttack: 1
-  isCloneOnDashStart: 1
-  isCloneOnDashEnd: 0
   canCreateCloneOnCounterAttack: 1
   canDuplicate: 1
   chanceDuplicate: 33
@@ -34780,6 +34847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Explosion
+  skillPrice: 0
   skillDescription: 'Crystal can explode.
 
     [Only one upgrade can be choosen]'
@@ -35431,6 +35499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Chainsaw Sword
+  skillPrice: 0
   skillDescription: 'Sword will spin like a chainsaw.
 
     [Only one sword upgrade
