@@ -30,7 +30,7 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            stateMachine.ChangeState(player.CounterAttackState);
+            player.Skill.ParrySkillController.CanUseSkill();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())

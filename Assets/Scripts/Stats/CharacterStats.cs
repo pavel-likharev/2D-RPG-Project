@@ -83,7 +83,7 @@ public class CharacterStats : MonoBehaviour
     {
         fx = GetComponentInChildren<CharacterFX>();
 
-        currentHealth = GetMaxHealtValue();
+        currentHealth = GetMaxHealthValue();
         critPower.SetDefaultValue(150);
     }
 
@@ -135,8 +135,8 @@ public class CharacterStats : MonoBehaviour
     {
         currentHealth += value;
 
-        if (currentHealth > GetMaxHealtValue())
-            currentHealth = GetMaxHealtValue();
+        if (currentHealth > GetMaxHealthValue())
+            currentHealth = GetMaxHealthValue();
 
         OnHealthChange?.Invoke(this, EventArgs.Empty);
     }
@@ -450,6 +450,6 @@ public class CharacterStats : MonoBehaviour
         float critDamage = damage * totalCritPower;
         return Mathf.RoundToInt(critDamage);
     }
-    public int GetMaxHealtValue() => maxHealth.GetValue() + vitality.GetValue() * 5;
+    public int GetMaxHealthValue() => maxHealth.GetValue() + vitality.GetValue() * 5;
     #endregion
 }

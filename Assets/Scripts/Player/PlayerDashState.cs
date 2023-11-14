@@ -15,7 +15,7 @@ public class PlayerDashState : PlayerState
 
         player.Skill.DashSkillController.CloneOnDash();
 
-        stateTimer = player.dashDuration;
+        stateTimer = player.DashSkill.dashDuration;
     }
 
     public override void Exit()
@@ -35,7 +35,7 @@ public class PlayerDashState : PlayerState
             stateMachine.ChangeState(player.WallSlideState);
         }
 
-        player.SetVelocity(player.dashForce * player.DashDir, 0);
+        player.SetVelocity(player.DashSkill.dashForce * player.DashSkill.DashDir, 0);
 
         if (stateTimer <= 0)
         {

@@ -9,9 +9,6 @@ public class CloneSkillController : SkillController
     [SerializeField] private float cloneDuration;
     [SerializeField] private bool isAttack;
 
-    [Header("Spawn info")]
-    [SerializeField] private bool canCreateCloneOnCounterAttack;
-
     [Header("Diplicate info")]
     [SerializeField] private bool canDuplicate;
     [SerializeField] private float chanceDuplicate;
@@ -55,15 +52,12 @@ public class CloneSkillController : SkillController
         newClone.GetComponent<CloneSkill>().SetupClone(cloneDuration, isAttack, FindClosestEnemy(newClone.transform), canDuplicate, chanceDuplicate);
     }
 
-    public void CreateCloneOnCounterAttack(Transform enemy)
+    public void CreateCloneWithDelay(Transform enemy)
     {
-        if (canCreateCloneOnCounterAttack)
-        {
-            StartCoroutine(CreateCloneWithDelay(enemy, new Vector3(xOffset * player.MoveDir, 0)));
-        }
+        StartCoroutine(CreateCloneFor(enemy, new Vector3(xOffset * player.MoveDir, 0)));
     }
 
-    private IEnumerator CreateCloneWithDelay(Transform enemy, Vector3 offset)
+    private IEnumerator CreateCloneFor(Transform enemy, Vector3 offset)
     {
         yield return new WaitForSeconds(createDelay);
             CreateClone(enemy.transform, offset);

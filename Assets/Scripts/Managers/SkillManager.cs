@@ -7,10 +7,10 @@ public class SkillManager : MonoBehaviour
     public static SkillManager Instance { get; private set; }
 
     public DashSkillController DashSkillController { get; private set; }
+    public ParrySkillController ParrySkillController { get; private set; }
     public CloneSkillController CloneSkillController { get; private set; }
     public SwordSkillController SwordSkillController { get; private set; }
     public BlackholeSkillController BlackholeSkillController { get; private set; }
-
     public CrystalSkillController CrystalSkillController { get; private set; }
 
     private void Awake()
@@ -29,5 +29,6 @@ public class SkillManager : MonoBehaviour
         SwordSkillController = GetComponent<SwordSkillController>();
         BlackholeSkillController = GetComponent<BlackholeSkillController>();
         CrystalSkillController = GetComponent<CrystalSkillController>();
+        ParrySkillController = GetComponent<ParrySkillController>();
     }
 }

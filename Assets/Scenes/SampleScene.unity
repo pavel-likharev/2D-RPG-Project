@@ -34309,6 +34309,7 @@ GameObject:
   - component: {fileID: 1948117022}
   - component: {fileID: 1948117023}
   - component: {fileID: 1948117024}
+  - component: {fileID: 1948117025}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -34460,6 +34461,28 @@ MonoBehaviour:
   multiStackCooldown: 3
   useTimeWindow: 2.5
   isCloneMirage: 1
+--- !u!114 &1948117025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948117017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6998ecebd8aeb824fbae3fc44dd41f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  parryUnlocked: 0
+  parryPrice: 0
+  parryUnlockSlot: {fileID: 0}
+  restoreOnParryUnlocked: 0
+  restoreOnParryPrice: 0
+  restoreOnParryUnlockSlot: {fileID: 0}
+  cloneOnParryUnlocked: 0
+  cloneOnParryPrice: 0
+  cloneOnParryUnlockSlot: {fileID: 0}
 --- !u!1 &1953132826
 GameObject:
   m_ObjectHideFlags: 0
@@ -36687,10 +36710,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2427413511337429929, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
-      propertyPath: maxHealth.baseValue
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 1298270592186682711, guid: e1d5273d0b4812042b363c6caf994eda, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -45,7 +45,7 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     statValueText.text = (playerStats.critPower.GetValue() + playerStats.strength.GetValue()).ToString();
                     break;
                 case StatType.health:
-                    statValueText.text = playerStats.GetMaxHealtValue().ToString();
+                    statValueText.text = playerStats.GetMaxHealthValue().ToString();
                     break;
                 case StatType.evasion:
                     statValueText.text = (playerStats.evasion.GetValue() + playerStats.agility.GetValue()).ToString();

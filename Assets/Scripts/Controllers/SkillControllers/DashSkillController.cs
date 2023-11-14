@@ -7,19 +7,19 @@ using UnityEngine.UI;
 public class DashSkillController : SkillController
 {
     [Header("Dash")]
-    public bool dashUnlocked;
     [SerializeField] private int dashPrice;
     [SerializeField] private UI_SkillTreeSlot dashUnlockSlot;
+    public bool DashUnlocked { get; private set; }
 
     [Header("Clone on dash")]
-    public bool cloneOnDashUnlocked;
     [SerializeField] private int cloneOnDashPrice;
     [SerializeField] private UI_SkillTreeSlot cloneOnDashUnlockSlot;
+    public bool CloneOnDashUnlocked { get; private set; }
 
     [Header("Clone on arrival")]
-    public bool cloneOnArrivalUnlocked;
     [SerializeField] private int cloneOnArrivalPrice;
     [SerializeField] private UI_SkillTreeSlot cloneOnArrivalUnlockSlot;
+    public bool CloneOnArrivalUnlocked { get; private set; }
 
     protected override void Start()
     {
@@ -32,7 +32,7 @@ public class DashSkillController : SkillController
 
     public void CloneOnDash()
     {
-        if (cloneOnDashUnlocked)
+        if (CloneOnDashUnlocked)
         {
             SkillManager.Instance.CloneSkillController.CreateClone(player.transform, Vector2.zero);
         }
@@ -40,7 +40,7 @@ public class DashSkillController : SkillController
 
     public void CloneOnArrival()
     {
-        if (cloneOnArrivalUnlocked)
+        if (CloneOnArrivalUnlocked)
         {
             SkillManager.Instance.CloneSkillController.CreateClone(player.transform, Vector2.zero);
         }
@@ -48,24 +48,29 @@ public class DashSkillController : SkillController
 
     private void UnlockDashSkill()
     {
-        UnlockSkill(dashUnlockSlot, dashPrice, ref dashUnlocked);
+        DashUnlocked = UnlockSkill(dashUnlockSlot, dashPrice);
     }
 
     private void UnlockCloneOnDashSkill()
     {
-        if (dashUnlocked)
-            UnlockSkill(cloneOnDashUnlockSlot, cloneOnDashPrice, ref cloneOnDashUnlocked);
-        
+        if (DashUnlocked)
+            CloneOnDashUnlocked = UnlockSkill(cloneOnDashUnlockSlot, cloneOnDashPrice);
     }
 
     private void UnlockCloneOnArrivalSkill()
     {
-        if (cloneOnDashUnlocked)
-            UnlockSkill(cloneOnArrivalUnlockSlot, cloneOnArrivalPrice, ref cloneOnArrivalUnlocked);
+        if (CloneOnDashUnlocked)
+            CloneOnArrivalUnlocked = UnlockSkill(cloneOnArrivalUnlockSlot, cloneOnArrivalPrice);
     }
 
     protected override void UseSkill()
     {
         base.UseSkill();
+
+        if (DashUnlocked)
+        {
+            player.DashSkill.SetupDash();
+            player.StateMachine.ChangeState(player.DashState);
+        }
     }
 }

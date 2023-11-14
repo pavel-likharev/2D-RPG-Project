@@ -27,16 +27,17 @@ public class SkillController : MonoBehaviour
         }
     }
 
-    protected void UnlockSkill(UI_SkillTreeSlot skillSlot, int price, ref bool skillUnlocked)
+    protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)
     {
         Debug.Log("Attempt to unlock skill");
 
         if (!PlayerManager.Instance.HaveEnoughMoney(price))
-            return;
+            return false;
         
-        skillUnlocked = true;
         skillSlot.UnlockSlot();
         Debug.Log("unlocked");
+
+        return true;
     }
 
     public bool CanUseSkill()

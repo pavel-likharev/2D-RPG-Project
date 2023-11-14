@@ -10,7 +10,7 @@ public class Effect_Heal : Effect
     {
         PlayerStats playerStats = PlayerManager.Instance.Player.GetComponent<PlayerStats>();
 
-        int healValue = Mathf.RoundToInt(playerStats.GetMaxHealtValue() * healPercientage);
+        int healValue = Mathf.RoundToInt(playerStats.GetMaxHealthValue() * healPercientage);
 
         playerStats.IncreaseHealth(healValue);
     }

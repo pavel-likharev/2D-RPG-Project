@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerState 
@@ -41,6 +42,21 @@ public class PlayerState
         yInput = Input.GetAxisRaw("Vertical");
 
         player.Animator.SetFloat(VELOCITY_Y, rb.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !player.IsWallDetected())
+        {
+            player.Skill.DashSkillController.CanUseSkill();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            player.Skill.CrystalSkillController.CanUseSkill();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Inventory.Instance.UseFlask();
+        }
     }
 
     public virtual void Exit()
