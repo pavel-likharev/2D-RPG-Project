@@ -52,9 +52,9 @@ public class CloneSkillController : SkillController
         newClone.GetComponent<CloneSkill>().SetupClone(cloneDuration, isAttack, FindClosestEnemy(newClone.transform), canDuplicate, chanceDuplicate);
     }
 
-    public void CreateCloneWithDelay(Transform enemy)
+    public void CreateCloneWithDelay(Transform target)
     {
-        StartCoroutine(CreateCloneFor(enemy, new Vector3(xOffset * player.MoveDir, 0)));
+        StartCoroutine(CreateCloneFor(target, new Vector3(xOffset * player.MoveDir, 0)));
     }
 
     private IEnumerator CreateCloneFor(Transform enemy, Vector3 offset)

@@ -22248,6 +22248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Skeleton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4783230969334357023, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5661241182525559764, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -22294,11 +22298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5777897457566030905, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5777897457566030905, guid: 29da76e8d49d9d24ab67732432be5608, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34310,6 +34314,7 @@ GameObject:
   - component: {fileID: 1948117023}
   - component: {fileID: 1948117024}
   - component: {fileID: 1948117025}
+  - component: {fileID: 1948117026}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -34357,13 +34362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
-  dashUnlocked: 0
   dashPrice: 500
   dashUnlockSlot: {fileID: 792654093}
-  cloneOnDashUnlocked: 0
   cloneOnDashPrice: 1000
   cloneOnDashUnlockSlot: {fileID: 918920006}
-  cloneOnArrivalUnlocked: 0
   cloneOnArrivalPrice: 2000
   cloneOnArrivalUnlockSlot: {fileID: 821427513}
 --- !u!114 &1948117021
@@ -34382,7 +34384,6 @@ MonoBehaviour:
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
   isAttack: 1
-  canCreateCloneOnCounterAttack: 1
   canDuplicate: 1
   chanceDuplicate: 33
   canCrystalFromClone: 0
@@ -34454,13 +34455,20 @@ MonoBehaviour:
   cooldown: 0
   crystalPrefab: {fileID: 2846587158904534868, guid: cd4ea02487fdc634f9447d6d0a62b577, type: 3}
   crystalDuration: 3
-  canMove: 1
   moveSpeed: 5
-  canUseMultiStacks: 0
+  crystalSlot: {fileID: 1870107398}
+  crystalPrice: 0
+  cloneBlinkSlot: {fileID: 1206775560}
+  cloneBlinkPrice: 0
+  explodeSlot: {fileID: 1978806814}
+  explodePrice: 0
+  controlledExplodeSlot: {fileID: 170387679}
+  controlledExplodePrice: 0
   stackAmount: 3
   multiStackCooldown: 3
   useTimeWindow: 2.5
-  isCloneMirage: 1
+  multiStackSlot: {fileID: 932819566}
+  multiStackPrice: 0
 --- !u!114 &1948117025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34474,15 +34482,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0
-  parryUnlocked: 0
   parryPrice: 0
-  parryUnlockSlot: {fileID: 0}
-  restoreOnParryUnlocked: 0
+  parryUnlockSlot: {fileID: 589794939}
+  restorePercent: 0.05
   restoreOnParryPrice: 0
-  restoreOnParryUnlockSlot: {fileID: 0}
-  cloneOnParryUnlocked: 0
+  restoreOnParryUnlockSlot: {fileID: 1103824180}
   cloneOnParryPrice: 0
-  cloneOnParryUnlockSlot: {fileID: 0}
+  cloneOnParryUnlockSlot: {fileID: 745555842}
+--- !u!114 &1948117026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948117017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3fc1d0aaa53014e98ad05342032827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0
+  dodgeSkillSlot: {fileID: 602620864}
+  dodgePrice: 0
+  evasionValue: 10
+  dodgeWithCloneSkillSlot: {fileID: 1893144862}
+  dodgeWithClonePrice: 0
 --- !u!1 &1953132826
 GameObject:
   m_ObjectHideFlags: 0

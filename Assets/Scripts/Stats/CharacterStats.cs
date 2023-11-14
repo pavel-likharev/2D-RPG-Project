@@ -23,6 +23,7 @@ public enum StatType
 }
 public class CharacterStats : MonoBehaviour
 {
+    public event EventHandler<TransformTargetEventsArgs> OnEvasion;
     public event EventHandler OnHealthChange;
     private CharacterFX fx;
     public bool IsDead { get; private set; }
@@ -92,11 +93,11 @@ public class CharacterStats : MonoBehaviour
         DoElementalEffect();
     }
 
-
     public virtual void DoDamage(CharacterStats target, int knockBackDir)
     {
         if (CanTargetAvoidAttack(target))
             return;
+        
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
@@ -406,11 +407,16 @@ public class CharacterStats : MonoBehaviour
 
         if (UnityEngine.Random.Range(0, 100) < totalEvasion)
         {
+            target.OnEvasion?.Invoke(this, new TransformTargetEventsArgs
+            {
+                target = transform
+            });
             return true;
         }
 
         return false;
     }
+
     private int CheckTargetResistance(CharacterStats target, int totalMagicalDamage)
     {
         totalMagicalDamage -= target.magicResistance.GetValue() + (target.intelligence.GetValue() * 3);
@@ -452,4 +458,9 @@ public class CharacterStats : MonoBehaviour
     }
     public int GetMaxHealthValue() => maxHealth.GetValue() + vitality.GetValue() * 5;
     #endregion
+}
+
+public class TransformTargetEventsArgs
+{
+    public Transform target;
 }
