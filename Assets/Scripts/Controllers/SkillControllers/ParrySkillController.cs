@@ -48,18 +48,28 @@ public class ParrySkillController : SkillController
     private void UnlockParrySkill()
     {
         ParryUnlocked = UnlockSkill(parryUnlockSlot, parryPrice);
+
+        parryUnlockSlot.GetComponent<Button>().enabled = false;
     }
 
     private void UnlockRestoreOnParrySkill()
     {
         if (ParryUnlocked)
+        {
             RestoreOnParryUnlocked = UnlockSkill(restoreOnParryUnlockSlot, restoreOnParryPrice);
+
+            restoreOnParryUnlockSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     private void UnlockCloneOnParrySkill()
     {
         if (RestoreOnParryUnlocked)
+        {
             CloneOnParryUnlocked = UnlockSkill(cloneOnParryUnlockSlot, cloneOnParryPrice);
+
+            cloneOnParryUnlockSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     protected override void UseSkill()

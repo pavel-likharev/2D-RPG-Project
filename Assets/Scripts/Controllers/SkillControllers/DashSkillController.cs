@@ -49,18 +49,28 @@ public class DashSkillController : SkillController
     private void UnlockDashSkill()
     {
         DashUnlocked = UnlockSkill(dashUnlockSlot, dashPrice);
+
+        dashUnlockSlot.GetComponent<Button>().enabled = false;
     }
 
     private void UnlockCloneOnDashSkill()
     {
         if (DashUnlocked)
+        {
             CloneOnDashUnlocked = UnlockSkill(cloneOnDashUnlockSlot, cloneOnDashPrice);
+
+            cloneOnDashUnlockSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     private void UnlockCloneOnArrivalSkill()
     {
         if (CloneOnDashUnlocked)
+        {
             CloneOnArrivalUnlocked = UnlockSkill(cloneOnArrivalUnlockSlot, cloneOnArrivalPrice);
+
+            cloneOnArrivalUnlockSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     protected override void UseSkill()

@@ -56,30 +56,53 @@ public class CrystalSkillController : SkillController
     private void UnlockCrystalSkill()
     {
         CrystalUnlocked = UnlockSkill(crystalSlot, crystalPrice);
+
+        crystalSlot.GetComponent<Button>().onClick.RemoveAllListeners();
+        crystalSlot.GetComponent<Button>().enabled = false;
     }
 
     private void UnlockCloneBlinkSkill()
     {
         if (CrystalUnlocked && !ExplodeUnlocked)
+        {
             CloneBlinkUnlocked = UnlockSkill(cloneBlinkSlot, cloneBlinkPrice);
+
+            cloneBlinkSlot.GetComponent<Button>().enabled = false;
+            explodeSlot.GetComponent<Button>().enabled = false;
+            controlledExplodeSlot.GetComponent<Button>().enabled = false;
+            multiStackSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     private void UnlockExplodeSkill()
     {
         if (CrystalUnlocked && !CloneBlinkUnlocked)
+        {
             ExplodeUnlocked = UnlockSkill(explodeSlot, explodePrice);
+
+            explodeSlot.GetComponent<Button>().enabled = false;
+            cloneBlinkSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     private void UnlockControlledExplodeSkill()
     {
         if (ExplodeUnlocked)
+        {
             ControlledExplodeUnlocked = UnlockSkill(controlledExplodeSlot, controlledExplodePrice);
+
+            controlledExplodeSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     private void UnlockMultiStackSkill()
     {
         if (ControlledExplodeUnlocked)
+        {
             MultiStackUnlocked = UnlockSkill(multiStackSlot, multiStackPrice);
+
+            multiStackSlot.GetComponent<Button>().enabled = false;
+        }
     }
 
     protected override void UseSkill()

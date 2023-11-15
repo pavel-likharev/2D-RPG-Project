@@ -28,18 +28,17 @@ public class DodgeSkillController : SkillController
 
         player.Stats.evasion.AddModifier(evasionValue);
         Inventory.Instance.UpdateStatSlotsUI();
+
+        dodgeSkillSlot.GetComponent<Button>().enabled = false;
     }
 
     private void UnlockDodgeWithClone()
     {
         if (DodgeUnlocked)
+        {
             DodgeWithCloneUnlocked = UnlockSkill(dodgeWithCloneSkillSlot, dodgeWithClonePrice);
-    }
 
-    protected override void UseSkill()
-    {
-        base.UseSkill();
-
-
+            dodgeWithCloneSkillSlot.GetComponent<Button>().enabled = false;
+        }
     }
 }

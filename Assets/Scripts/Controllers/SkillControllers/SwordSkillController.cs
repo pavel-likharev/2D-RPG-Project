@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordSkillController : SkillController
 {
@@ -10,7 +11,7 @@ public class SwordSkillController : SkillController
         Spin
     }
 
-    public SwordType swordType = SwordType.Regular;
+    public SwordType swordType;
 
     [Header("Skill info")]
     [SerializeField] private GameObject swordPrefab;
@@ -20,21 +21,46 @@ public class SwordSkillController : SkillController
     [SerializeField] private float swordGravity;
     [SerializeField] private float freezeDuration;
     private Vector2 finalDir;
+    [Space]
+    [SerializeField] private UI_SkillTreeSlot throwSwordSlot;
+    [SerializeField] private int throwSwordPrice;
+    public bool ThrowSwordUnlocked { get; private set; }
 
     [Header("Bounce info")]
     [SerializeField] private int bounceAmount;
     [SerializeField] private float bounceGravity;
     [SerializeField] private float bouncingForce;
+    [Space]
+    [SerializeField] private UI_SkillTreeSlot bouncySwordSlot;
+    [SerializeField] private int bouncySwordPrice;
+    public bool BouncySwordUnlocked { get; private set; }
 
     [Header("Pierce info")]
     [SerializeField] private int pierceAmount;
     [SerializeField] private float pierceGravity;
+    [Space]
+    [SerializeField] private UI_SkillTreeSlot pierceSwordSlot;
+    [SerializeField] private int pierceSwordPrice;
+    public bool PierceSwordUnlocked { get; private set; }
 
     [Header("Spin info")]
     [SerializeField] private float spinDuration;
     [SerializeField] private float spinGravity;
     [SerializeField] private float maxTravelDistance;
     [SerializeField] private float hitCooldown;
+    [Space]
+    [SerializeField] private UI_SkillTreeSlot spinSwordSlot;
+    [SerializeField] private int spinSwordPrice;
+    public bool SpinSwordUnlocked { get; private set; }
+
+    [Header("Passive skills")]
+    [SerializeField] private UI_SkillTreeSlot timeStopSlot;
+    [SerializeField] private int timeStopPrice;
+    public bool TimeStopUnlocked { get; private set; }
+    [Space]
+    [SerializeField] private UI_SkillTreeSlot vulnerableSlot;
+    [SerializeField] private int vulnerablePrice;
+    public bool VulnerableUnlocked { get; private set; }
 
     [Header("Aim dots")]
     [SerializeField] private GameObject dotPrefab;
@@ -55,7 +81,84 @@ public class SwordSkillController : SkillController
         GenerateDots();
 
         SetupGravity();
+
+        throwSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockThrowSword);
+        bouncySwordSlot.GetComponent<Button>().onClick.AddListener(UnlockBouncySword);
+        pierceSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockPierceSword);
+        spinSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockSpinSword);
+        
+        timeStopSlot.GetComponent<Button>().onClick.AddListener(UnlockTimeStop);
+        vulnerableSlot.GetComponent<Button>().onClick.AddListener(UnlockVulnerable);
     }
+
+    #region Unlock Skills
+    private void UnlockThrowSword()
+    {
+        ThrowSwordUnlocked = UnlockSkill(throwSwordSlot, throwSwordPrice);
+
+        throwSwordSlot.GetComponent<Button>().enabled = false;
+    }
+    
+    private void UnlockBouncySword()
+    {
+        if (ThrowSwordUnlocked && !PierceSwordUnlocked && !SpinSwordUnlocked)
+        {
+            BouncySwordUnlocked = UnlockSkill(bouncySwordSlot, bouncySwordPrice);
+            swordType = SwordType.Bounce;
+
+            DisableButtons();
+        }
+    }
+
+    private void UnlockPierceSword()
+    {
+        if (ThrowSwordUnlocked && !BouncySwordUnlocked && !SpinSwordUnlocked)
+        {
+            PierceSwordUnlocked = UnlockSkill(pierceSwordSlot, pierceSwordPrice);
+            swordType = SwordType.Pierce;
+
+            DisableButtons();
+        }
+    }
+
+    private void UnlockSpinSword()
+    {
+        if (ThrowSwordUnlocked && !BouncySwordUnlocked && !PierceSwordUnlocked)
+        {
+            SpinSwordUnlocked = UnlockSkill(spinSwordSlot, spinSwordPrice);
+            swordType = SwordType.Spin;
+
+            DisableButtons();
+        }
+    }
+
+    private void UnlockTimeStop()
+    {
+        if (ThrowSwordUnlocked)
+        {
+            TimeStopUnlocked = UnlockSkill(timeStopSlot, timeStopPrice);
+
+            timeStopSlot.GetComponent<Button>().enabled = false;
+        }
+    }
+
+    private void UnlockVulnerable()
+    {
+        if (TimeStopUnlocked)
+        {
+            VulnerableUnlocked = UnlockSkill(vulnerableSlot, vulnerablePrice);
+
+            vulnerableSlot.GetComponent<Button>().enabled = false;
+        }
+    }
+
+    private void DisableButtons()
+    {
+        bouncySwordSlot.GetComponent<Button>().enabled = false;
+        pierceSwordSlot.GetComponent<Button>().enabled = false;
+        spinSwordSlot.GetComponent<Button>().enabled = false;
+    }
+    #endregion
 
     protected override void Update()
     {

@@ -29,13 +29,10 @@ public class SkillController : MonoBehaviour
 
     protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)
     {
-        Debug.Log("Attempt to unlock skill");
-
         if (!PlayerManager.Instance.HaveEnoughMoney(price))
             return false;
         
         skillSlot.UnlockSlot();
-        Debug.Log("unlocked");
 
         return true;
     }

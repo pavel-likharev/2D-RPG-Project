@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Xml;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public enum StatType
@@ -26,7 +24,11 @@ public class CharacterStats : MonoBehaviour
     public event EventHandler<TransformTargetEventsArgs> OnEvasion;
     public event EventHandler OnHealthChange;
     private CharacterFX fx;
+
     public bool IsDead { get; private set; }
+    public bool IsVulnerable { get; private set; }
+
+    private float vulnerableModify = 1.1f;
 
     #region Fields
     [Header("Major stats")]
@@ -73,7 +75,7 @@ public class CharacterStats : MonoBehaviour
 
     private float shockDamageMultiplier = 0.1f;
     private int shockEffectReducer = 20;
-    
+
     [SerializeField] private GameObject shockStrikePrefab;
     private int shockDamage;
 
@@ -93,17 +95,19 @@ public class CharacterStats : MonoBehaviour
         DoElementalEffect();
     }
 
-    public virtual void DoDamage(CharacterStats target, int knockBackDir)
+    // Damage
+    public virtual void DoDamage(CharacterStats target, int knockBackDir, float multiplierDamage = 1)
     {
         if (CanTargetAvoidAttack(target))
             return;
-        
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
+        totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
+
         if (CanCrit())
-            totalDamage = CalculateCriticalDamage(totalDamage);       
-        
+            totalDamage = CalculateCriticalDamage(totalDamage);
+
         totalDamage = CheckTargetArmor(target, totalDamage);
 
         target.TakeDamage(totalDamage, knockBackDir);
@@ -119,7 +123,23 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth <= 0 && !IsDead)
             Die();
     }
-    public virtual void IncreaseStat(Stat stat, int value, float duration)
+
+    // Vulnerable
+    public void MakeVulnerable(float duration)
+    {
+        StartCoroutine(VulnerableFor(duration));
+    }
+    private IEnumerator VulnerableFor(float duration)
+    {
+        IsVulnerable = true;
+
+        yield return new WaitForSeconds(duration);
+
+        IsVulnerable = false;
+    }
+
+    // Stats modify
+    public virtual void ChangeStatTemporarily(Stat stat, int value, float duration)
     {
         StartCoroutine(StatModify(stat, value, duration));
     }
@@ -131,27 +151,6 @@ public class CharacterStats : MonoBehaviour
 
         stat.RemoveModifier(value);
     }
-
-    public virtual void IncreaseHealth(int value)
-    {
-        currentHealth += value;
-
-        if (currentHealth > GetMaxHealthValue())
-            currentHealth = GetMaxHealthValue();
-
-        OnHealthChange?.Invoke(this, EventArgs.Empty);
-    }
-    protected virtual void DecreaseHealth(int damage)
-    {
-        currentHealth -= damage;
-
-        OnHealthChange?.Invoke(this, EventArgs.Empty);
-    }
-    protected virtual void Die()
-    {
-        IsDead = true;
-    }
-
     public Stat GetStatFromType(StatType statType)
     {
         switch (statType)
@@ -188,6 +187,32 @@ public class CharacterStats : MonoBehaviour
             default:
                 return null;
         }
+    }
+
+    // Health
+    public virtual void IncreaseHealth(int value)
+    {
+        currentHealth += value;
+
+        if (currentHealth > GetMaxHealthValue())
+            currentHealth = GetMaxHealthValue();
+
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
+    }
+    protected virtual void DecreaseHealth(int damage)
+    {
+        if (IsVulnerable)
+        {
+            damage = Mathf.RoundToInt(damage * vulnerableModify);
+        }
+
+        currentHealth -= damage;
+
+        OnHealthChange?.Invoke(this, EventArgs.Empty);
+    }
+    protected virtual void Die()
+    {
+        IsDead = true;
     }
 
     #region Magical Damage and elements 
@@ -243,7 +268,6 @@ public class CharacterStats : MonoBehaviour
             isElementalState = false;
         }
     }
-
 
     private void ElementalLogic(CharacterStats target, int fireDamage, int iceDamage, int lightingDamage)
     {
@@ -301,7 +325,7 @@ public class CharacterStats : MonoBehaviour
             {
                 if (GetComponent<Player>() != null)
                     return;
-                
+
                 HitShockClosestEnemy();
             }
 
@@ -336,7 +360,7 @@ public class CharacterStats : MonoBehaviour
     }
     private void ApplyIgniteDamage()
     {
-        
+
         if (igniteDamageTimer >= 0)
         {
             igniteDamageTimer -= Time.deltaTime;

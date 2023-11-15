@@ -1547,12 +1547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Time Stop
-  skillPrice: 0
   skillDescription: When enemy hit by sword, his time stops.
-  unlockedSlots:
-  - {fileID: 558695402}
-  lockedSlots:
-  - {fileID: 1534883104}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &138629261
 MonoBehaviour:
@@ -2174,14 +2169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Controlled Destruction
-  skillPrice: 0
   skillDescription: 'Crystal moves towards the enemy.
 
     You can no longer teleport
     to crystal.'
-  unlockedSlots:
-  - {fileID: 1978806814}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &170387680
 MonoBehaviour:
@@ -4828,10 +4819,10 @@ RectTransform:
   m_Father: {fileID: 324425423}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 694, y: -35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494534069
 MonoBehaviour:
@@ -5036,11 +5027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Blackhole
-  skillPrice: 0
   skillDescription: Trap enemies in a blackhole which allows you to do tons of damage.
-  unlockedSlots:
-  - {fileID: 1809604165}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &502866499
 MonoBehaviour:
@@ -5289,10 +5276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Sword Throw
-  skillPrice: 0
   skillDescription: Throws sword into the enemy.
-  unlockedSlots: []
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &558695403
 MonoBehaviour:
@@ -6003,10 +5987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry
-  skillPrice: 0
   skillDescription: You can parry attack to avoid damage.
-  unlockedSlots: []
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &589794940
 MonoBehaviour:
@@ -6143,10 +6124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge
-  skillPrice: 0
   skillDescription: You getting 10% of a evasion.
-  unlockedSlots: []
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &602620865
 MonoBehaviour:
@@ -6546,10 +6524,10 @@ RectTransform:
   m_Father: {fileID: 324425423}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 994, y: -35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &641483971
 MonoBehaviour:
@@ -6690,16 +6668,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Bouncy Sword
-  skillPrice: 0
   skillDescription: 'Sword can bounce between enemies.
 
     [Only one sword upgrade
     can be choose]'
-  unlockedSlots:
-  - {fileID: 558695402}
-  lockedSlots:
-  - {fileID: 993860156}
-  - {fileID: 2055211383}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &648615888
 MonoBehaviour:
@@ -8046,11 +8018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Parry with clones
-  skillPrice: 0
   skillDescription: You create a clone with succesful parry.
-  unlockedSlots:
-  - {fileID: 1103824180}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &745555843
 MonoBehaviour:
@@ -8967,13 +8935,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
-  skillPrice: 0
   skillDescription: 'You can dash to avaid attacks.
 
     You are invincible in the
     time of dash.'
-  unlockedSlots: []
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &792654094
 MonoBehaviour:
@@ -9477,11 +9442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash_Double Illusion
-  skillPrice: 0
   skillDescription: You create clone at your arrival.
-  unlockedSlots:
-  - {fileID: 918920006}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &821427514
 MonoBehaviour:
@@ -10232,11 +10193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash - Illusion
-  skillPrice: 0
   skillDescription: You leave clone when you dash.
-  unlockedSlots:
-  - {fileID: 792654093}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &918920007
 MonoBehaviour:
@@ -10375,10 +10332,10 @@ RectTransform:
   m_Father: {fileID: 324425423}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 394, y: -35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920108849
 MonoBehaviour:
@@ -10583,11 +10540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiple Crystals
-  skillPrice: 0
   skillDescription: You can create up to 3 crystal at a time.
-  unlockedSlots:
-  - {fileID: 170387679}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &932819567
 MonoBehaviour:
@@ -11177,10 +11130,10 @@ RectTransform:
   m_Father: {fileID: 324425423}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1294, y: -35}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &952878563
 MonoBehaviour:
@@ -11385,15 +11338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Multiple Clone
-  skillPrice: 0
-  skillDescription: 'Clone have 30% by damage, but can chance spawn new clone.
+  skillDescription: 'Clone have 30% by damage, but can 30% chance spawn new clone.
 
     [Only
     one upgrade can be choosen]'
-  unlockedSlots:
-  - {fileID: 1428845952}
-  lockedSlots:
-  - {fileID: 1138820347}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &988700327
 MonoBehaviour:
@@ -11466,16 +11414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Bullet Sword
-  skillPrice: 0
   skillDescription: 'Sword can piece enemies.
 
     [Only one sword upgrade can be
     choose]'
-  unlockedSlots:
-  - {fileID: 558695402}
-  lockedSlots:
-  - {fileID: 648615887}
-  - {fileID: 2055211383}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &993860157
 MonoBehaviour:
@@ -12586,7 +12528,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1091609971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12720,11 +12662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Restore Parry
-  skillPrice: 0
   skillDescription: You restore a bit of health with succesful parry.
-  unlockedSlots:
-  - {fileID: 589794939}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1103824181
 MonoBehaviour:
@@ -21562,15 +21500,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Clone
-  skillPrice: 0
   skillDescription: 'Create crystal insctead a clone.
 
     [Only one upgrade can
     be choosen]'
-  unlockedSlots:
-  - {fileID: 1428845952}
-  lockedSlots:
-  - {fileID: 988700326}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1138820348
 MonoBehaviour:
@@ -22185,14 +22118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal Blink
-  skillPrice: 0
   skillDescription: 'You leave your clone instead of you when you blink.
 
     [Only
     one upgrade can be choosen]'
-  unlockedSlots:
-  - {fileID: 1870107398}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1206775561
 MonoBehaviour:
@@ -24125,14 +24054,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Agressive Clone
-  skillPrice: 0
-  skillDescription: 'Clone damage increse. 80% by damage.
+  skillDescription: 'Clone damage increse. Attack with  80% by your damage.
 
-    Clone can apply on
-    hit effects.'
-  unlockedSlots:
-  - {fileID: 1809604165}
-  lockedSlots: []
+    Clone
+    can apply on hit effects.'
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1428845953
 MonoBehaviour:
@@ -24724,12 +24649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Vulnerability
-  skillPrice: 0
   skillDescription: Enemy hit by sword, takes 10% more damage.
-  unlockedSlots:
-  - {fileID: 558695402}
-  - {fileID: 138629260}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1534883105
 MonoBehaviour:
@@ -26768,7 +26688,7 @@ GameObject:
   - component: {fileID: 1809604165}
   - component: {fileID: 1809604166}
   m_Layer: 5
-  m_Name: SkillTreeSlot_Clone
+  m_Name: SkillTreeSlot_Clone-Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26786,11 +26706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feccd178c8b5b264a9f9f2cd77e890b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Clone
-  skillPrice: 0
-  skillDescription: "Your clone can attack enemies. \nHe have 30% by damage."
-  unlockedSlots: []
-  lockedSlots: []
+  skillName: Clone-Warrior
+  skillDescription: Your clone can attack enemies with 30% by your damage.
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1809604166
 MonoBehaviour:
@@ -32979,13 +32896,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Crystal
-  skillPrice: 0
   skillDescription: 'Create magic crystal that does magic damage.
 
     By clickin
     abilitty again you can teleport to crystal.'
-  unlockedSlots: []
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1870107399
 MonoBehaviour:
@@ -33441,11 +33355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dodge Clone
-  skillPrice: 0
   skillDescription: You can create clone on dodge.
-  unlockedSlots:
-  - {fileID: 602620864}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1893144863
 MonoBehaviour:
@@ -34383,10 +34293,15 @@ MonoBehaviour:
   cooldown: 1
   clonePrefab: {fileID: 5986664921338709235, guid: 352b8b4377bba9c4081eb7f10f2a0b03, type: 3}
   cloneDuration: 1.5
-  isAttack: 1
-  canDuplicate: 1
-  chanceDuplicate: 33
-  canCrystalFromClone: 0
+  cloneAttackSkillSlot: {fileID: 1809604165}
+  cloneAttackPrice: 100
+  agressiveSkillSlot: {fileID: 1428845952}
+  agressivePrice: 0
+  duplicateSkillSlot: {fileID: 988700326}
+  duplicatePrice: 0
+  chanceDuplicate: 30
+  crystalCloneSkillSlot: {fileID: 1138820347}
+  crystalClonePrice: 0
 --- !u!114 &1948117022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34407,15 +34322,27 @@ MonoBehaviour:
   returnSpeed: 25
   swordGravity: 4.5
   freezeDuration: 1.5
+  throwSwordSlot: {fileID: 558695402}
+  throwSwordPrice: 0
   bounceAmount: 4
   bounceGravity: 5
   bouncingForce: 20
+  bouncySwordSlot: {fileID: 648615887}
+  bouncySwordPrice: 0
   pierceAmount: 2
   pierceGravity: 0.1
+  pierceSwordSlot: {fileID: 993860156}
+  pierceSwordPrice: 0
   spinDuration: 2
   spinGravity: 0.5
   maxTravelDistance: 7
   hitCooldown: 0.35
+  spinSwordSlot: {fileID: 2055211383}
+  spinSwordPrice: 0
+  timeStopSlot: {fileID: 138629260}
+  timeStopPrice: 0
+  vulnerableSlot: {fileID: 1534883104}
+  vulnerablePrice: 0
   dotPrefab: {fileID: 1885039530554401676, guid: 84c383570cb0d044a82141047cc48833, type: 3}
   dotsParent: {fileID: 1724074983}
   numberOfDots: 20
@@ -34440,6 +34367,8 @@ MonoBehaviour:
   blackholeDuration: 3
   attackAmount: 3
   cloneAttackCooldown: 0.2
+  blackholeSKillSlot: {fileID: 502866498}
+  blackholePrice: 0
 --- !u!114 &1948117024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34894,13 +34823,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Explosion
-  skillPrice: 0
   skillDescription: 'Crystal can explode.
 
     [Only one upgrade can be choosen]'
-  unlockedSlots:
-  - {fileID: 1870107398}
-  lockedSlots: []
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &1978806815
 MonoBehaviour:
@@ -35546,16 +35471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Chainsaw Sword
-  skillPrice: 0
   skillDescription: 'Sword will spin like a chainsaw.
 
     [Only one sword upgrade
     can be choose]'
-  unlockedSlots:
-  - {fileID: 558695402}
-  lockedSlots:
-  - {fileID: 648615887}
-  - {fileID: 993860156}
   lockedColor: {r: 0.45490196, g: 0.45490196, b: 0.45490196, a: 1}
 --- !u!114 &2055211384
 MonoBehaviour:

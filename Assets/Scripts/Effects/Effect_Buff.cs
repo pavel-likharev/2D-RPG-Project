@@ -13,7 +13,7 @@ public class Effect_Buff : Effect
     {
         stats = PlayerManager.Instance.Player.GetComponent<PlayerStats>();
 
-        stats.IncreaseStat(stats.GetStatFromType(buffType), buffValue, buffDuartion);
+        stats.ChangeStatTemporarily(stats.GetStatFromType(buffType), buffValue, buffDuartion);
     }
 
 

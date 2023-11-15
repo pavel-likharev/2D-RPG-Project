@@ -14,9 +14,11 @@ public class CloneSkill : MonoBehaviour
     [SerializeField] private Transform attackCheck;
     private float attackCheckRadius;
     private int moveDir = 1;
+    private float multiplierAttack;
 
     private bool canDuplicate;
     private float chanceDuplicate;
+    private bool canApplyHitEffect;
 
     private Transform closestEnemy;
 
@@ -24,7 +26,6 @@ public class CloneSkill : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
     }
 
     private void Start()
@@ -51,12 +52,14 @@ public class CloneSkill : MonoBehaviour
         }
     }
 
-    public void SetupClone(float cloneDuration, bool isCanAttack, Transform closestEnemy, bool canDuplicate, float chanceDuplicate)
+    public void SetupClone(float cloneDuration, bool isCanAttack, float multiplierAttack, bool canApplyHitEffect, Transform closestEnemy, bool canDuplicate, float chanceDuplicate)
     {
         cloneTimer = cloneDuration;
         this.closestEnemy = closestEnemy;
         this.canDuplicate = canDuplicate;
         this.chanceDuplicate = chanceDuplicate;
+        this.multiplierAttack = multiplierAttack;
+        this.canApplyHitEffect = canApplyHitEffect;
 
         RotateToClosestTarger();
 
@@ -80,13 +83,18 @@ public class CloneSkill : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
-                PlayerManager.Instance.Player.Stats.DoDamage(hit.GetComponent<CharacterStats>(), moveDir);
+                PlayerManager.Instance.Player.Stats.DoDamage(hit.GetComponent<CharacterStats>(), moveDir, multiplierAttack);
+
+                if (canApplyHitEffect)
+                {
+                    Inventory.Instance.GetEquipment(EquipmentType.Weapon)?.ApplyEffect(hit.transform);
+                }
 
                 if (canDuplicate)
                 {
                     if (Random.Range(0, 100) < chanceDuplicate)
                     { 
-                        SkillManager.Instance.CloneSkillController.CreateClone(hit.transform, new Vector3(1f * moveDir, 0, 0));
+                        SkillManager.Instance.CloneSkillController.CreateClone(hit.transform, new Vector2(moveDir, 0));
                     }
                 }
             }

@@ -21,6 +21,7 @@ public class BlackholeSkill : MonoBehaviour
     private int attackAmount;
     private float cloneAttackCooldown;
     private float cloneAttackTimer;
+    private float multiplierAttack = 0.3f;
 
     private List<Transform> targets = new List<Transform>();
     private List<GameObject> createdHotKeys = new List<GameObject>();
@@ -83,7 +84,7 @@ public class BlackholeSkill : MonoBehaviour
         canCloneAttack = true;
         canCreateHotKey = false;
 
-        if (!SkillManager.Instance.CloneSkillController.canCrystalFromClone)
+        if (!SkillManager.Instance.CloneSkillController.CrystalCloneUnlocked)
             PlayerManager.Instance.Player.CharacterFX.MakeTransparent(true);
     }
 
@@ -108,14 +109,14 @@ public class BlackholeSkill : MonoBehaviour
                 xOffset = -1;
             }
 
-            if (SkillManager.Instance.CloneSkillController.canCrystalFromClone)
+            if (SkillManager.Instance.CloneSkillController.CrystalCloneUnlocked)
             {
                 SkillManager.Instance.CrystalSkillController.CreateCrystal();
                 SkillManager.Instance.CrystalSkillController.CurrentCrystalChooseRandomTarget();
             }
             else
             {
-                SkillManager.Instance.CloneSkillController.CreateClone(targets[randomIndex], new Vector2(xOffset, 0));
+                SkillManager.Instance.CloneSkillController.CreateClone(targets[randomIndex], new Vector2(xOffset, 0), multiplierAttack);
             }
 
             attackAmount--;
