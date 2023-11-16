@@ -177,6 +177,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_White_Transperent_1
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 869
+        width: 97
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d27c5128734d574c8ec7be98d6d41a7
+      internalID: 1842856465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_White_Transperent_2
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 617
+        width: 86
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 12, y: 12, z: 16, w: 9}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ef1f99f56664f84fa89e4c96bb6791c
+      internalID: 1796193366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -189,6 +231,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_White_Transperent_0: 1383908249
+      UI_White_Transperent_1: 1842856465
+      UI_White_Transperent_2: 1796193366
       UIartdeco_PIPO_pack2_white_0: 1968567152
       UIartdeco_PIPO_pack2_white_1: 2145175254
   mipmapLimitGroupName: 

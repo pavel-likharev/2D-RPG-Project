@@ -45,6 +45,7 @@ public class BlackholeSkillController : SkillController
         base.UseSkill();
 
         CreateBlackhole();
+        UI.Instance.InGame.SetBlackholeCooldown();
     }
 
     public void CreateBlackhole()

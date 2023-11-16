@@ -185,6 +185,11 @@ public class SwordSkillController : SkillController
         CreateSword();
     }
 
+    public void SetCooldown()
+    {
+        cooldownTimer = cooldown;
+    }
+
     private void SetupGravity()
     {
         if (swordType == SwordType.Bounce)

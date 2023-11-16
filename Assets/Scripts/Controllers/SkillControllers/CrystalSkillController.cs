@@ -40,6 +40,8 @@ public class CrystalSkillController : SkillController
     private List<GameObject> crystals = new List<GameObject>();
     private GameObject currentCrystal;
 
+    private float defaultCooldown;
+
     protected override void Start()
     {
         base.Start();
@@ -51,6 +53,8 @@ public class CrystalSkillController : SkillController
         explodeSlot.GetComponent<Button>().onClick.AddListener(UnlockExplodeSkill);
         controlledExplodeSlot.GetComponent<Button>().onClick.AddListener(UnlockControlledExplodeSkill);
         multiStackSlot.GetComponent<Button>().onClick.AddListener(UnlockMultiStackSkill);
+
+        defaultCooldown = cooldown;
     }
 
     private void UnlockCrystalSkill()
@@ -119,6 +123,12 @@ public class CrystalSkillController : SkillController
             if (currentCrystal == null)
             {
                 CreateCrystal();
+
+                if (ExplodeUnlocked && !MultiStackUnlocked)
+                    UI.Instance.InGame.SetCrystalCooldown();
+                else
+                    cooldown = 0;
+
             }
             else
             {
@@ -138,6 +148,9 @@ public class CrystalSkillController : SkillController
                 {
                     currentCrystal.GetComponent<CrystalSkill>()?.FinishedCrystal();
                 }
+
+                cooldown = defaultCooldown;
+                UI.Instance.InGame.SetCrystalCooldown();
 
             }
         }
@@ -174,8 +187,9 @@ public class CrystalSkillController : SkillController
 
                 if (crystals.Count <= 0)
                 {
-                    cooldown = multiStackCooldown;
+                    cooldown = defaultCooldown;
                     RefilCrystal();
+                    UI.Instance.InGame.SetCrystalCooldown();
                 }
 
                 return true;

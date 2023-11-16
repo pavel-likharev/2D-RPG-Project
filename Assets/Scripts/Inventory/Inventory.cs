@@ -294,6 +294,8 @@ public class Inventory : MonoBehaviour
                 flaskCooldown = currentFlask.itemCooldown;
                 currentFlask.ApplyEffect(null);
                 lastTimeUsedFlask = Time.time;
+
+                UI.Instance.InGame.SetFlaskCooldown(flaskCooldown);
             }
             else
             {
@@ -322,6 +324,7 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
 
     #region UpdateUI
     public void UpdateInventorySlotsUI()

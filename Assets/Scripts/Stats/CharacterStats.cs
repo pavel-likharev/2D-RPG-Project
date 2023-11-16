@@ -82,6 +82,11 @@ public class CharacterStats : MonoBehaviour
     private float checkRadiusClosestEnemy = 25f;
     #endregion
 
+    protected virtual void Awake()
+    {
+        
+    }
+
     protected virtual void Start()
     {
         fx = GetComponentInChildren<CharacterFX>();

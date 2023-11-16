@@ -33,7 +33,7 @@ public class PlayerGroundedState : PlayerState
             player.Skill.ParrySkillController.CanUseSkill();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword() && player.Skill.SwordSkillController.ThrowSwordUnlocked)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword() && player.Skill.SwordSkillController.ThrowSwordUnlocked && !player.Skill.SwordSkillController.IsCooldown())
         {
             stateMachine.ChangeState(player.AimSwordState);
         }

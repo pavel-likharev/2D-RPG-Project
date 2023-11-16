@@ -145,6 +145,9 @@ public class Player : Character
     {
         StateMachine.ChangeState(CatchSwordState);
         Destroy(Sword);
+
+        Skill.SwordSkillController.SetCooldown();
+        UI.Instance.InGame.SetSwordCooldown();
     }
 
     public void ExitBlackholeSkill()

@@ -81,6 +81,8 @@ public class DashSkillController : SkillController
         {
             player.DashSkill.SetupDash();
             player.StateMachine.ChangeState(player.DashState);
+
+            UI.Instance.InGame.SetDashCooldown();
         }
     }
 }

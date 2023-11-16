@@ -12,8 +12,10 @@ public class EnemyStats : CharacterStats
 
     [Range(0f, 1f)][SerializeField] private float percantageModifier = 0.4f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         enemy = GetComponent<Enemy>();
         myDrop = GetComponent<ItemDrop>();
     }

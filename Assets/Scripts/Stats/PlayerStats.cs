@@ -6,8 +6,11 @@ public class PlayerStats : CharacterStats
 {
     private Player player;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        currentHealth = GetMaxHealthValue();
         player = GetComponent<Player>();
     }
 

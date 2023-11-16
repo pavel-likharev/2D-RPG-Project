@@ -53,6 +53,10 @@ public class SkillController : MonoBehaviour
     {
     }
 
+    public float GetCooldown() => cooldown;
+
+    public bool IsCooldown() => cooldownTimer > 0;
+
     protected virtual Transform FindClosestEnemy(Transform checkTransform)
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(checkTransform.position, checkRadiusClosestEnemy);

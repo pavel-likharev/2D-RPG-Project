@@ -75,8 +75,12 @@ public class ParrySkillController : SkillController
     protected override void UseSkill()
     {
         base.UseSkill();
-        
+
         if (ParryUnlocked)
+        {
             player.StateMachine.ChangeState(player.ParryState);
+
+            UI.Instance.InGame.SetParryCooldown();
+        }
     }
 }
