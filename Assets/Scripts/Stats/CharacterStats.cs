@@ -1,14 +1,34 @@
 using System;
 using System.Collections;
-using System.Xml;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
+public enum StatType
+{
+    strength,
+    agility,
+    intelligence,
+    vitality,
+    damage,
+    critChance,
+    critPower,
+    health,
+    armor,
+    evasion,
+    magicResistance,
+    fireDamage,
+    iceDamage,
+    lightingDamage,
+}
 public class CharacterStats : MonoBehaviour
 {
+    public event EventHandler<TransformTargetEventsArgs> OnEvasion;
     public event EventHandler OnHealthChange;
     private CharacterFX fx;
+
     public bool IsDead { get; private set; }
+    public bool IsVulnerable { get; private set; }
+
+    private float vulnerableModify = 1.1f;
 
     #region Fields
     [Header("Major stats")]
@@ -55,18 +75,23 @@ public class CharacterStats : MonoBehaviour
 
     private float shockDamageMultiplier = 0.1f;
     private int shockEffectReducer = 20;
-    
+
     [SerializeField] private GameObject shockStrikePrefab;
     private int shockDamage;
 
     private float checkRadiusClosestEnemy = 25f;
     #endregion
 
+    protected virtual void Awake()
+    {
+        
+    }
+
     protected virtual void Start()
     {
         fx = GetComponentInChildren<CharacterFX>();
 
-        currentHealth = GetMaxHealtValue();
+        currentHealth = GetMaxHealthValue();
         critPower.SetDefaultValue(150);
     }
 
@@ -75,17 +100,19 @@ public class CharacterStats : MonoBehaviour
         DoElementalEffect();
     }
 
-
-    public virtual void DoDamage(CharacterStats target, int knockBackDir)
+    // Damage
+    public virtual void DoDamage(CharacterStats target, int knockBackDir, float multiplierDamage = 1)
     {
         if (CanTargetAvoidAttack(target))
             return;
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
+        totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
+
         if (CanCrit())
-            totalDamage = CalculateCriticalDamage(totalDamage);       
-        
+            totalDamage = CalculateCriticalDamage(totalDamage);
+
         totalDamage = CheckTargetArmor(target, totalDamage);
 
         target.TakeDamage(totalDamage, knockBackDir);
@@ -101,7 +128,23 @@ public class CharacterStats : MonoBehaviour
         if (currentHealth <= 0 && !IsDead)
             Die();
     }
-    public virtual void IncreaseStat(Stat stat, int value, float duration)
+
+    // Vulnerable
+    public void MakeVulnerable(float duration)
+    {
+        StartCoroutine(VulnerableFor(duration));
+    }
+    private IEnumerator VulnerableFor(float duration)
+    {
+        IsVulnerable = true;
+
+        yield return new WaitForSeconds(duration);
+
+        IsVulnerable = false;
+    }
+
+    // Stats modify
+    public virtual void ChangeStatTemporarily(Stat stat, int value, float duration)
     {
         StartCoroutine(StatModify(stat, value, duration));
     }
@@ -113,18 +156,61 @@ public class CharacterStats : MonoBehaviour
 
         stat.RemoveModifier(value);
     }
+    public Stat GetStatFromType(StatType statType)
+    {
+        switch (statType)
+        {
+            case StatType.strength:
+                return strength;
 
+            case StatType.agility:
+                return agility;
+            case StatType.intelligence:
+                return intelligence;
+            case StatType.vitality:
+                return vitality;
+            case StatType.damage:
+                return damage;
+            case StatType.critChance:
+                return critChance;
+            case StatType.critPower:
+                return critPower;
+            case StatType.health:
+                return maxHealth;
+            case StatType.armor:
+                return armor;
+            case StatType.evasion:
+                return evasion;
+            case StatType.magicResistance:
+                return magicResistance;
+            case StatType.fireDamage:
+                return fireDamage;
+            case StatType.iceDamage:
+                return iceDamage;
+            case StatType.lightingDamage:
+                return lightingDamage;
+            default:
+                return null;
+        }
+    }
+
+    // Health
     public virtual void IncreaseHealth(int value)
     {
         currentHealth += value;
 
-        if (currentHealth > GetMaxHealtValue())
-            currentHealth = GetMaxHealtValue();
+        if (currentHealth > GetMaxHealthValue())
+            currentHealth = GetMaxHealthValue();
 
         OnHealthChange?.Invoke(this, EventArgs.Empty);
     }
     protected virtual void DecreaseHealth(int damage)
     {
+        if (IsVulnerable)
+        {
+            damage = Mathf.RoundToInt(damage * vulnerableModify);
+        }
+
         currentHealth -= damage;
 
         OnHealthChange?.Invoke(this, EventArgs.Empty);
@@ -188,7 +274,6 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-
     private void ElementalLogic(CharacterStats target, int fireDamage, int iceDamage, int lightingDamage)
     {
         bool canApplyIgnite = fireDamage > iceDamage && fireDamage > lightingDamage;
@@ -245,7 +330,7 @@ public class CharacterStats : MonoBehaviour
             {
                 if (GetComponent<Player>() != null)
                     return;
-                
+
                 HitShockClosestEnemy();
             }
 
@@ -280,7 +365,7 @@ public class CharacterStats : MonoBehaviour
     }
     private void ApplyIgniteDamage()
     {
-        
+
         if (igniteDamageTimer >= 0)
         {
             igniteDamageTimer -= Time.deltaTime;
@@ -351,11 +436,16 @@ public class CharacterStats : MonoBehaviour
 
         if (UnityEngine.Random.Range(0, 100) < totalEvasion)
         {
+            target.OnEvasion?.Invoke(this, new TransformTargetEventsArgs
+            {
+                target = transform
+            });
             return true;
         }
 
         return false;
     }
+
     private int CheckTargetResistance(CharacterStats target, int totalMagicalDamage)
     {
         totalMagicalDamage -= target.magicResistance.GetValue() + (target.intelligence.GetValue() * 3);
@@ -395,6 +485,11 @@ public class CharacterStats : MonoBehaviour
         float critDamage = damage * totalCritPower;
         return Mathf.RoundToInt(critDamage);
     }
-    public int GetMaxHealtValue() => maxHealth.GetValue() + vitality.GetValue() * 5;
+    public int GetMaxHealthValue() => maxHealth.GetValue() + vitality.GetValue() * 5;
     #endregion
+}
+
+public class TransformTargetEventsArgs
+{
+    public Transform target;
 }

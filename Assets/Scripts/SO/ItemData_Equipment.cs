@@ -15,8 +15,10 @@ public class ItemData_Equipment : ItemData
 {
     public EquipmentType equipmentType;
 
+    [Header("Unique effect")]
     public List<Effect> effects;
     public float itemCooldown;
+    [TextArea] public string effectDescriptionText;
 
     [Header("Major stats")]
     public int strength; // 1 point increase damage by 1 and crit.power by 1%
@@ -41,7 +43,7 @@ public class ItemData_Equipment : ItemData
     public int lightingDamage;
 
     [Header("Craft requirements")]
-    public List<InventoryItem> craftingMaterials;
+    public List<InventoryItem> craftingMaterials; // max 4
 
     public void ApplyEffect(Transform target)
     {
@@ -49,6 +51,8 @@ public class ItemData_Equipment : ItemData
         {
             effect.ExecuteEffect(target);
         }
+
+        Inventory.Instance.UpdateStatSlotsUI();
     }
 
     public void AddModifiers()
@@ -95,5 +99,48 @@ public class ItemData_Equipment : ItemData
         playerStats.fireDamage.RemoveModifier(fireDamage);
         playerStats.iceDamage.RemoveModifier(iceDamage);
         playerStats.lightingDamage.RemoveModifier(lightingDamage);
+    }
+
+    public override string GetDescription()
+    {
+        description.Length = 0;
+
+        AddItemDescription(strength, "Strenght");
+        AddItemDescription(agility, "Agility");
+        AddItemDescription(intelligence, "Intelligence");
+        AddItemDescription(vitality, "Vitality");
+
+        AddItemDescription(damage, "Damage");
+        AddItemDescription(critChance, "Crit.chance");
+        AddItemDescription(critPower, "Crit.power");
+
+        AddItemDescription(health, "Health");
+        AddItemDescription(evasion, "Evasion");
+        AddItemDescription(armor, "Armor");
+        AddItemDescription(magicResistance, "Magic Resist.");
+
+        AddItemDescription(fireDamage, "Fire Damage");
+        AddItemDescription(iceDamage, "Ice Damage");
+        AddItemDescription(lightingDamage, "Lighting Damage");
+
+        if (effectDescriptionText != null && effectDescriptionText.Length > 0)
+        {
+            description.AppendLine();
+            description.Append(effectDescriptionText);
+        }
+
+        return description.ToString();
+    }
+
+    private void AddItemDescription(int value, string name)
+    {
+        if (value != 0)
+        {
+            if (description.Length > 0) 
+                description.AppendLine();
+
+            if (value > 0)
+                description.Append(name + ": " + value);
+        }
     }
 }

@@ -13,7 +13,7 @@ public class Effect_Freeze : Effect
     {
         PlayerStats playerStats = PlayerManager.Instance.Player.GetComponent<PlayerStats>();
 
-        if (playerStats.currentHealth < playerStats.GetMaxHealtValue() * peircentHealthEffect)
+        if (playerStats.currentHealth < playerStats.GetMaxHealthValue() * peircentHealthEffect)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, freezeRadius);
             foreach (var hit in colliders)

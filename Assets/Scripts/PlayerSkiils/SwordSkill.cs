@@ -43,8 +43,6 @@ public class SwordSkill : MonoBehaviour
     private float spinDir;
     private float spinMoveSpeed = 1.5f;
 
-
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -220,7 +218,12 @@ public class SwordSkill : MonoBehaviour
     private void SkillSwordDamage(Enemy enemy, int knockbackDir)
     {
         PlayerManager.Instance.Player.Stats.DoDamage(enemy.GetComponent<CharacterStats>(), knockbackDir);
-        enemy.FreezeTimeFor(freezeDuration);
+
+        if (player.Skill.SwordSkillController.TimeStopUnlocked)
+            enemy.FreezeTimeFor(freezeDuration);
+
+        if (player.Skill.SwordSkillController.VulnerableUnlocked)
+            enemy.GetComponent<EnemyStats>().MakeVulnerable(freezeDuration);
 
         ItemData_Equipment amulet = Inventory.Instance.GetEquipment(EquipmentType.Amulet);
         amulet?.ApplyEffect(enemy.transform);

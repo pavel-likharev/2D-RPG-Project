@@ -30,10 +30,10 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            stateMachine.ChangeState(player.CounterAttackState);
+            player.Skill.ParrySkillController.CanUseSkill();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword())
+        if (Input.GetKeyDown(KeyCode.Mouse1) && HasNoSword() && player.Skill.SwordSkillController.ThrowSwordUnlocked && !player.Skill.SwordSkillController.IsCooldown())
         {
             stateMachine.ChangeState(player.AimSwordState);
         }
@@ -48,7 +48,7 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.JumpState);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && player.Skill.BlackholeSkillController.BlackholeSkillUnlocked)
         {
             stateMachine.ChangeState(player.BlackholeState);
         }

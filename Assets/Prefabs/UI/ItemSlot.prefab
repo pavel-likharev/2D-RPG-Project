@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0.02745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 4457418012729921526}
   itemText: {fileID: 752814675522556075}
+  defaultColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 0.039215688}
+  tooltip: {fileID: 5748226212515593567, guid: b04141cb3f3af1b479ff075b395b2bed, type: 3}
   item:
     itemData: {fileID: 0}
     stackSize: 0

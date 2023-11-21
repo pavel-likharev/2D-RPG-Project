@@ -24,7 +24,7 @@ public class Player : Character
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerPrimaryAttackState PrimaryAttackState { get; private set; }
-    public PlayerCounterAttackState CounterAttackState { get; private set; }
+    public PlayerParryState ParryState { get; private set; }
     public PlayerAimSwordState AimSwordState { get; private set; }
     public PlayerCatchSwordState CatchSwordState { get; private set; }
     public PlayerBlackholeState BlackholeState { get; private set; }
@@ -44,12 +44,8 @@ public class Player : Character
     private float defaultMoveSpeed;
     private float defaultJumpForce;
 
-    [Header("Dash info")]
-    public float dashForce = 12f;
-    public float dashDuration = 0.3f;
-    public float DashDir { get; private set; }
-    private float defaultDashForce;
-
+    public DashSkill DashSkill { get; private set; }
+    public ParrySkill ParrySkill { get; private set; }
     public SkillManager Skill { get; private set; }
     public GameObject Sword { get; private set; }
 
@@ -58,6 +54,9 @@ public class Player : Character
         base.Awake();
 
         StateMachine = new PlayerStateMachine();
+
+        DashSkill = GetComponent<DashSkill>();
+        ParrySkill = GetComponent<ParrySkill>();
 
         IdleState = new PlayerIdleState(this, StateMachine, IS_IDLE);
         MoveState = new PlayerMoveState(this, StateMachine, IS_MOVE);
@@ -70,7 +69,7 @@ public class Player : Character
         WallJumpState = new PlayerWallJumpState(this, StateMachine, IS_JUMP);
 
         PrimaryAttackState = new PlayerPrimaryAttackState(this, StateMachine, IS_ATTACK);
-        CounterAttackState = new PlayerCounterAttackState(this, StateMachine, IS_COUNTER_ATTACK);
+        ParryState = new PlayerParryState(this, StateMachine, IS_COUNTER_ATTACK);
 
         AimSwordState = new PlayerAimSwordState(this, StateMachine, IS_AIM_SWORD);
         CatchSwordState = new PlayerCatchSwordState(this, StateMachine, IS_CATCH_SWORD);
@@ -87,7 +86,7 @@ public class Player : Character
 
         defaultMoveSpeed = moveSpeed;
         defaultJumpForce = jumpForce;
-        defaultDashForce = dashForce;
+        DashSkill.defaultDashForce = DashSkill.dashForce;
     }
 
     protected override void Update()
@@ -95,18 +94,6 @@ public class Player : Character
         base.Update();
 
         StateMachine.CurrentState.Update();
-
-        CheckForDashInput();
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Skill.CrystalSkillController.CanUseSkill();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Inventory.Instance.UseFlask();
-        }
     }
 
     public override void SlowDownCharacter(float speedPercentage, float duration)
@@ -117,7 +104,7 @@ public class Player : Character
 
         moveSpeed *= value;
         jumpForce *= value;
-        dashForce *= value;
+        DashSkill.dashForce *= value;
 
         Animator.speed *= value;
 
@@ -130,7 +117,7 @@ public class Player : Character
 
         moveSpeed = defaultMoveSpeed;
         jumpForce = defaultJumpForce;
-        dashForce = defaultDashForce;
+        DashSkill.dashForce = DashSkill.defaultDashForce;
     }
 
     public override void Die()
@@ -158,6 +145,9 @@ public class Player : Character
     {
         StateMachine.ChangeState(CatchSwordState);
         Destroy(Sword);
+
+        Skill.SwordSkillController.SetCooldown();
+        UI.Instance.InGame.SetSwordCooldown();
     }
 
     public void ExitBlackholeSkill()
@@ -167,19 +157,5 @@ public class Player : Character
 
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-    private void CheckForDashInput()
-    {
-        if (IsWallDetected())
-            return;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.Instance.DashSkillController.CanUseSkill())
-        {
-            DashDir = Input.GetAxisRaw("Horizontal");
-
-            if (DashDir == 0)
-                DashDir = MoveDir;
-
-            StateMachine.ChangeState(DashState);
-        }
-    }
 }

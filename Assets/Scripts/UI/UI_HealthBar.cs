@@ -39,7 +39,7 @@ public class UI_HealthBar : MonoBehaviour
 
     private void UpdateHealthUI()
     {
-        slider.maxValue = stats.GetMaxHealtValue();
+        slider.maxValue = stats.GetMaxHealthValue();
         slider.value = stats.currentHealth;
     }
 

@@ -27,6 +27,16 @@ public class SkillController : MonoBehaviour
         }
     }
 
+    protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)
+    {
+        if (!PlayerManager.Instance.HaveEnoughCurrency(price))
+            return false;
+        
+        skillSlot.UnlockSlot();
+
+        return true;
+    }
+
     public bool CanUseSkill()
     {
         if (cooldownTimer <= 0)
@@ -42,6 +52,10 @@ public class SkillController : MonoBehaviour
     protected virtual void UseSkill()
     {
     }
+
+    public float GetCooldown() => cooldown;
+
+    public bool IsCooldown() => cooldownTimer > 0;
 
     protected virtual Transform FindClosestEnemy(Transform checkTransform)
     {

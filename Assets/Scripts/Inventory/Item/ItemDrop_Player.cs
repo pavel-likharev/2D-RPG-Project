@@ -34,7 +34,7 @@ public class ItemDrop_Player : ItemDrop
             inventory.UnequipItem(item.itemData as ItemData_Equipment);
         }
 
-        inventory.UpdateEquipmentSlotUI();
+        inventory.UpdateEquipmentSlotsUI();
     }
 
     private void GenerateDropStash(Inventory inventory)
@@ -55,6 +55,6 @@ public class ItemDrop_Player : ItemDrop
             inventory.RemoveItemFromStash(item.itemData);
         }
 
-        inventory.UpdateStashSlotUI();
+        inventory.UpdateStashSlotsUI();
     }
 }
