@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
 
-    [SerializeField] private int currency;
+    private int currency = 1000000;
 
     [field: SerializeField] public Player Player { get; private set; }
 
@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public bool HaveEnoughMoney(int price)
+    public bool HaveEnoughCurrency(int price)
     {
         if (price > currency)
         {
@@ -31,7 +31,19 @@ public class PlayerManager : MonoBehaviour
         }
 
         currency -= price;
+
+        UI.Instance.InGame.SetCurrencyText(currency);
+
         return true;
+    }
+
+    public int GetCurrency() => currency;
+
+    public void AddCurrency(int value)
+    {
+        currency += value;
+
+        UI.Instance.InGame.SetCurrencyText(currency);
     }
 
 }

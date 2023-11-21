@@ -26,8 +26,13 @@ public class DashSkillController : SkillController
         base.Start();
 
         dashUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockDashSkill);
+        dashUnlockSlot.SetPriceText(dashPrice);
+
         cloneOnDashUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnDashSkill);
+        cloneOnDashUnlockSlot.SetPriceText(cloneOnDashPrice);
+
         cloneOnArrivalUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnArrivalSkill);
+        cloneOnArrivalUnlockSlot.SetPriceText(cloneOnArrivalPrice);
     }
 
     public void CloneOnDash()

@@ -123,7 +123,7 @@ public class ItemData_Equipment : ItemData
         AddItemDescription(iceDamage, "Ice Damage");
         AddItemDescription(lightingDamage, "Lighting Damage");
 
-        if (effectDescriptionText.Length > 0 && effectDescriptionText != null)
+        if (effectDescriptionText != null && effectDescriptionText.Length > 0)
         {
             description.AppendLine();
             description.Append(effectDescriptionText);

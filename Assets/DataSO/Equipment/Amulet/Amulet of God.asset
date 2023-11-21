@@ -20,6 +20,7 @@ MonoBehaviour:
   effects:
   - {fileID: -3941384277299913875, guid: db63be91e9ac6c649874c29cb0df7f8a, type: 3}
   itemCooldown: 0
+  effectDescriptionText: Crystal call thunder strike on hit.
   strength: 0
   agility: 0
   intelligence: 0

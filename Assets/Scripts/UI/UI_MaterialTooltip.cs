@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_MaterialTooltip : MonoBehaviour
+public class UI_MaterialTooltip : UI_Tooltip
 {
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemDescruiption;

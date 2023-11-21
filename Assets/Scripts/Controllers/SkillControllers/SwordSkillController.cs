@@ -83,12 +83,22 @@ public class SwordSkillController : SkillController
         SetupGravity();
 
         throwSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockThrowSword);
+        throwSwordSlot.SetPriceText(throwSwordPrice);
+
         bouncySwordSlot.GetComponent<Button>().onClick.AddListener(UnlockBouncySword);
-        pierceSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockPierceSword);
-        spinSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockSpinSword);
+        bouncySwordSlot.SetPriceText(bouncySwordPrice);
         
+        pierceSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockPierceSword);
+        pierceSwordSlot.SetPriceText(pierceSwordPrice);
+        
+        spinSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockSpinSword);
+        spinSwordSlot.SetPriceText(spinSwordPrice);
+
         timeStopSlot.GetComponent<Button>().onClick.AddListener(UnlockTimeStop);
+        timeStopSlot.SetPriceText(timeStopPrice);
+        
         vulnerableSlot.GetComponent<Button>().onClick.AddListener(UnlockVulnerable);
+        vulnerableSlot.SetPriceText(vulnerablePrice);
     }
 
     #region Unlock Skills

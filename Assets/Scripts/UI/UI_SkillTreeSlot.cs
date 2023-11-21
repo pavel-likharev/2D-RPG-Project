@@ -13,6 +13,7 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private Color lockedColor;
 
     private Image skillImage;
+    private string skillPriceText;
     
     private void OnValidate()
     {
@@ -30,26 +31,13 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
         skillImage.color = Color.white;
     }
 
+    public void SetPriceText(int price) => skillPriceText = "Price: " + price.ToString();
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Vector2 mousePosition = Input.mousePosition;
 
-        float xOffset;
-        float yOffset;
-
-        if (mousePosition.x > 600)
-            xOffset = -150;
-        else
-            xOffset = 150;
-
-        if (mousePosition.y > 300)
-            yOffset = -150;
-        else
-            yOffset = 150;
-
-        UI.Instance.MenuController.skillTooltip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
-
-        UI.Instance.MenuController.skillTooltip.ShowTooltip(skillName, skillDescription);
+        UI.Instance.MenuController.skillTooltip.SetTooltipPosition();
+        UI.Instance.MenuController.skillTooltip.ShowTooltip(skillName, skillDescription, skillPriceText);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -44,9 +44,16 @@ public class CloneSkillController : SkillController
         base.Start();
 
         cloneAttackSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneAttack);
+        cloneAttackSkillSlot.SetPriceText(cloneAttackPrice);
+
         agressiveSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockAgressive);
+        agressiveSkillSlot.SetPriceText(agressivePrice);
+        
         duplicateSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDuplicate);
+        duplicateSkillSlot.SetPriceText(duplicatePrice);
+        
         crystalCloneSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockCrystalClone);
+        crystalCloneSkillSlot.SetPriceText(crystalClonePrice);
     }
 
     private void UnlockCloneAttack()

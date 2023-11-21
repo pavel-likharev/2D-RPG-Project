@@ -1,9 +1,12 @@
+using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_InGame : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI currencyText;
 
     [SerializeField] private Image parryImage;
     [SerializeField] private Image flaskImage;
@@ -38,6 +41,7 @@ public class UI_InGame : MonoBehaviour
         blackholeCooldown = skills.BlackholeSkillController.GetCooldown();
 
         UpdateHealthUI();
+        SetCurrencyText(PlayerManager.Instance.GetCurrency());
     }
 
     private void Update()
@@ -60,6 +64,14 @@ public class UI_InGame : MonoBehaviour
     private void SetCooldown(Image image)
     {
         image.fillAmount = 1;
+    }
+
+    public void SetCurrencyText(int value)
+    {
+        if (value > 0)
+            currencyText.text = PlayerManager.Instance.GetCurrency().ToString("#,#", CultureInfo.InvariantCulture);
+        else
+            currencyText.text = "0";
     }
 
     public void SetParryCooldown() => SetCooldown(parryImage);

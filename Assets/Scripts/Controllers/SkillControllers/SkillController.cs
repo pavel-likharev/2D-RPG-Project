@@ -29,7 +29,7 @@ public class SkillController : MonoBehaviour
 
     protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)
     {
-        if (!PlayerManager.Instance.HaveEnoughMoney(price))
+        if (!PlayerManager.Instance.HaveEnoughCurrency(price))
             return false;
         
         skillSlot.UnlockSlot();

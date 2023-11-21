@@ -29,8 +29,13 @@ public class ParrySkillController : SkillController
         base.Start();
 
         parryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockParrySkill);
+        parryUnlockSlot.SetPriceText(parryPrice);
+
         restoreOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockRestoreOnParrySkill);
+        restoreOnParryUnlockSlot.SetPriceText(restoreOnParryPrice);
+
         cloneOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnParrySkill);
+        cloneOnParryUnlockSlot.SetPriceText(cloneOnParryPrice);
     }
 
     public void AttemptRestoreHealth()

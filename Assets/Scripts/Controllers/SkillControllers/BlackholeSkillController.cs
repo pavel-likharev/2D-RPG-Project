@@ -28,6 +28,7 @@ public class BlackholeSkillController : SkillController
         base.Start();
 
         blackholeSKillSlot.GetComponent<Button>().onClick.AddListener(UnlockBlackhole);
+        blackholeSKillSlot.SetPriceText(blackholePrice);
     }
 
     private void UnlockBlackhole()

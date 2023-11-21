@@ -66,8 +66,7 @@ public class UI_StatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Vector2 mousePosition = Input.mousePosition;
 
-        UI.Instance.MenuController.statTooltip.transform.position = new Vector2(mousePosition.x, mousePosition.y + 150);
-
+        UI.Instance.MenuController.statTooltip.SetTooltipPosition();
         UI.Instance.MenuController.statTooltip.ShowTooltip(description);
     }
 

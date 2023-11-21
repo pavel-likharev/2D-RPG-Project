@@ -49,10 +49,19 @@ public class CrystalSkillController : SkillController
         RefilCrystal();
 
         crystalSlot.GetComponent<Button>().onClick.AddListener(UnlockCrystalSkill);
+        crystalSlot.SetPriceText(crystalPrice);
+
         cloneBlinkSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneBlinkSkill);
+        cloneBlinkSlot.SetPriceText(cloneBlinkPrice);
+
         explodeSlot.GetComponent<Button>().onClick.AddListener(UnlockExplodeSkill);
+        explodeSlot.SetPriceText(explodePrice);
+        
         controlledExplodeSlot.GetComponent<Button>().onClick.AddListener(UnlockControlledExplodeSkill);
+        controlledExplodeSlot.SetPriceText(controlledExplodePrice);
+        
         multiStackSlot.GetComponent<Button>().onClick.AddListener(UnlockMultiStackSkill);
+        multiStackSlot.SetPriceText(multiStackPrice);
 
         defaultCooldown = cooldown;
     }

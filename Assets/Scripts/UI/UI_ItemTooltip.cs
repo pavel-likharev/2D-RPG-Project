@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UI_ItemTooltip : MonoBehaviour
+public class UI_ItemTooltip : UI_Tooltip
 {
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemType;
     [SerializeField] private TextMeshProUGUI itemDescruiption;
+    [SerializeField] private TextMeshProUGUI itemUniqe;
 
     private void Start()
     {
@@ -19,6 +20,9 @@ public class UI_ItemTooltip : MonoBehaviour
         itemName.text = itemData.itemName;
         itemType.text = itemData.equipmentType.ToString();
         itemDescruiption.text = itemData.GetDescription();
+
+        if (itemData.effectDescriptionText != null && itemData.effectDescriptionText.Length > 0)
+            itemUniqe.text = "Uniqe effect: " + itemData.effectDescriptionText;
 
         gameObject.SetActive(true);
     }

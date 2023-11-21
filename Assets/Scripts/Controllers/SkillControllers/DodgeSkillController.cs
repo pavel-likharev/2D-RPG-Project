@@ -19,7 +19,10 @@ public class DodgeSkillController : SkillController
         base.Start();
 
         dodgeSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDodge);
+        dodgeSkillSlot.SetPriceText(dodgePrice);
+
         dodgeWithCloneSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDodgeWithClone);
+        dodgeWithCloneSkillSlot.SetPriceText(dodgeWithClonePrice);
     }
 
     private void UnlockDodge()
