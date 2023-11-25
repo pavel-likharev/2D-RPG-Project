@@ -96,7 +96,5 @@ public class UI_InGame : MonoBehaviour
     {
         healthSlider.maxValue = player.Stats.GetMaxHealthValue();
         healthSlider.value = player.Stats.currentHealth;
-
-        Debug.Log(player.Stats.currentHealth);
     }
 }

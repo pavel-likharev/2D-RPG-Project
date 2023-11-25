@@ -14,6 +14,12 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Inventory.Instance.RemoveItem(item.itemData);
+            return;
+        }
+
         if (item.itemData != null)
         {
             Inventory.Instance.AddItem(item.itemData);

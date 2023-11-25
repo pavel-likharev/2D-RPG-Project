@@ -25,6 +25,12 @@ public class DodgeSkillController : SkillController
         dodgeWithCloneSkillSlot.SetPriceText(dodgeWithClonePrice);
     }
 
+    public override void CheckUnlockedSkills()
+    {
+        DodgeUnlocked = dodgeSkillSlot.Unlocked;
+        DodgeWithCloneUnlocked = dodgeWithCloneSkillSlot.Unlocked;
+    }
+
     private void UnlockDodge()
     {
         DodgeUnlocked = UnlockSkill(dodgeSkillSlot, dodgePrice);

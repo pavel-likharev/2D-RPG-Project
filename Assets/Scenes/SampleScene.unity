@@ -901,6 +901,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1283491195528104898, guid: 585b93c20c74fc048b3f7a59fdd11cd6, type: 3}
   m_PrefabInstance: {fileID: 2014199222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &66860387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66860389}
+  - component: {fileID: 66860388}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &66860388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66860387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77f69e894b38404587b9ad9e1adb12f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: saves.gamedata
+  encrypt: 1
+--- !u!4 &66860389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66860387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &71703627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23427,6 +23473,8 @@ MonoBehaviour:
   equipmentContainer: {fileID: 104944937}
   statSlotContainer: {fileID: 674193266}
   lastTimeUsedArmor: 0
+  loadedItems: []
+  loadedEquipment: []
 --- !u!4 &1186379573
 Transform:
   m_ObjectHideFlags: 0
@@ -27016,6 +27064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb12eedb345d8549bd2fd2b8f76f141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currency: 50000
   <Player>k__BackingField: {fileID: 1464002170}
 --- !u!4 &1474536774
 Transform:
@@ -39353,6 +39402,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82c5807d3606a644b914010fef4e1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillSlots:
+  - {fileID: 558695402}
+  - {fileID: 138629260}
+  - {fileID: 1534883104}
+  - {fileID: 648615887}
+  - {fileID: 993860156}
+  - {fileID: 2055211383}
+  - {fileID: 1809604165}
+  - {fileID: 1428845952}
+  - {fileID: 502866498}
+  - {fileID: 1138820347}
+  - {fileID: 988700326}
+  - {fileID: 1870107398}
+  - {fileID: 1206775560}
+  - {fileID: 602620864}
+  - {fileID: 1893144862}
+  - {fileID: 1978806814}
+  - {fileID: 170387679}
+  - {fileID: 932819566}
+  - {fileID: 792654093}
+  - {fileID: 918920006}
+  - {fileID: 821427513}
+  - {fileID: 589794939}
+  - {fileID: 1103824180}
+  - {fileID: 745555842}
 --- !u!4 &1948117019
 Transform:
   m_ObjectHideFlags: 0
@@ -39476,7 +39550,7 @@ MonoBehaviour:
   blackholeDuration: 3
   attackAmount: 3
   cloneAttackCooldown: 0.2
-  blackholeSKillSlot: {fileID: 502866498}
+  blackholeSkillSlot: {fileID: 502866498}
   blackholePrice: 11111
 --- !u!114 &1948117024
 MonoBehaviour:
