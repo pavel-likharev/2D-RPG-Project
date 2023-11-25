@@ -12,24 +12,41 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [SerializeField] private Color lockedColor;
 
-    private Image skillImage;
+    private Image skillImage => GetComponent<Image>();
     private string skillPriceText;
-    
+
+    public bool Unlocked { get; private set; }
+
+    private void Awake()
+    {
+        if (!Unlocked)
+        {
+            skillImage.color = lockedColor;
+        }
+    }
+
     private void OnValidate()
     {
         gameObject.name = "SkillTreeSlot_" + skillName;
+
     }
 
     private void Start()
     {
-        skillImage = GetComponent<Image>();
-        skillImage.color = lockedColor;
+
     }
 
     public void UnlockSlot()
     {
         skillImage.color = Color.white;
+        Unlocked = true;
+
+        GetComponent<Button>().enabled = false;
     }
+
+    public string GetName() => skillName;
+
+
 
     public void SetPriceText(int price) => skillPriceText = "Price: " + price.ToString();
 

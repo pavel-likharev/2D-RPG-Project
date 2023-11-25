@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillController : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class SkillController : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
         }
+    }
+
+    public virtual void CheckUnlockedSkills()
+    {
     }
 
     protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)

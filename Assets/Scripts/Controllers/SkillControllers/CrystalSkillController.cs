@@ -66,6 +66,15 @@ public class CrystalSkillController : SkillController
         defaultCooldown = cooldown;
     }
 
+    public override void CheckUnlockedSkills()
+    {
+        CrystalUnlocked = crystalSlot.Unlocked;
+        CloneBlinkUnlocked = cloneBlinkSlot.Unlocked;
+        ExplodeUnlocked = explodeSlot.Unlocked;
+        ControlledExplodeUnlocked = controlledExplodeSlot.Unlocked;
+        MultiStackUnlocked = multiStackSlot.Unlocked;
+    }
+
     private void UnlockCrystalSkill()
     {
         CrystalUnlocked = UnlockSkill(crystalSlot, crystalPrice);

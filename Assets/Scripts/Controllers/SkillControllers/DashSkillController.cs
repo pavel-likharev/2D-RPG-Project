@@ -35,6 +35,13 @@ public class DashSkillController : SkillController
         cloneOnArrivalUnlockSlot.SetPriceText(cloneOnArrivalPrice);
     }
 
+    public override void CheckUnlockedSkills()
+    {
+        DashUnlocked = dashUnlockSlot.Unlocked;
+        CloneOnDashUnlocked = cloneOnDashUnlockSlot.Unlocked;
+        CloneOnArrivalUnlocked = cloneOnArrivalUnlockSlot.Unlocked;
+    }
+
     public void CloneOnDash()
     {
         if (CloneOnDashUnlocked)

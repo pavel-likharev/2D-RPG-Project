@@ -38,6 +38,13 @@ public class ParrySkillController : SkillController
         cloneOnParryUnlockSlot.SetPriceText(cloneOnParryPrice);
     }
 
+    public override void CheckUnlockedSkills()
+    {
+        ParryUnlocked = parryUnlockSlot.Unlocked;
+        RestoreOnParryUnlocked = restoreOnParryUnlockSlot.Unlocked;
+        CloneOnParryUnlocked = cloneOnParryUnlockSlot.Unlocked;
+    }
+
     public void AttemptRestoreHealth()
     {
         if (RestoreOnParryUnlocked)

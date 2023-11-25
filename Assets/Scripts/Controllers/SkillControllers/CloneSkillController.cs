@@ -56,6 +56,14 @@ public class CloneSkillController : SkillController
         crystalCloneSkillSlot.SetPriceText(crystalClonePrice);
     }
 
+    public override void CheckUnlockedSkills()
+    {
+        CloneAttackUnlocked = cloneAttackSkillSlot.Unlocked;
+        AgressiveUnlocked = agressiveSkillSlot.Unlocked;
+        DuplicateUnlocked = duplicateSkillSlot.Unlocked;
+        CrystalCloneUnlocked = crystalCloneSkillSlot.Unlocked;
+    }
+
     private void UnlockCloneAttack()
     {
         CloneAttackUnlocked = UnlockSkill(cloneAttackSkillSlot, cloneAttackPrice);

@@ -99,8 +99,17 @@ public class SwordSkillController : SkillController
         
         vulnerableSlot.GetComponent<Button>().onClick.AddListener(UnlockVulnerable);
         vulnerableSlot.SetPriceText(vulnerablePrice);
-    }
+        }
 
+    public override void CheckUnlockedSkills()
+    {
+        ThrowSwordUnlocked = throwSwordSlot.Unlocked;
+        BouncySwordUnlocked = bouncySwordSlot.Unlocked;
+        PierceSwordUnlocked = pierceSwordSlot.Unlocked;
+        SpinSwordUnlocked = spinSwordSlot.Unlocked;
+        TimeStopUnlocked = timeStopSlot.Unlocked;
+        VulnerableUnlocked = vulnerableSlot.Unlocked;
+    }
     #region Unlock Skills
     private void UnlockThrowSword()
     {

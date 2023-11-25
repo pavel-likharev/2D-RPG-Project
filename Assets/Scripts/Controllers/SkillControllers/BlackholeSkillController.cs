@@ -16,28 +16,30 @@ public class BlackholeSkillController : SkillController
     [SerializeField] private float cloneAttackCooldown;
 
     [Header("Blackhole Skill")]
-    [SerializeField] private UI_SkillTreeSlot blackholeSKillSlot;
+    [SerializeField] private UI_SkillTreeSlot blackholeSkillSlot;
     [SerializeField] private int blackholePrice;
     public bool BlackholeSkillUnlocked { get; private set; }
 
-    BlackholeSkill currentBlackhole;
-
+    private BlackholeSkill currentBlackhole;
 
     protected override void Start()
     {
         base.Start();
 
-        blackholeSKillSlot.GetComponent<Button>().onClick.AddListener(UnlockBlackhole);
-        blackholeSKillSlot.SetPriceText(blackholePrice);
+        blackholeSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockBlackhole);
+        blackholeSkillSlot.SetPriceText(blackholePrice);
+    }
+
+    public override void CheckUnlockedSkills()
+    {
+        BlackholeSkillUnlocked = blackholeSkillSlot.Unlocked;
     }
 
     private void UnlockBlackhole()
     {
         if (player.Skill.CloneSkillController.CloneAttackUnlocked)
         {
-            BlackholeSkillUnlocked = UnlockSkill(blackholeSKillSlot, blackholePrice);
-
-            blackholeSKillSlot.GetComponent<Button>().enabled = false;
+            BlackholeSkillUnlocked = UnlockSkill(blackholeSkillSlot, blackholePrice);
         }
     }
 

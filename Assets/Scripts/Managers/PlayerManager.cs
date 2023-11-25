@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, ISavePoint
 {
     public static PlayerManager Instance { get; private set; }
 
-    private int currency = 1000000;
+    [SerializeField] private int currency;
 
     [field: SerializeField] public Player Player { get; private set; }
 
@@ -44,6 +44,16 @@ public class PlayerManager : MonoBehaviour
         currency += value;
 
         UI.Instance.InGame.SetCurrencyText(currency);
+    }
+
+    public void LoadData(GameData data)
+    {
+        currency = data.currency;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.currency = currency;
     }
 
 }
