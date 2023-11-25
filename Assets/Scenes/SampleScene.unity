@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fileName: saves.gamedata
+  encrypt: 1
 --- !u!4 &66860389
 Transform:
   m_ObjectHideFlags: 0
