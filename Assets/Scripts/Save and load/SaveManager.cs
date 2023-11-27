@@ -68,7 +68,7 @@ public class SaveManager : MonoBehaviour
     }
 
     [ContextMenu("Delete save file")]
-    private void DeleteSavedData()
+    public void DeleteSavedData()
     {
         fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName, encrypt);
 
@@ -86,4 +86,6 @@ public class SaveManager : MonoBehaviour
 
         return new List<ISavePoint>(savePoints);
     }
+
+    public bool HasSavedData() => fileDataHandler.Load() != null;
 }

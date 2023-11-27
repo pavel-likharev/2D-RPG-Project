@@ -16,6 +16,8 @@ public class PlayerDeadState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        UI.Instance.EndScreen.SwitchOnEndScreen();
     }
 
     public override void Exit()
