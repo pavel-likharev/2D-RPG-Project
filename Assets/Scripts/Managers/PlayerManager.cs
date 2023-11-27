@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour, ISavePoint
 
     [SerializeField] private int currency;
 
-    [field: SerializeField] public Player Player { get; private set; }
+    public Player Player { get; private set; }
 
     private void Awake()
     {
@@ -20,6 +20,9 @@ public class PlayerManager : MonoBehaviour, ISavePoint
         {
             Instance = this;
         }
+
+        Player = FindObjectOfType<Player>();
+        Debug.Log("Player in PM " + Player != null);
     }
 
     public bool HaveEnoughCurrency(int price)
@@ -32,8 +35,6 @@ public class PlayerManager : MonoBehaviour, ISavePoint
 
         currency -= price;
 
-        UI.Instance.InGame.SetCurrencyText(currency);
-
         return true;
     }
 
@@ -42,8 +43,11 @@ public class PlayerManager : MonoBehaviour, ISavePoint
     public void AddCurrency(int value)
     {
         currency += value;
+    }
 
-        UI.Instance.InGame.SetCurrencyText(currency);
+    public void SetZeroCurrency()
+    {
+        currency = 0;
     }
 
     public void LoadData(GameData data)

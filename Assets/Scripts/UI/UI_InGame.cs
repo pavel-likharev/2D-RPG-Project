@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class UI_InGame : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI currencyText;
 
     [SerializeField] private Image parryImage;
     [SerializeField] private Image flaskImage;
@@ -22,6 +21,11 @@ public class UI_InGame : MonoBehaviour
     private float crystalCooldown;
     private float swordCooldown;
     private float blackholeCooldown;
+
+    [Header("Currency")]
+    [SerializeField] private TextMeshProUGUI currencyText;
+    [SerializeField] private float currencyAmount;
+    [SerializeField] private float increaseRate = 100;
 
     private Player player;
     private SkillManager skills;
@@ -41,7 +45,9 @@ public class UI_InGame : MonoBehaviour
         blackholeCooldown = skills.BlackholeSkillController.GetCooldown();
 
         UpdateHealthUI();
-        SetCurrencyText(PlayerManager.Instance.GetCurrency());
+
+        currencyAmount = PlayerManager.Instance.GetCurrency();
+        SetCurrencyText();
     }
 
     private void Update()
@@ -52,6 +58,8 @@ public class UI_InGame : MonoBehaviour
         CheckCooldown(swordImage, swordCooldown);
         CheckCooldown(blackholeImage, blackholeCooldown);
         CheckCooldown(flaskImage, flaskCooldown);
+
+        CheckCurrency();
     }
 
     private void CheckCooldown(Image image, float cooldown)
@@ -61,15 +69,25 @@ public class UI_InGame : MonoBehaviour
 
     }
 
+
     private void SetCooldown(Image image)
     {
         image.fillAmount = 1;
     }
-
-    public void SetCurrencyText(int value)
+    private void CheckCurrency()
     {
-        if (value > 0)
-            currencyText.text = PlayerManager.Instance.GetCurrency().ToString("#,#", CultureInfo.InvariantCulture);
+        if (currencyAmount < PlayerManager.Instance.GetCurrency())
+            currencyAmount += Time.deltaTime * increaseRate;
+        else
+            currencyAmount = PlayerManager.Instance.GetCurrency();
+
+        SetCurrencyText();
+    }
+
+    public void SetCurrencyText()
+    {
+        if (currencyAmount > 0)
+            currencyText.text = ((int)currencyAmount).ToString("#,#", CultureInfo.InvariantCulture);
         else
             currencyText.text = "0";
     }

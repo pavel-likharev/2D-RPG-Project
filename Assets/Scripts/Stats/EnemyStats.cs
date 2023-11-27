@@ -6,6 +6,9 @@ public class EnemyStats : CharacterStats
 {
     private Enemy enemy;
     private ItemDrop myDrop;
+    public Stat currencyAmount;
+
+    private int currencyMultiplier = 100;
 
     [Header("Level details")]
     [SerializeField] private int level = 1;
@@ -22,6 +25,8 @@ public class EnemyStats : CharacterStats
 
     protected override void Start()
     {
+        currencyAmount.SetDefaultValue(currencyMultiplier);
+
         ApplyLevelModifiers();
 
         base.Start();
@@ -46,6 +51,8 @@ public class EnemyStats : CharacterStats
         Modify(fireDamage);
         Modify(iceDamage);
         Modify(lightingDamage);
+
+        Modify(currencyAmount);
     }
 
     private void Modify(Stat stat)
@@ -60,6 +67,8 @@ public class EnemyStats : CharacterStats
     protected override void Die()
     {
         base.Die();
+
+        PlayerManager.Instance.AddCurrency(currencyAmount.GetValue());
 
         enemy.Die();
         myDrop.GenerateDrop();
