@@ -37,9 +37,9 @@ public class ItemObject : MonoBehaviour
             rb.velocity = new Vector2 (0, 5);
             return;
         }
-        
+
+        AudioManager.Instance.PlaySFX(18, transform);        
         Inventory.Instance.AddItem(itemData);
         Destroy(gameObject);
-        
     }
 }

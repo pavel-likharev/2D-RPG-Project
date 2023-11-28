@@ -49,6 +49,9 @@ public class BlackholeSkillController : SkillController
 
         CreateBlackhole();
         UI.Instance.InGame.SetBlackholeCooldown();
+
+        AudioManager.Instance.PlaySFX(3, player.transform);
+        AudioManager.Instance.PlaySFX(6, player.transform);
     }
 
     public void CreateBlackhole()
