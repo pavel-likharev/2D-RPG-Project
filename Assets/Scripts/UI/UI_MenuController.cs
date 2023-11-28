@@ -61,6 +61,8 @@ public class UI_MenuController : MonoBehaviour
 
     public void SwitchPanel(GameObject panel)
     {
+        AudioManager.Instance.PlaySFX(7);
+
         menu.gameObject.SetActive(true);
 
         for (int i = 0; i < panelsContainer.transform.childCount; i++)
@@ -86,7 +88,10 @@ public class UI_MenuController : MonoBehaviour
 
     public void CloseMenu()
     {
-        if (menu.activeSelf)    
+        if (menu.activeSelf)
+        {
+            AudioManager.Instance.PlaySFX(7);
             menu.gameObject.SetActive(false);
+        }
     }
 }
