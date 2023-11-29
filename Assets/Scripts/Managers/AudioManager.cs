@@ -69,7 +69,10 @@ public class AudioManager : MonoBehaviour
             sfx[sfxIndex].Stop();
         }
     }
-    public void StopSfxWith(int index) => StartCoroutine(DecreaseVolume(sfx[index]));
+    public void StopSfxWith(int index)
+    {
+        StartCoroutine(DecreaseVolume(sfx[index]));
+    }
 
     IEnumerator DecreaseVolume(AudioSource audio)
     {

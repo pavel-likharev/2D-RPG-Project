@@ -18,6 +18,7 @@ public class PlayerDashState : PlayerState
         player.Skill.DashSkillController.CloneOnDash();
 
         stateTimer = player.DashSkill.dashDuration;
+
     }
 
     public override void Exit()
@@ -45,5 +46,7 @@ public class PlayerDashState : PlayerState
         {
             stateMachine.ChangeState(player.IdleState);
         }
+
+        player.CharacterFX.CreateAfterImage();
     }
 }

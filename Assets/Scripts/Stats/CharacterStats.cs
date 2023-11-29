@@ -111,12 +111,20 @@ public class CharacterStats : MonoBehaviour
 
         totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
 
+        bool isCrit = false;
+
         if (CanCrit())
+        {
             totalDamage = CalculateCriticalDamage(totalDamage);
+            isCrit = true;
+        }
+
+        fx.CreateHitFX(target.transform, isCrit);
 
         totalDamage = CheckTargetArmor(target, totalDamage);
 
         target.TakeDamage(totalDamage, knockBackDir);
+
         // DoMagicalDamage(target);
     }
     public virtual void TakeDamage(int damage, int knockBackDir)
@@ -127,7 +135,7 @@ public class CharacterStats : MonoBehaviour
         DecreaseHealth(damage);
 
         GetComponent<Character>().DamageImpact(knockBackDir);
-        fx.StartCoroutine("HitFX");
+        fx.StartCoroutine("HitColorFX");
 
         if (currentHealth <= 0 && !IsDead)
             Die();

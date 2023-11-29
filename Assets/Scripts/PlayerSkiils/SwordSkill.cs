@@ -285,6 +285,8 @@ public class SwordSkill : MonoBehaviour
             return;
         }
 
+        GetComponentInChildren<ParticleSystem>().Play();
+
         animator.SetBool(IS_ROTATION, false);
         transform.parent = collision.transform;
     }

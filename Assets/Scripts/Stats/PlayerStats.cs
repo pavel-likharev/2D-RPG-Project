@@ -38,6 +38,7 @@ public class PlayerStats : CharacterStats
             Vector2 knockbackPower = new Vector2(7, 10);
             player.SetupKnockbackPower(knockbackPower);
             AudioManager.Instance.PlaySFX(32);
+            player.CharacterFX.ScreenShakeOnHugeDamage();
         }
 
         Inventory.Instance.UseArmor();
