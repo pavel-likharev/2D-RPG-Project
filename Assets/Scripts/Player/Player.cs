@@ -91,6 +91,11 @@ public class Player : Character
 
     protected override void Update()
     {
+        if (GameManager.Instance.IsGamePause)
+        {
+            return;
+        }
+
         base.Update();
 
         StateMachine.CurrentState.Update();
@@ -148,6 +153,11 @@ public class Player : Character
 
         Skill.SwordSkillController.SetCooldown();
         UI.Instance.InGame.SetSwordCooldown();
+    }
+
+    protected override void SetupZeroKnockbackPower()
+    {
+        knockbackPower = new Vector2(0, 0);
     }
 
     public void ExitBlackholeSkill()

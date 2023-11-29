@@ -27,6 +27,7 @@ public class CharacterStats : MonoBehaviour
 
     public bool IsDead { get; private set; }
     public bool IsVulnerable { get; private set; }
+    public bool IsInvincible { get; private set; }
 
     private float vulnerableModify = 1.1f;
 
@@ -120,6 +121,9 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void TakeDamage(int damage, int knockBackDir)
     {
+        if (IsInvincible)
+            return;
+
         DecreaseHealth(damage);
 
         GetComponent<Character>().DamageImpact(knockBackDir);
@@ -134,6 +138,7 @@ public class CharacterStats : MonoBehaviour
     {
         StartCoroutine(VulnerableFor(duration));
     }
+    public void MakeInvincible(bool isInvincible) => IsInvincible = isInvincible;
     private IEnumerator VulnerableFor(float duration)
     {
         IsVulnerable = true;
@@ -206,6 +211,9 @@ public class CharacterStats : MonoBehaviour
     }
     protected virtual void DecreaseHealth(int damage)
     {
+        if (IsDead) 
+            return;
+        
         if (IsVulnerable)
         {
             damage = Mathf.RoundToInt(damage * vulnerableModify);
@@ -218,6 +226,12 @@ public class CharacterStats : MonoBehaviour
     protected virtual void Die()
     {
         IsDead = true;
+    }
+
+    public void KillCharacter()
+    {
+        if (!IsDead)
+            Die();
     }
 
     #region Magical Damage and elements 

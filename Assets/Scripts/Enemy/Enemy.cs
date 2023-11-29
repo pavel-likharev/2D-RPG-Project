@@ -20,7 +20,9 @@ public class Enemy : Character
     public float agressiveDistance = 10f;
     public float visibleDistance = 2f;
     public float attackDistance = 1f;
-    public float attackCooldown = 2f;
+    public float attackCooldown = 0.5f;
+    public float minAttackCooldown = 0.5f;
+    public float maxAttackCooldown = 1.5f;
     public float battleTime = 2f;
     [HideInInspector] public float lastTimeAttack;
 

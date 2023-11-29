@@ -424,8 +424,8 @@ MonoBehaviour:
   wallCheckDistance: 0.15
   attackCheck: {fileID: 186308543031738239}
   attackCheckRadius: 0.7
-  knockbackDirection: {x: 0, y: 0}
-  knockbackDuration: 0.07
+  knockbackPower: {x: 0, y: 0}
+  knockbackDuration: 0.3
   attackMovements:
   - {x: 1, y: 3}
   - {x: 1, y: 1}

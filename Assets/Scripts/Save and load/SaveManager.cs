@@ -20,7 +20,7 @@ public class SaveManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Destroy(Instance.gameObject);
+            Destroy(gameObject);
         }
         else
         {

@@ -20,6 +20,7 @@ public class SkeletonAttackState : EnemyState
     {
         base.Exit();
 
+        enemySkeleton.attackCooldown = Random.Range(enemySkeleton.minAttackCooldown, enemySkeleton.maxAttackCooldown);
         enemySkeleton.lastTimeAttack = Time.time;
     }
 

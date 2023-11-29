@@ -14,7 +14,7 @@ public class UI_MainMenu : MonoBehaviour
     private void Start()
     {
         if (SaveManager.Instance.HasSavedData())
-            continueButton.SetActive(false);
+            continueButton.SetActive(true);
     }
 
     public void ContinueGame()
