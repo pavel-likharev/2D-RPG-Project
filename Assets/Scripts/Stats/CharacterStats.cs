@@ -109,7 +109,9 @@ public class CharacterStats : MonoBehaviour
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
+        Debug.Log(totalDamage);
         totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
+        Debug.Log(totalDamage);
 
         bool isCrit = false;
 
@@ -228,6 +230,8 @@ public class CharacterStats : MonoBehaviour
         }
 
         currentHealth -= damage;
+
+        fx.CreatePopupText(damage.ToString());
 
         OnHealthChange?.Invoke(this, EventArgs.Empty);
     }

@@ -51,6 +51,12 @@ public class GameManager : MonoBehaviour, ISavePoint
         SceneManager.LoadScene(scene.name);
     }
 
+    public void ExitGame()
+    {
+        SaveManager.Instance.SaveGame();
+        Application.Quit();
+    }
+
     public void SaveData(ref GameData data)
     {
         data.checkpoints.Clear();

@@ -48,85 +48,105 @@ public class CrystalSkillController : SkillController
 
         RefilCrystal();
 
-        crystalSlot.GetComponent<Button>().onClick.AddListener(UnlockCrystalSkill);
+        crystalSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCrystal);
         crystalSlot.SetPriceText(crystalPrice);
 
-        cloneBlinkSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneBlinkSkill);
+        cloneBlinkSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCloneBlink);
         cloneBlinkSlot.SetPriceText(cloneBlinkPrice);
 
-        explodeSlot.GetComponent<Button>().onClick.AddListener(UnlockExplodeSkill);
+        explodeSlot.GetComponent<Button>().onClick.AddListener(TryUnlockExplode);
         explodeSlot.SetPriceText(explodePrice);
         
-        controlledExplodeSlot.GetComponent<Button>().onClick.AddListener(UnlockControlledExplodeSkill);
+        controlledExplodeSlot.GetComponent<Button>().onClick.AddListener(TryUnlockControlledExplode);
         controlledExplodeSlot.SetPriceText(controlledExplodePrice);
         
-        multiStackSlot.GetComponent<Button>().onClick.AddListener(UnlockMultiStackSkill);
+        multiStackSlot.GetComponent<Button>().onClick.AddListener(TryUnlockMultiStack);
         multiStackSlot.SetPriceText(multiStackPrice);
 
         defaultCooldown = cooldown;
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        CrystalUnlocked = crystalSlot.Unlocked;
-        CloneBlinkUnlocked = cloneBlinkSlot.Unlocked;
-        ExplodeUnlocked = explodeSlot.Unlocked;
-        ControlledExplodeUnlocked = controlledExplodeSlot.Unlocked;
-        MultiStackUnlocked = multiStackSlot.Unlocked;
+        if (crystalSlot.Unlocked)
+            UnlockCrystal();
+
+        if (cloneBlinkSlot.Unlocked)
+            UnlockCloneBlink();
+
+        if (explodeSlot.Unlocked)
+            UnlockExplode();
+
+        if (controlledExplodeSlot.Unlocked)
+            UnlockControlledExplode();
+
+        if (multiStackSlot.Unlocked)
+            UnlockMultiStack();
     }
 
-    private void UnlockCrystalSkill()
+    private void TryUnlockCrystal()
     {
-        CrystalUnlocked = UnlockSkill(crystalSlot, crystalPrice);
+        if (UnlockSkill(crystalSlot, crystalPrice, true))
+            UnlockCrystal();
 
-        crystalSlot.GetComponent<Button>().onClick.RemoveAllListeners();
-        crystalSlot.GetComponent<Button>().enabled = false;
     }
 
-    private void UnlockCloneBlinkSkill()
+    private void UnlockCrystal()
+    {
+        CrystalUnlocked = true;
+    }
+
+    private void TryUnlockCloneBlink()
     {
         if (CrystalUnlocked && !ExplodeUnlocked)
         {
-            CloneBlinkUnlocked = UnlockSkill(cloneBlinkSlot, cloneBlinkPrice);
-
-            cloneBlinkSlot.GetComponent<Button>().enabled = false;
-            explodeSlot.GetComponent<Button>().enabled = false;
-            controlledExplodeSlot.GetComponent<Button>().enabled = false;
-            multiStackSlot.GetComponent<Button>().enabled = false;
+            if(UnlockSkill(cloneBlinkSlot, cloneBlinkPrice, true))
+                UnlockCloneBlink();
         }
     }
 
-    private void UnlockExplodeSkill()
+    private void UnlockCloneBlink()
     {
-        if (CrystalUnlocked && !CloneBlinkUnlocked)
-        {
-            ExplodeUnlocked = UnlockSkill(explodeSlot, explodePrice);
-
-            explodeSlot.GetComponent<Button>().enabled = false;
-            cloneBlinkSlot.GetComponent<Button>().enabled = false;
-        }
+        CloneBlinkUnlocked = true;
     }
 
-    private void UnlockControlledExplodeSkill()
+    private void TryUnlockExplode()
     {
-        if (ExplodeUnlocked)
-        {
-            ControlledExplodeUnlocked = UnlockSkill(controlledExplodeSlot, controlledExplodePrice);
-
-            controlledExplodeSlot.GetComponent<Button>().enabled = false;
-        }
+        if (UnlockSkill(explodeSlot, explodePrice, CrystalUnlocked && !CloneBlinkUnlocked))
+            UnlockExplode();
     }
 
-    private void UnlockMultiStackSkill()
+    private void UnlockExplode()
     {
-        if (ControlledExplodeUnlocked)
-        {
-            MultiStackUnlocked = UnlockSkill(multiStackSlot, multiStackPrice);
+        ExplodeUnlocked = true;
+    }
 
-            multiStackSlot.GetComponent<Button>().enabled = false;
+    private void TryUnlockControlledExplode()
+    {
+        if (UnlockSkill(controlledExplodeSlot, controlledExplodePrice, ExplodeUnlocked))
+            UnlockControlledExplode();
+    }
+
+    private void UnlockControlledExplode()
+    {
+        ControlledExplodeUnlocked = true;
+    }
+
+    private void TryUnlockMultiStack()
+    {
+        if (UnlockSkill(multiStackSlot, multiStackPrice, ControlledExplodeUnlocked))
+        {
+            UnlockMultiStack();
         }
     }
 
+    private void UnlockMultiStack()
+    {
+        MultiStackUnlocked = true;
+    }
+
+    // Logic
     protected override void UseSkill()
     {
         base.UseSkill();

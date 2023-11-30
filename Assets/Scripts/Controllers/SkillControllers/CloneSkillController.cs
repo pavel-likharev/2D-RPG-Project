@@ -43,71 +43,87 @@ public class CloneSkillController : SkillController
     {
         base.Start();
 
-        cloneAttackSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneAttack);
+        cloneAttackSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCloneAttack);
         cloneAttackSkillSlot.SetPriceText(cloneAttackPrice);
 
-        agressiveSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockAgressive);
+        agressiveSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockAgressive);
         agressiveSkillSlot.SetPriceText(agressivePrice);
         
-        duplicateSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDuplicate);
+        duplicateSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockDuplicate);
         duplicateSkillSlot.SetPriceText(duplicatePrice);
         
-        crystalCloneSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockCrystalClone);
+        crystalCloneSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCrystalClone);
         crystalCloneSkillSlot.SetPriceText(crystalClonePrice);
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        CloneAttackUnlocked = cloneAttackSkillSlot.Unlocked;
-        AgressiveUnlocked = agressiveSkillSlot.Unlocked;
-        DuplicateUnlocked = duplicateSkillSlot.Unlocked;
-        CrystalCloneUnlocked = crystalCloneSkillSlot.Unlocked;
+        if (cloneAttackSkillSlot.Unlocked)
+            UnlockCloneAttack();
+        
+        if (agressiveSkillSlot.Unlocked)
+            UnlockAgressive();
+        
+        if (duplicateSkillSlot.Unlocked)
+            UnlockDuplicate();
+        
+        if (crystalCloneSkillSlot.Unlocked)
+            UnlockCrystalCLone();
+    }
+
+    private void TryUnlockCloneAttack()
+    {
+        if (UnlockSkill(cloneAttackSkillSlot, cloneAttackPrice, true))
+            UnlockCloneAttack();
     }
 
     private void UnlockCloneAttack()
     {
-        CloneAttackUnlocked = UnlockSkill(cloneAttackSkillSlot, cloneAttackPrice);
+        CloneAttackUnlocked = true;
         multiplierAttack = defaultMultiplierAttack;
+    }
 
-        cloneAttackSkillSlot.GetComponent<Button>().enabled = false;
+    private void TryUnlockAgressive()
+    {
+        if (UnlockSkill(agressiveSkillSlot, agressivePrice, CloneAttackUnlocked))
+            UnlockAgressive();
     }
 
     private void UnlockAgressive()
     {
-        if (CloneAttackUnlocked)
-        {
-            AgressiveUnlocked = UnlockSkill(agressiveSkillSlot, agressivePrice);
-            canApplyHitEffect = true;
-            multiplierAttack = agressiveMultiplierAttack;
+        AgressiveUnlocked = true;
+        canApplyHitEffect = true;
+        multiplierAttack = agressiveMultiplierAttack;
+    }
 
-            agressiveSkillSlot.GetComponent<Button>().enabled = false;
+    private void TryUnlockDuplicate()
+    {
+        if (UnlockSkill(duplicateSkillSlot, duplicatePrice, (AgressiveUnlocked && !CrystalCloneUnlocked)))
+        {
+            UnlockDuplicate();
         }
+
     }
 
     private void UnlockDuplicate()
     {
-        if (AgressiveUnlocked && !CrystalCloneUnlocked)
-        {
-            DuplicateUnlocked = UnlockSkill(duplicateSkillSlot, duplicatePrice);
-            multiplierAttack = defaultMultiplierAttack;
-
-            duplicateSkillSlot.GetComponent<Button>().enabled = false;
-            crystalCloneSkillSlot.GetComponent<Button>().enabled = false;
-        }
-
+        DuplicateUnlocked = true;
+        multiplierAttack = defaultMultiplierAttack;
     }
 
-    private void UnlockCrystalClone()
+    private void TryUnlockCrystalClone()
     {
-        if (AgressiveUnlocked && !DuplicateUnlocked)
-        {
-            CrystalCloneUnlocked = UnlockSkill(crystalCloneSkillSlot, crystalClonePrice);
-
-            duplicateSkillSlot.GetComponent<Button>().enabled = false;
-            crystalCloneSkillSlot.GetComponent<Button>().enabled = false;
-        }
+        if (UnlockSkill(crystalCloneSkillSlot, crystalClonePrice, (AgressiveUnlocked && !DuplicateUnlocked)))
+            UnlockCrystalCLone();
     }
 
+    private void UnlockCrystalCLone()
+    {
+        CrystalCloneUnlocked = true;
+    }
+
+    // Logic
     public void CreateClone(Transform clonePosition, Vector3 offset, float optionalMultiplierAttack = 1)
     {
         float currentMultiplier;

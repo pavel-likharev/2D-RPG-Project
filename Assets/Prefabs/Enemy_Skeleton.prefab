@@ -163,6 +163,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c167eccdf5aabb44aa821bc42356f58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
+  shakeMultiplier: 0
+  shakePowerOnCatchSword: {x: 0, y: 0, z: 0}
+  shakePowerOnHugeDamage: {x: 0, y: 0, z: 0}
+  afterPrefab: {fileID: 0}
+  afterImageLooseRate: 0
+  afterImageCooldown: 0
   hitMaterial: {fileID: 2100000, guid: 8de6b75f5f444534081b04bb92cb1743, type: 2}
   flashDuration: 0.2
   chillColor:

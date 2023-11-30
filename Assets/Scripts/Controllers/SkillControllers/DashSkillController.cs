@@ -25,21 +25,75 @@ public class DashSkillController : SkillController
     {
         base.Start();
 
-        dashUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockDashSkill);
+        dashUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockDash);
         dashUnlockSlot.SetPriceText(dashPrice);
 
-        cloneOnDashUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnDashSkill);
+        cloneOnDashUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCloneOnDash);
         cloneOnDashUnlockSlot.SetPriceText(cloneOnDashPrice);
 
-        cloneOnArrivalUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnArrivalSkill);
+        cloneOnArrivalUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCloneOnArrival);
         cloneOnArrivalUnlockSlot.SetPriceText(cloneOnArrivalPrice);
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        DashUnlocked = dashUnlockSlot.Unlocked;
-        CloneOnDashUnlocked = cloneOnDashUnlockSlot.Unlocked;
-        CloneOnArrivalUnlocked = cloneOnArrivalUnlockSlot.Unlocked;
+        if (dashUnlockSlot.Unlocked)
+            UnlockDash();
+        
+        if (cloneOnDashUnlockSlot.Unlocked)
+            UnlockCloneOnDash();
+
+        if (cloneOnArrivalUnlockSlot.Unlocked)
+            UnlockCloneOnArrival();
+    }
+
+    private void TryUnlockDash()
+    {
+        if (UnlockSkill(dashUnlockSlot, dashPrice, true))
+            UnlockDash();
+    }
+
+    private void UnlockDash()
+    {
+        DashUnlocked = true;
+    }
+
+    private void TryUnlockCloneOnDash()
+    {
+        if (UnlockSkill(cloneOnDashUnlockSlot, cloneOnDashPrice, DashUnlocked))
+            UnlockCloneOnDash();
+    }
+
+    private void UnlockCloneOnDash()
+    {
+        CloneOnDashUnlocked = true;
+    }
+
+    private void TryUnlockCloneOnArrival()
+    {
+        if (UnlockSkill(cloneOnArrivalUnlockSlot, cloneOnArrivalPrice ,CloneOnDashUnlocked))
+            UnlockCloneOnArrival();
+        
+    }
+
+    private void UnlockCloneOnArrival()
+    {
+        CloneOnArrivalUnlocked = true;
+    }
+
+    // Logic
+    protected override void UseSkill()
+    {
+        base.UseSkill();
+
+        if (DashUnlocked)
+        {
+            player.DashSkill.SetupDash();
+            player.StateMachine.ChangeState(player.DashState);
+
+            UI.Instance.InGame.SetDashCooldown();
+        }
     }
 
     public void CloneOnDash()
@@ -55,46 +109,6 @@ public class DashSkillController : SkillController
         if (CloneOnArrivalUnlocked)
         {
             SkillManager.Instance.CloneSkillController.CreateClone(player.transform, Vector2.zero);
-        }
-    }
-
-    private void UnlockDashSkill()
-    {
-        DashUnlocked = UnlockSkill(dashUnlockSlot, dashPrice);
-
-        dashUnlockSlot.GetComponent<Button>().enabled = false;
-    }
-
-    private void UnlockCloneOnDashSkill()
-    {
-        if (DashUnlocked)
-        {
-            CloneOnDashUnlocked = UnlockSkill(cloneOnDashUnlockSlot, cloneOnDashPrice);
-
-            cloneOnDashUnlockSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    private void UnlockCloneOnArrivalSkill()
-    {
-        if (CloneOnDashUnlocked)
-        {
-            CloneOnArrivalUnlocked = UnlockSkill(cloneOnArrivalUnlockSlot, cloneOnArrivalPrice);
-
-            cloneOnArrivalUnlockSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    protected override void UseSkill()
-    {
-        base.UseSkill();
-
-        if (DashUnlocked)
-        {
-            player.DashSkill.SetupDash();
-            player.StateMachine.ChangeState(player.DashState);
-
-            UI.Instance.InGame.SetDashCooldown();
         }
     }
 }

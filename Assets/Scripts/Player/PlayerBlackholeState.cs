@@ -48,10 +48,8 @@ public class PlayerBlackholeState : PlayerState
 
             if (!isSkillUse)
             {
-                if (player.Skill.BlackholeSkillController.CanUseSkill())
-                {
-                    isSkillUse = true;
-                }
+                player.Skill.BlackholeSkillController.CreateBlackhole();
+                isSkillUse = true;
             }
         }
 

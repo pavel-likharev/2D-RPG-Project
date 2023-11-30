@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c167eccdf5aabb44aa821bc42356f58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
   shakeMultiplier: 0.15
   shakePowerOnCatchSword: {x: 1, y: 0, z: 0}
   shakePowerOnHugeDamage: {x: 2, y: 2, z: 0}
@@ -412,7 +413,7 @@ Transform:
   - {fileID: 2380762350749639547}
   - {fileID: 6273169323543960980}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &5627077208923006879
 CapsuleCollider2D:

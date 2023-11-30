@@ -26,28 +26,36 @@ public class BlackholeSkillController : SkillController
     {
         base.Start();
 
-        blackholeSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockBlackhole);
+        blackholeSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockBlackHoleSkill);
         blackholeSkillSlot.SetPriceText(blackholePrice);
+
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        BlackholeSkillUnlocked = blackholeSkillSlot.Unlocked;
+        if (blackholeSkillSlot.Unlocked) 
+            UnlockBlackhole();
+    }
+
+    private void TryUnlockBlackHoleSkill()
+    {
+        if (UnlockSkill(blackholeSkillSlot, blackholePrice, player.Skill.CloneSkillController.CloneAttackUnlocked))
+            UnlockBlackhole();
     }
 
     private void UnlockBlackhole()
     {
-        if (player.Skill.CloneSkillController.CloneAttackUnlocked)
-        {
-            BlackholeSkillUnlocked = UnlockSkill(blackholeSkillSlot, blackholePrice);
-        }
+        BlackholeSkillUnlocked = true;
     }
-
+    
+    // Logic
     protected override void UseSkill()
     {
         base.UseSkill();
 
-        CreateBlackhole();
+        player.StateMachine.ChangeState(player.BlackholeState);
+
         UI.Instance.InGame.SetBlackholeCooldown();
 
         AudioManager.Instance.PlaySFX(3, player.transform);

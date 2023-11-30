@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SkillController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SkillController : MonoBehaviour
     protected float cooldownTimer;
     protected Player player;
 
+    private string cooldownText = "Cooldown";
     protected virtual void Awake()
     {
     }
@@ -32,14 +34,19 @@ public class SkillController : MonoBehaviour
     {
     }
 
-    protected bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price)
+    protected virtual bool UnlockSkill(UI_SkillTreeSlot skillSlot, int price, bool canUnlock)
     {
-        if (!PlayerManager.Instance.HaveEnoughCurrency(price))
-            return false;
-        
-        skillSlot.UnlockSlot();
+        if (canUnlock)
+        {
+            if (!PlayerManager.Instance.HaveEnoughCurrency(price))
+                return false;
 
-        return true;
+            skillSlot.UnlockSlot();
+
+            return true;
+        }
+
+        return false;
     }
 
     public bool CanUseSkill()
@@ -51,6 +58,8 @@ public class SkillController : MonoBehaviour
 
             return true;
         }
+
+        player.CharacterFX.CreatePopupText(cooldownText);
         return false;
     }
 
