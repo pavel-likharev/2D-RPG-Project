@@ -49,6 +49,8 @@ public class Player : Character
     public SkillManager Skill { get; private set; }
     public GameObject Sword { get; private set; }
 
+    public PlayerFX FX { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
@@ -57,6 +59,7 @@ public class Player : Character
 
         DashSkill = GetComponent<DashSkill>();
         ParrySkill = GetComponent<ParrySkill>();
+        FX = GetComponentInChildren<PlayerFX>();
 
         IdleState = new PlayerIdleState(this, StateMachine, IS_IDLE);
         MoveState = new PlayerMoveState(this, StateMachine, IS_MOVE);
@@ -153,6 +156,12 @@ public class Player : Character
 
         Skill.SwordSkillController.SetCooldown();
         UI.Instance.InGame.SetSwordCooldown();
+    }
+
+    public override void DamageImpact(int knockbackDir)
+    {
+        if (knockbackPower != Vector2.zero)
+            base.DamageImpact(knockbackDir);
     }
 
     protected override void SetupZeroKnockbackPower()

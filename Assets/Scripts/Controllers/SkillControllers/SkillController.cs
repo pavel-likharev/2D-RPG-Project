@@ -59,7 +59,7 @@ public class SkillController : MonoBehaviour
             return true;
         }
 
-        player.CharacterFX.CreatePopupText(cooldownText);
+        player.FX.CreatePopupText(cooldownText);
         return false;
     }
 

@@ -15,8 +15,8 @@ public class PlayerCatchSwordState : PlayerState
 
         sword = player.Sword.transform;
 
-        player.CharacterFX.PlayDustFX();
-        player.CharacterFX.ScreenShakeOnCatchSword();
+        player.FX.PlayDustFX();
+        player.FX.ScreenShakeOnCatchSword();
 
         if (player.transform.position.x > sword.position.x && player.MoveDir == 1)
         {

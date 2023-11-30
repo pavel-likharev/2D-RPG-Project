@@ -85,7 +85,7 @@ public class BlackholeSkill : MonoBehaviour
         canCreateHotKey = false;
 
         if (!SkillManager.Instance.CloneSkillController.CrystalCloneUnlocked)
-            PlayerManager.Instance.Player.CharacterFX.MakeTransparent(true);
+            PlayerManager.Instance.Player.FX.MakeTransparent(true);
     }
 
     private void CloneAttackLogic()

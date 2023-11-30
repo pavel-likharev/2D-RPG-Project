@@ -6,23 +6,10 @@ using UnityEngine;
 
 public class CharacterFX : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     [Header("TextPopup")]
     [SerializeField] private GameObject textPopupPrefab;
-
-    [Header("Screen shake")]
-    private CinemachineImpulseSource screenShake;
-    [SerializeField] private float shakeMultiplier;
-    private Vector3 shakePower;
-    [SerializeField] private Vector3 shakePowerOnCatchSword;
-    [SerializeField] private Vector3 shakePowerOnHugeDamage;
-
-    [Header("AfterDash")]
-    [SerializeField] private GameObject afterPrefab;
-    [SerializeField] private float afterImageLooseRate;
-    [SerializeField] private float afterImageCooldown;
-    private float afterImageTimer;
 
     [Header("Flash FX")]
     [SerializeField] private Material hitMaterial;
@@ -41,25 +28,19 @@ public class CharacterFX : MonoBehaviour
     [SerializeField] private GameObject hitFx;
     [SerializeField] private GameObject criticalHitFx;
 
-    [SerializeField] private ParticleSystem dustFx;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         originalMaterial = spriteRenderer.material;
-        screenShake = GetComponent<CinemachineImpulseSource>();
+
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (afterImageTimer >= 0)
-        {
-            afterImageTimer -= Time.deltaTime;
-        }
     }
 
     public void CreatePopupText(string text)
@@ -72,30 +53,6 @@ public class CharacterFX : MonoBehaviour
         GameObject newTextPopup = Instantiate(textPopupPrefab, transform.position + positionOffset, Quaternion.identity);
 
         newTextPopup.GetComponent<TextMeshPro>().text = text;
-    }
-
-    private void ScreenShake(Vector3 shakePower)
-    {
-        screenShake.m_DefaultVelocity = new Vector3(shakePower.x * PlayerManager.Instance.Player.MoveDir, shakePower.y) * shakeMultiplier;
-        screenShake.GenerateImpulse();
-    }
-
-    public void ScreenShakeOnCatchSword() => ScreenShake(shakePowerOnCatchSword);
-    public void ScreenShakeOnHugeDamage() => ScreenShake(shakePowerOnHugeDamage);
-
-    public void CreateAfterImage()
-    {
-        if (afterImageTimer <= 0)
-        {
-            afterImageTimer = afterImageCooldown;
-            GameObject newAfterDashImage = Instantiate(afterPrefab, transform.position, Quaternion.identity);
-            if (GetComponentInParent<Player>().MoveDir == -1)
-            {
-                newAfterDashImage.GetComponent<SpriteRenderer>().flipX = true;
-            }
-
-            newAfterDashImage.GetComponent<AfterImageFX>().SetupFX(afterImageLooseRate, spriteRenderer.sprite);
-        }
     }
 
     public void MakeTransparent(bool isTransparent)
@@ -148,11 +105,6 @@ public class CharacterFX : MonoBehaviour
         newHitFx.transform.localScale = new Vector3(GetComponentInParent<Character>().MoveDir, newHitFx.transform.localScale.y, newHitFx.transform.localScale.z);
 
         Destroy(newHitFx, 0.5f);
-    }
-
-    public void PlayDustFX()
-    {
-        dustFx?.Play();
     }
 
     private void RedColorBlink()

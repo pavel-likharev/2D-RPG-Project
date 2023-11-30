@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1571365582824404278}
   - component: {fileID: 6955055138200915272}
   - component: {fileID: 5668504963145188555}
-  - component: {fileID: 5350989419901740323}
+  - component: {fileID: 8911578752742167823}
   m_Layer: 0
   m_Name: Skeleton_Visual
   m_TagString: Untagged
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8744c882e9aec44a4d3f50c301cb7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5350989419901740323
+--- !u!114 &8911578752742167823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,33 +160,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1721873328630638012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c167eccdf5aabb44aa821bc42356f58b, type: 3}
+  m_Script: {fileID: 11500000, guid: f6fc7c238543d6247a590f30037ab68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
-  shakeMultiplier: 0
-  shakePowerOnCatchSword: {x: 0, y: 0, z: 0}
-  shakePowerOnHugeDamage: {x: 0, y: 0, z: 0}
-  afterPrefab: {fileID: 0}
-  afterImageLooseRate: 0
-  afterImageCooldown: 0
   hitMaterial: {fileID: 2100000, guid: 8de6b75f5f444534081b04bb92cb1743, type: 2}
   flashDuration: 0.2
   chillColor:
-  - {r: 0.14640433, g: 0.7331039, b: 0.990566, a: 1.8727993e+31}
-  - {r: 0.14901961, g: 0.73333335, b: 0.99215686, a: 1.09002504e+27}
+  - {r: 0.14509805, g: 0.73333335, b: 0.9921569, a: 0}
+  - {r: 0.14901961, g: 0.73333335, b: 0.9921569, a: 0}
   igniteColor:
-  - {r: 1, g: 0.2901961, b: 0.2901961, a: 1}
-  - {r: 1, g: 0.47843137, b: 0.47843137, a: 1}
+  - {r: 1, g: 0.2901961, b: 0.2901961, a: 0}
+  - {r: 1, g: 0.4784314, b: 0.4784314, a: 0}
   shockColor:
-  - {r: 1, g: 0.85882354, b: 0.1882353, a: 1}
-  - {r: 1, g: 0.92941177, b: 0.5921569, a: 1}
+  - {r: 1, g: 0.8588236, b: 0.18823531, a: 0}
+  - {r: 1, g: 0.9294118, b: 0.5921569, a: 0}
   chillFX: {fileID: 8272637575494348951}
   igniteFX: {fileID: 6051293698821029222}
   shockFX: {fileID: 4093496827800846600}
   hitFx: {fileID: 1143977548828315528, guid: 3357db5f27b909b408927041b413dad3, type: 3}
   criticalHitFx: {fileID: 4177748826846381036, guid: d95d917df9347db4bbda9d94b6a02a85, type: 3}
-  dustFx: {fileID: 0}
 --- !u!1 &1923993494292323375
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +401,7 @@ Transform:
   - {fileID: 4477227989923527114}
   - {fileID: 5137754450005938720}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6441603785690318230
 Rigidbody2D:

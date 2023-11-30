@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 9010210220387538333}
   - component: {fileID: 3670609129104206464}
   - component: {fileID: 7291725072026812116}
-  - component: {fileID: 8215869034931316964}
+  - component: {fileID: 5884975996946461051}
   - component: {fileID: 3596773669008443438}
   m_Layer: 0
   m_Name: PlayerVIsual
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82634995a7a1ab7498698214a3f4ffa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8215869034931316964
+--- !u!114 &5884975996946461051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,33 +223,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 5061749236119573282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c167eccdf5aabb44aa821bc42356f58b, type: 3}
+  m_Script: {fileID: 11500000, guid: c9d29519e461c594c87804f3428361ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
-  shakeMultiplier: 0.15
-  shakePowerOnCatchSword: {x: 1, y: 0, z: 0}
-  shakePowerOnHugeDamage: {x: 2, y: 2, z: 0}
-  afterPrefab: {fileID: 3178276655316069100, guid: 1f84e2b909b4f7f42b3040067bad6b65, type: 3}
-  afterImageLooseRate: 2.5
-  afterImageCooldown: 0.05
   hitMaterial: {fileID: 2100000, guid: 8de6b75f5f444534081b04bb92cb1743, type: 2}
   flashDuration: 0.2
   chillColor:
-  - {r: 0.14640433, g: 0.7331039, b: 0.990566, a: 1.8727993e+31}
-  - {r: 0.14901961, g: 0.73333335, b: 0.99215686, a: 1.09002504e+27}
+  - {r: 0.14509805, g: 0.73333335, b: 0.9921569, a: 0}
+  - {r: 0.14901961, g: 0.73333335, b: 0.9921569, a: 0}
   igniteColor:
-  - {r: 1, g: 0.2901961, b: 0.2901961, a: 1}
-  - {r: 1, g: 0.47843137, b: 0.47843137, a: 1}
+  - {r: 1, g: 0.2901961, b: 0.2901961, a: 0}
+  - {r: 1, g: 0.4784314, b: 0.4784314, a: 0}
   shockColor:
-  - {r: 1, g: 0.85882354, b: 0.1882353, a: 1}
-  - {r: 1, g: 0.92941177, b: 0.5921569, a: 1}
+  - {r: 1, g: 0.8588236, b: 0.18823531, a: 0}
+  - {r: 1, g: 0.9294118, b: 0.5921569, a: 0}
   chillFX: {fileID: 2639032720317426397}
   igniteFX: {fileID: 3967586720196004447}
   shockFX: {fileID: 6812212719539007571}
   hitFx: {fileID: 1143977548828315528, guid: 3357db5f27b909b408927041b413dad3, type: 3}
   criticalHitFx: {fileID: 4177748826846381036, guid: d95d917df9347db4bbda9d94b6a02a85, type: 3}
-  dustFx: {fileID: 5160115410763531864}
+  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
+  shakeMultiplier: 0.2
+  shakePowerOnCatchSword: {x: 1, y: 0, z: 0}
+  shakePowerOnHugeDamage: {x: 2, y: 2, z: 0}
+  afterPrefab: {fileID: 3178276655316069100, guid: 1f84e2b909b4f7f42b3040067bad6b65, type: 3}
+  afterImageLooseRate: 2.5
+  afterImageCooldown: 0.05
+  dustFx: {fileID: 3454221250089975855, guid: 05d53a01bc9a38f439e91dafd05eae2b, type: 3}
 --- !u!114 &3596773669008443438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,11 +912,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05d53a01bc9a38f439e91dafd05eae2b, type: 3}
---- !u!198 &5160115410763531864 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3454221250089975855, guid: 05d53a01bc9a38f439e91dafd05eae2b, type: 3}
-  m_PrefabInstance: {fileID: 7526555444197475959}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6273169323543960980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4574940407608859619, guid: 05d53a01bc9a38f439e91dafd05eae2b, type: 3}
