@@ -54,6 +54,19 @@ public class CloneSkillController : SkillController
         
         crystalCloneSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCrystalClone);
         crystalCloneSkillSlot.SetPriceText(crystalClonePrice);
+
+        multiplierAttack = defaultMultiplierAttack;
+    }
+
+    public override void ResetSkillController()
+    {
+        CloneAttackUnlocked = false;
+        multiplierAttack = defaultMultiplierAttack;
+
+        AgressiveUnlocked = false;
+        canApplyHitEffect = false;
+
+        CrystalCloneUnlocked = false;
     }
 
     // Check skills
@@ -81,7 +94,6 @@ public class CloneSkillController : SkillController
     private void UnlockCloneAttack()
     {
         CloneAttackUnlocked = true;
-        multiplierAttack = defaultMultiplierAttack;
     }
 
     private void TryUnlockAgressive()

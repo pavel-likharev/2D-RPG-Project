@@ -44,6 +44,19 @@ public class SkillManager : MonoBehaviour, ISavePoint
         skillControllers = GetComponents<SkillController>();
     }
 
+    public void ResetSkills()
+    {
+        foreach (var slot in skillSlots)
+        {
+            slot.LockSlot();
+        }
+
+        foreach (var controller in skillControllers)
+        {
+            controller.ResetSkillController();
+        }
+    }
+
     public void LoadData(GameData data)
     {
         if (data.skills != null)

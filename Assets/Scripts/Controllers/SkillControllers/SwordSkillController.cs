@@ -114,6 +114,18 @@ public class SwordSkillController : SkillController
         }
     }
 
+    public override void ResetSkillController()
+    {
+        ThrowSwordUnlocked = false;
+        BouncySwordUnlocked = false;
+        PierceSwordUnlocked = false;
+        SpinSwordUnlocked = false;
+        TimeStopUnlocked = false;
+        VulnerableUnlocked = false;
+
+        Sword = SwordType.Regular;
+    }
+
     // Check skills
     public override void CheckUnlockedSkills()
     {

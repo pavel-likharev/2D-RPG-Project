@@ -30,7 +30,7 @@ public class PlayerBlackholeState : PlayerState
         base.Exit();
 
         rb.gravityScale = defaultGravity;
-        PlayerManager.Instance.Player.CharacterFX.MakeTransparent(false);
+        PlayerManager.Instance.Player.FX.MakeTransparent(false);
     }
 
     public override void Update()

@@ -46,7 +46,12 @@ public class UI_SkillTreeSlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public string GetName() => skillName;
 
-
+    public void LockSlot()
+    {
+        GetComponent<Button>().enabled = true;
+        Unlocked = false;
+        skillImage.color = lockedColor;
+    }
 
     public void SetPriceText(int price) => skillPriceText = "Price: " + price.ToString();
 

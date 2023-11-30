@@ -13,6 +13,8 @@ public class EnemySkeleton : Enemy
     public SkeletonDeadState DeadState { get; private set; }
     #endregion
 
+    public EnemyFX FX { get; private set; } 
+
     protected override void Awake()
     {
         base.Awake();
@@ -23,6 +25,8 @@ public class EnemySkeleton : Enemy
         AttackState = new SkeletonAttackState(this, StateMachine, IS_ATTACK, this);
         StunnedState = new SkeletonStunnedState(this, StateMachine, IS_STUNNED, this);
         DeadState = new SkeletonDeadState(this, StateMachine, IS_DEAD, this);
+
+        FX = GetComponentInChildren<EnemyFX>();
     }
 
     protected override void Start()

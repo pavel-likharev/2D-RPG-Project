@@ -109,9 +109,7 @@ public class CharacterStats : MonoBehaviour
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
-        Debug.Log(totalDamage);
         totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
-        Debug.Log(totalDamage);
 
         bool isCrit = false;
 

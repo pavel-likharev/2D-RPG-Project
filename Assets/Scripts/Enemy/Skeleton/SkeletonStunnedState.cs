@@ -23,14 +23,14 @@ public class SkeletonStunnedState : EnemyState
 
         rb.velocity = new Vector2(enemySkeleton.stunDir.x * player.MoveDir, enemySkeleton.stunDir.y);
 
-        enemySkeleton.CharacterFX.InvokeRepeating("RedColorBlink", 0, 0.1f);
+        enemySkeleton.FX.InvokeRepeating("RedColorBlink", 0, 0.1f);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        enemySkeleton.CharacterFX.Invoke("CancelColor", 0);
+        enemySkeleton.FX.Invoke("CancelColor", 0);
     }
 
     public override void Update()

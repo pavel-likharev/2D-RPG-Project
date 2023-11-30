@@ -47,6 +47,6 @@ public class PlayerDashState : PlayerState
             stateMachine.ChangeState(player.IdleState);
         }
 
-        player.CharacterFX.CreateAfterImage();
+        player.FX.CreateAfterImage();
     }
 }

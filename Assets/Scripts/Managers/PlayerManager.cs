@@ -22,7 +22,6 @@ public class PlayerManager : MonoBehaviour, ISavePoint
         }
 
         Player = FindObjectOfType<Player>();
-        Debug.Log("Player in PM " + Player != null);
     }
 
     public bool HaveEnoughCurrency(int price)

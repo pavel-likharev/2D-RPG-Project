@@ -19,7 +19,6 @@ public class Character : MonoBehaviour
     public Animator Animator { get; private set; }
     public Rigidbody2D Rb { get; private set; }
     public CapsuleCollider2D capsuleCollider { get; private set; }
-    public CharacterFX CharacterFX { get; private set; }
     public SpriteRenderer SpriteRenderer { get; private set; }
     public CharacterStats Stats { get; private set; }
     #endregion
@@ -49,7 +48,6 @@ public class Character : MonoBehaviour
         Rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         Animator = GetComponentInChildren<Animator>();
-        CharacterFX = GetComponentInChildren<CharacterFX>();
         SpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Stats = GetComponent<CharacterStats>();
 
@@ -75,7 +73,7 @@ public class Character : MonoBehaviour
         Animator.speed = 1;
     }
 
-    public void DamageImpact(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
+    public virtual void DamageImpact(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
     {
         StartCoroutine("HitKnockback", knockbackDir);
     }

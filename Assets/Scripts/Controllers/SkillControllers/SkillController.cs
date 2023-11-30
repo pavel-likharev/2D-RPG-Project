@@ -59,12 +59,17 @@ public class SkillController : MonoBehaviour
             return true;
         }
 
-        player.CharacterFX.CreatePopupText(cooldownText);
+        player.FX.CreatePopupText(cooldownText);
         return false;
     }
 
     protected virtual void UseSkill()
     {
+    }
+
+    public virtual void ResetSkillController()
+    {
+        
     }
 
     public float GetCooldown() => cooldown;
