@@ -67,6 +67,11 @@ public class SkillController : MonoBehaviour
     {
     }
 
+    public virtual void ResetSkillController()
+    {
+        
+    }
+
     public float GetCooldown() => cooldown;
 
     public bool IsCooldown() => cooldownTimer > 0;

@@ -66,6 +66,15 @@ public class CrystalSkillController : SkillController
         defaultCooldown = cooldown;
     }
 
+    public override void ResetSkillController()
+    {
+        CrystalUnlocked = false;
+        CloneBlinkUnlocked = false;
+        ExplodeUnlocked = false;
+        ControlledExplodeUnlocked = false;
+        MultiStackUnlocked = false;
+    }
+
     // Check skills
     public override void CheckUnlockedSkills()
     {

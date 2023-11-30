@@ -25,6 +25,15 @@ public class DodgeSkillController : SkillController
         dodgeWithCloneSkillSlot.SetPriceText(dodgeWithClonePrice);
     }
 
+    public override void ResetSkillController()
+    {
+        DodgeUnlocked = false;
+        DodgeWithCloneUnlocked = false;
+
+        player.Stats.evasion.RemoveModifier(evasionValue);
+        Inventory.Instance.UpdateStatSlotsUI();
+    }
+
     // Check skills
     public override void CheckUnlockedSkills()
     {

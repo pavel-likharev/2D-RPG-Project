@@ -31,6 +31,11 @@ public class BlackholeSkillController : SkillController
 
     }
 
+    public override void ResetSkillController()
+    {
+        BlackholeSkillUnlocked = false;
+    }
+
     // Check skills
     public override void CheckUnlockedSkills()
     {
