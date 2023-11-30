@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour, ISavePoint
 {
     public static GameManager Instance { get; private set; }
+    public bool IsGamePause { get; private set; }
 
     [SerializeField] private Checkpoint[] checkpoints;
 
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour, ISavePoint
     {
         if (Instance != null)
         {
-            Destroy(Instance.gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -28,6 +29,19 @@ public class GameManager : MonoBehaviour, ISavePoint
         checkpoints = FindObjectsOfType<Checkpoint>();
     }
 
+    public void PauseGame(bool isPause)
+    {
+        if (isPause)
+        {
+            IsGamePause = isPause;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            IsGamePause = isPause;
+            Time.timeScale = 1;
+        }
+    }
 
     public void RestartScene()
     {
@@ -35,6 +49,12 @@ public class GameManager : MonoBehaviour, ISavePoint
 
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+    }
+
+    public void ExitGame()
+    {
+        SaveManager.Instance.SaveGame();
+        Application.Quit();
     }
 
     public void SaveData(ref GameData data)
@@ -119,10 +139,8 @@ public class GameManager : MonoBehaviour, ISavePoint
 
         return closestCheckpoint;
     }
-
     public void SetLostCurrency(int currency)
     {
         lostCurrencyAmount = currency;
     }
-
 }

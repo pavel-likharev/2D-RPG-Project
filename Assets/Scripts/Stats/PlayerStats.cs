@@ -6,6 +6,8 @@ public class PlayerStats : CharacterStats
 {
     private Player player;
 
+    private float limitForKnockback = 0.3f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,6 +32,14 @@ public class PlayerStats : CharacterStats
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
+
+        if (damage > GetMaxHealthValue() * limitForKnockback)
+        {
+            Vector2 knockbackPower = new Vector2(7, 10);
+            player.SetupKnockbackPower(knockbackPower);
+            AudioManager.Instance.PlaySFX(32);
+            player.CharacterFX.ScreenShakeOnHugeDamage();
+        }
 
         Inventory.Instance.UseArmor();
     }

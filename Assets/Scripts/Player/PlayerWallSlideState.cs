@@ -29,6 +29,11 @@ public class PlayerWallSlideState : PlayerState
         //    stateMachine.ChangeState(player.IdleState);
         //}
 
+        if (!player.IsWallDetected())
+        {
+            stateMachine.ChangeState(player.AirState);
+        }
+
         if (yInput < 0)
         {
             player.SetVelocity(0, rb.velocity.y);
@@ -38,7 +43,7 @@ public class PlayerWallSlideState : PlayerState
             player.SetVelocity(0, rb.velocity.y * 0.7f);
         }
 
-        if (player.IsGroundedDetected() || !player.IsWallDetected())
+        if (player.IsGroundedDetected())
         {
             stateMachine.ChangeState(player.IdleState);
         }

@@ -15,7 +15,7 @@ public class UI : MonoBehaviour, ISavePoint
     {
         if (Instance != null)
         {
-            Destroy(Instance.gameObject);
+            Destroy(gameObject);
         }
         else
         {

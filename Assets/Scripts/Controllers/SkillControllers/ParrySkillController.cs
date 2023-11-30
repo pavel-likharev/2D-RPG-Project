@@ -28,21 +28,74 @@ public class ParrySkillController : SkillController
     {
         base.Start();
 
-        parryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockParrySkill);
+        parryUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockParry);
         parryUnlockSlot.SetPriceText(parryPrice);
 
-        restoreOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockRestoreOnParrySkill);
+        restoreOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockRestoreOnParry);
         restoreOnParryUnlockSlot.SetPriceText(restoreOnParryPrice);
 
-        cloneOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(UnlockCloneOnParrySkill);
+        cloneOnParryUnlockSlot.GetComponent<Button>().onClick.AddListener(TryUnlockCloneOnParry);
         cloneOnParryUnlockSlot.SetPriceText(cloneOnParryPrice);
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        ParryUnlocked = parryUnlockSlot.Unlocked;
-        RestoreOnParryUnlocked = restoreOnParryUnlockSlot.Unlocked;
-        CloneOnParryUnlocked = cloneOnParryUnlockSlot.Unlocked;
+        if (parryUnlockSlot.Unlocked)
+            UnlockParry();
+
+        if (restoreOnParryUnlockSlot.Unlocked)
+            UnlockRestoreOnParry();
+
+        if (cloneOnParryUnlockSlot.Unlocked)
+            UnlockCloneOnParry();
+    }
+
+    private void TryUnlockParry()
+    {
+        if (UnlockSkill(parryUnlockSlot, parryPrice, true))
+            UnlockParry();
+
+    }
+
+    private void UnlockParry()
+    {
+        ParryUnlocked = true;
+    }
+
+    private void TryUnlockRestoreOnParry()
+    {
+        if (UnlockSkill(restoreOnParryUnlockSlot, restoreOnParryPrice, ParryUnlocked))
+            UnlockRestoreOnParry();
+    }
+
+    private void UnlockRestoreOnParry()
+    {
+        RestoreOnParryUnlocked = true;
+    }
+
+    private void TryUnlockCloneOnParry()
+    {
+        if (UnlockSkill(cloneOnParryUnlockSlot, cloneOnParryPrice, RestoreOnParryUnlocked))
+            UnlockCloneOnParry();
+    }
+
+    private void UnlockCloneOnParry()
+    {
+        CloneOnParryUnlocked = true;
+    }
+
+    // Logic
+    protected override void UseSkill()
+    {
+        base.UseSkill();
+
+        if (ParryUnlocked)
+        {
+            player.StateMachine.ChangeState(player.ParryState);
+
+            UI.Instance.InGame.SetParryCooldown();
+        }
     }
 
     public void AttemptRestoreHealth()
@@ -55,44 +108,5 @@ public class ParrySkillController : SkillController
     {
         if (CloneOnParryUnlocked)
             player.Skill.CloneSkillController.CreateCloneWithDelay(target);
-    }
-
-    private void UnlockParrySkill()
-    {
-        ParryUnlocked = UnlockSkill(parryUnlockSlot, parryPrice);
-
-        parryUnlockSlot.GetComponent<Button>().enabled = false;
-    }
-
-    private void UnlockRestoreOnParrySkill()
-    {
-        if (ParryUnlocked)
-        {
-            RestoreOnParryUnlocked = UnlockSkill(restoreOnParryUnlockSlot, restoreOnParryPrice);
-
-            restoreOnParryUnlockSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    private void UnlockCloneOnParrySkill()
-    {
-        if (RestoreOnParryUnlocked)
-        {
-            CloneOnParryUnlocked = UnlockSkill(cloneOnParryUnlockSlot, cloneOnParryPrice);
-
-            cloneOnParryUnlockSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    protected override void UseSkill()
-    {
-        base.UseSkill();
-
-        if (ParryUnlocked)
-        {
-            player.StateMachine.ChangeState(player.ParryState);
-
-            UI.Instance.InGame.SetParryCooldown();
-        }
     }
 }

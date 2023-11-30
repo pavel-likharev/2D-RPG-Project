@@ -19,38 +19,23 @@ public class SkeletonBattleState : EnemyState
         base.Enter();
 
         player = PlayerManager.Instance.Player.transform;
+
+        if (player.GetComponent<PlayerStats>().IsDead)
+            stateMachine.ChangeState(enemySkeleton.MoveState);
+
+
+
     }
 
     public override void Exit()
     {
         base.Exit();
+        enemySkeleton.Animator.speed = 1;
     }
 
     public override void Update()
     {
         base.Update();
-
-        if (enemySkeleton.IsPlayerDetected())
-        {
-            stateTimer = enemySkeleton.battleTime;
-
-            if (enemySkeleton.IsPlayerDetected().distance < enemySkeleton.attackDistance)
-            {
-                if (CanAttack())
-                {
-                    stateMachine.ChangeState(enemySkeleton.AttackState);
-                }
-            }
-        }
-        else
-        {
-            if (stateTimer <= 0 || Vector2.Distance(enemySkeleton.transform.position, player.position) > enemySkeleton.agressiveDistance)
-            {
-                stateMachine.ChangeState(enemySkeleton.IdleState);
-            }
-        }
-
-        
 
         if (player.position.x > enemySkeleton.transform.position.x)
         {
@@ -61,8 +46,35 @@ public class SkeletonBattleState : EnemyState
             moveDir = -1;
         }
 
-        enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * moveDir, rb.velocity.y);
+        if (enemySkeleton.IsPlayerDetected())
+        {
+            stateTimer = enemySkeleton.battleTime;
 
+            if (enemySkeleton.IsPlayerDetected().distance < enemySkeleton.attackDistance)
+            {
+                enemySkeleton.Animator.speed = 0;
+                if (CanAttack())
+                {
+                    stateMachine.ChangeState(enemySkeleton.AttackState);
+                }
+            }
+            else
+            {
+                enemySkeleton.Animator.speed = 1;
+                enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * moveDir, rb.velocity.y);
+            }
+
+        }
+        else
+        {
+            if (stateTimer <= 0 || Vector2.Distance(enemySkeleton.transform.position, player.position) > enemySkeleton.agressiveDistance)
+            {
+                stateMachine.ChangeState(enemySkeleton.MoveState);
+            }
+            enemySkeleton.SetVelocity(enemySkeleton.moveSpeed * moveDir, rb.velocity.y);
+        }
+
+        
     }
 
     private bool CanAttack() => Time.time >= enemySkeleton.lastTimeAttack + enemySkeleton.attackCooldown;

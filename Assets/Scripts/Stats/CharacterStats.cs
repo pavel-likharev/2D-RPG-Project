@@ -27,6 +27,7 @@ public class CharacterStats : MonoBehaviour
 
     public bool IsDead { get; private set; }
     public bool IsVulnerable { get; private set; }
+    public bool IsInvincible { get; private set; }
 
     private float vulnerableModify = 1.1f;
 
@@ -108,22 +109,35 @@ public class CharacterStats : MonoBehaviour
 
         int totalDamage = damage.GetValue() + strength.GetValue();
 
+        Debug.Log(totalDamage);
         totalDamage = Mathf.RoundToInt(totalDamage * multiplierDamage);
+        Debug.Log(totalDamage);
+
+        bool isCrit = false;
 
         if (CanCrit())
+        {
             totalDamage = CalculateCriticalDamage(totalDamage);
+            isCrit = true;
+        }
+
+        fx.CreateHitFX(target.transform, isCrit);
 
         totalDamage = CheckTargetArmor(target, totalDamage);
 
         target.TakeDamage(totalDamage, knockBackDir);
+
         // DoMagicalDamage(target);
     }
     public virtual void TakeDamage(int damage, int knockBackDir)
     {
+        if (IsInvincible)
+            return;
+
         DecreaseHealth(damage);
 
         GetComponent<Character>().DamageImpact(knockBackDir);
-        fx.StartCoroutine("HitFX");
+        fx.StartCoroutine("HitColorFX");
 
         if (currentHealth <= 0 && !IsDead)
             Die();
@@ -134,6 +148,7 @@ public class CharacterStats : MonoBehaviour
     {
         StartCoroutine(VulnerableFor(duration));
     }
+    public void MakeInvincible(bool isInvincible) => IsInvincible = isInvincible;
     private IEnumerator VulnerableFor(float duration)
     {
         IsVulnerable = true;
@@ -206,6 +221,9 @@ public class CharacterStats : MonoBehaviour
     }
     protected virtual void DecreaseHealth(int damage)
     {
+        if (IsDead) 
+            return;
+        
         if (IsVulnerable)
         {
             damage = Mathf.RoundToInt(damage * vulnerableModify);
@@ -213,11 +231,19 @@ public class CharacterStats : MonoBehaviour
 
         currentHealth -= damage;
 
+        fx.CreatePopupText(damage.ToString());
+
         OnHealthChange?.Invoke(this, EventArgs.Empty);
     }
     protected virtual void Die()
     {
         IsDead = true;
+    }
+
+    public void KillCharacter()
+    {
+        if (!IsDead)
+            Die();
     }
 
     #region Magical Damage and elements 

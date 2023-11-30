@@ -50,7 +50,7 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.R) && player.Skill.BlackholeSkillController.BlackholeSkillUnlocked)
         {
-            stateMachine.ChangeState(player.BlackholeState);
+            player.Skill.BlackholeSkillController.CanUseSkill();
         }
     }
 

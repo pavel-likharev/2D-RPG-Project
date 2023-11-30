@@ -61,6 +61,8 @@ public class UI_MenuController : MonoBehaviour
 
     public void SwitchPanel(GameObject panel)
     {
+        GameManager.Instance?.PauseGame(true);
+
         AudioManager.Instance.PlaySFX(7);
 
         menu.gameObject.SetActive(true);
@@ -90,8 +92,10 @@ public class UI_MenuController : MonoBehaviour
     {
         if (menu.activeSelf)
         {
-            AudioManager.Instance.PlaySFX(7);
             menu.gameObject.SetActive(false);
+
+            AudioManager.Instance.PlaySFX(7);
+            GameManager.Instance?.PauseGame(false);
         }
     }
 }

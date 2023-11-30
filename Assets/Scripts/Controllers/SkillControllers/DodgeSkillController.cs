@@ -18,36 +18,44 @@ public class DodgeSkillController : SkillController
     {
         base.Start();
 
-        dodgeSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDodge);
+        dodgeSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockDodge);
         dodgeSkillSlot.SetPriceText(dodgePrice);
 
-        dodgeWithCloneSkillSlot.GetComponent<Button>().onClick.AddListener(UnlockDodgeWithClone);
+        dodgeWithCloneSkillSlot.GetComponent<Button>().onClick.AddListener(TryUnlockDodgeWithClone);
         dodgeWithCloneSkillSlot.SetPriceText(dodgeWithClonePrice);
     }
 
+    // Check skills
     public override void CheckUnlockedSkills()
     {
-        DodgeUnlocked = dodgeSkillSlot.Unlocked;
-        DodgeWithCloneUnlocked = dodgeWithCloneSkillSlot.Unlocked;
+        if (dodgeSkillSlot.Unlocked)
+            UnlockDodge();
+        if (dodgeWithCloneSkillSlot.Unlocked)
+            UnlockDodgeWithClone();
+    }
+
+    private void TryUnlockDodge()
+    {
+        if (UnlockSkill(dodgeSkillSlot, dodgePrice, true))
+            UnlockDodge();
     }
 
     private void UnlockDodge()
     {
-        DodgeUnlocked = UnlockSkill(dodgeSkillSlot, dodgePrice);
+        DodgeUnlocked = true;
 
         player.Stats.evasion.AddModifier(evasionValue);
         Inventory.Instance.UpdateStatSlotsUI();
+    }
 
-        dodgeSkillSlot.GetComponent<Button>().enabled = false;
+    private void TryUnlockDodgeWithClone()
+    {
+        if (UnlockSkill(dodgeWithCloneSkillSlot, dodgeWithClonePrice, DodgeUnlocked))
+            UnlockDodgeWithClone();
     }
 
     private void UnlockDodgeWithClone()
     {
-        if (DodgeUnlocked)
-        {
-            DodgeWithCloneUnlocked = UnlockSkill(dodgeWithCloneSkillSlot, dodgeWithClonePrice);
-
-            dodgeWithCloneSkillSlot.GetComponent<Button>().enabled = false;
-        }
+        DodgeWithCloneUnlocked = true;
     }
 }

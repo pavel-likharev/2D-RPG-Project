@@ -83,6 +83,7 @@ public class CloneSkill : MonoBehaviour
         {
             if (hit.GetComponent<Enemy>() != null)
             {
+                Debug.Log("clone attack ");
                 PlayerManager.Instance.Player.Stats.DoDamage(hit.GetComponent<CharacterStats>(), moveDir, multiplierAttack);
 
                 if (canApplyHitEffect)

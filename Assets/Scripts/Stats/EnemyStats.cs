@@ -72,5 +72,7 @@ public class EnemyStats : CharacterStats
 
         enemy.Die();
         myDrop.GenerateDrop();
+
+        Destroy(gameObject, 3f);
     }
 }

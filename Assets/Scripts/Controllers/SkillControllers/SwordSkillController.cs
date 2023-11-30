@@ -11,7 +11,7 @@ public class SwordSkillController : SkillController
         Spin
     }
 
-    public SwordType swordType;
+    public SwordType Sword { get; private set; }
 
     [Header("Skill info")]
     [SerializeField] private GameObject swordPrefab;
@@ -69,11 +69,6 @@ public class SwordSkillController : SkillController
     [SerializeField] private float spaceBetweenDots;
     private GameObject[] dots;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void Start()
     {
         base.Start();
@@ -82,102 +77,24 @@ public class SwordSkillController : SkillController
 
         SetupGravity();
 
-        throwSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockThrowSword);
+        throwSwordSlot.GetComponent<Button>().onClick.AddListener(TryUnlockThrowSword);
         throwSwordSlot.SetPriceText(throwSwordPrice);
 
-        bouncySwordSlot.GetComponent<Button>().onClick.AddListener(UnlockBouncySword);
+        bouncySwordSlot.GetComponent<Button>().onClick.AddListener(TryUnlockBouncySword);
         bouncySwordSlot.SetPriceText(bouncySwordPrice);
         
-        pierceSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockPierceSword);
+        pierceSwordSlot.GetComponent<Button>().onClick.AddListener(TryUnlockPierceSword);
         pierceSwordSlot.SetPriceText(pierceSwordPrice);
         
-        spinSwordSlot.GetComponent<Button>().onClick.AddListener(UnlockSpinSword);
+        spinSwordSlot.GetComponent<Button>().onClick.AddListener(TryUnlockSpinSword);
         spinSwordSlot.SetPriceText(spinSwordPrice);
 
-        timeStopSlot.GetComponent<Button>().onClick.AddListener(UnlockTimeStop);
+        timeStopSlot.GetComponent<Button>().onClick.AddListener(TryUnlockTimeStop);
         timeStopSlot.SetPriceText(timeStopPrice);
         
-        vulnerableSlot.GetComponent<Button>().onClick.AddListener(UnlockVulnerable);
+        vulnerableSlot.GetComponent<Button>().onClick.AddListener(TryUnlockVulnerable);
         vulnerableSlot.SetPriceText(vulnerablePrice);
-        }
-
-    public override void CheckUnlockedSkills()
-    {
-        ThrowSwordUnlocked = throwSwordSlot.Unlocked;
-        BouncySwordUnlocked = bouncySwordSlot.Unlocked;
-        PierceSwordUnlocked = pierceSwordSlot.Unlocked;
-        SpinSwordUnlocked = spinSwordSlot.Unlocked;
-        TimeStopUnlocked = timeStopSlot.Unlocked;
-        VulnerableUnlocked = vulnerableSlot.Unlocked;
     }
-    #region Unlock Skills
-    private void UnlockThrowSword()
-    {
-        ThrowSwordUnlocked = UnlockSkill(throwSwordSlot, throwSwordPrice);
-
-        throwSwordSlot.GetComponent<Button>().enabled = false;
-    }
-    
-    private void UnlockBouncySword()
-    {
-        if (ThrowSwordUnlocked && !PierceSwordUnlocked && !SpinSwordUnlocked)
-        {
-            BouncySwordUnlocked = UnlockSkill(bouncySwordSlot, bouncySwordPrice);
-            swordType = SwordType.Bounce;
-
-            DisableButtons();
-        }
-    }
-
-    private void UnlockPierceSword()
-    {
-        if (ThrowSwordUnlocked && !BouncySwordUnlocked && !SpinSwordUnlocked)
-        {
-            PierceSwordUnlocked = UnlockSkill(pierceSwordSlot, pierceSwordPrice);
-            swordType = SwordType.Pierce;
-
-            DisableButtons();
-        }
-    }
-
-    private void UnlockSpinSword()
-    {
-        if (ThrowSwordUnlocked && !BouncySwordUnlocked && !PierceSwordUnlocked)
-        {
-            SpinSwordUnlocked = UnlockSkill(spinSwordSlot, spinSwordPrice);
-            swordType = SwordType.Spin;
-
-            DisableButtons();
-        }
-    }
-
-    private void UnlockTimeStop()
-    {
-        if (ThrowSwordUnlocked)
-        {
-            TimeStopUnlocked = UnlockSkill(timeStopSlot, timeStopPrice);
-
-            timeStopSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    private void UnlockVulnerable()
-    {
-        if (TimeStopUnlocked)
-        {
-            VulnerableUnlocked = UnlockSkill(vulnerableSlot, vulnerablePrice);
-
-            vulnerableSlot.GetComponent<Button>().enabled = false;
-        }
-    }
-
-    private void DisableButtons()
-    {
-        bouncySwordSlot.GetComponent<Button>().enabled = false;
-        pierceSwordSlot.GetComponent<Button>().enabled = false;
-        spinSwordSlot.GetComponent<Button>().enabled = false;
-    }
-    #endregion
 
     protected override void Update()
     {
@@ -197,6 +114,102 @@ public class SwordSkillController : SkillController
         }
     }
 
+    // Check skills
+    public override void CheckUnlockedSkills()
+    {
+        if (throwSwordSlot.Unlocked)
+            UnlockThrowSword();
+
+        if (bouncySwordSlot.Unlocked)
+            UnlockBouncySword();
+
+        if (pierceSwordSlot.Unlocked)
+            UnlockPierceSword();
+
+        if (spinSwordSlot.Unlocked)
+            UnlockSpinSword();
+
+        if (timeStopSlot.Unlocked)
+            UnlockTimeStop();
+
+        if (vulnerableSlot.Unlocked)
+            UnlockVulnerable();
+    }
+
+    #region Unlock Skills
+    private void TryUnlockThrowSword()
+    {
+        if (UnlockSkill(throwSwordSlot, throwSwordPrice, true))
+            UnlockThrowSword();
+    }
+
+    private void UnlockThrowSword()
+    {
+        ThrowSwordUnlocked = true;
+    }
+
+    private void TryUnlockBouncySword()
+    {
+        if (UnlockSkill(bouncySwordSlot, bouncySwordPrice, ThrowSwordUnlocked && !PierceSwordUnlocked && !SpinSwordUnlocked))
+            UnlockBouncySword();
+    }
+
+    private void UnlockBouncySword()
+    {
+        BouncySwordUnlocked = true;
+        Sword = SwordType.Bounce;
+    }
+
+    private void TryUnlockPierceSword()
+    {
+        if (UnlockSkill(pierceSwordSlot, pierceSwordPrice, ThrowSwordUnlocked && !BouncySwordUnlocked && !SpinSwordUnlocked))
+            UnlockPierceSword();
+    }
+
+    private void UnlockPierceSword()
+    {
+        PierceSwordUnlocked = true;
+        Sword = SwordType.Pierce;
+    }
+
+    private void TryUnlockSpinSword()
+    {
+        if (UnlockSkill(spinSwordSlot, spinSwordPrice, ThrowSwordUnlocked && !BouncySwordUnlocked && !PierceSwordUnlocked))
+            UnlockSpinSword();
+    }
+
+    private void UnlockSpinSword()
+    {
+        SpinSwordUnlocked = true;
+        Sword = SwordType.Spin;
+    }
+
+    private void TryUnlockTimeStop()
+    {
+        if (UnlockSkill(timeStopSlot, timeStopPrice, ThrowSwordUnlocked))
+            UnlockTimeStop();
+    }
+
+    private void UnlockTimeStop()
+    {
+        TimeStopUnlocked = true;
+    }
+
+    private void TryUnlockVulnerable()
+    {
+        if (UnlockSkill(vulnerableSlot, vulnerablePrice, TimeStopUnlocked))
+            UnlockVulnerable();
+    }
+
+    private void UnlockVulnerable()
+    {
+        VulnerableUnlocked = true;
+    }
+
+    #endregion
+
+
+    // Logic
     protected override void UseSkill()
     {
         base.UseSkill();
@@ -211,15 +224,15 @@ public class SwordSkillController : SkillController
 
     private void SetupGravity()
     {
-        if (swordType == SwordType.Bounce)
+        if (Sword == SwordType.Bounce)
         {
             swordGravity = bounceGravity;
         }
-        else if (swordType == SwordType.Pierce)
+        else if (Sword == SwordType.Pierce)
         {
             swordGravity = pierceGravity;
         }
-        else if (swordType == SwordType.Spin)
+        else if (Sword == SwordType.Spin)
         {
             swordGravity = spinGravity;
         }
@@ -230,15 +243,15 @@ public class SwordSkillController : SkillController
         GameObject newSword = Instantiate(swordPrefab, spawnPosition.position, transform.rotation);
         SwordSkill skill = newSword.GetComponent<SwordSkill>();
 
-        if (swordType == SwordType.Bounce)
+        if (Sword == SwordType.Bounce)
         {
             skill.SetupBouncing(true, bounceAmount, bouncingForce);
         }
-        else if (swordType == SwordType.Pierce)
+        else if (Sword == SwordType.Pierce)
         {
             skill.SetupPiercing(true, pierceAmount);
         }
-        else if (swordType == SwordType.Spin)
+        else if (Sword == SwordType.Spin)
         {
             skill.SetupSpinning(true, spinDuration, maxTravelDistance, hitCooldown);
         }

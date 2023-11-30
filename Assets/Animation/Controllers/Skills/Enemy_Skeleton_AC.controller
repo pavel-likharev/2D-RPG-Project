@@ -151,7 +151,7 @@ AnimatorStateMachine:
     m_Position: {x: 410, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 768147987272435294}
-    m_Position: {x: 440, y: 500, z: 0}
+    m_Position: {x: 410, y: 470, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8475864255232025085}
     m_Position: {x: 470, y: 560, z: 0}
@@ -183,6 +183,12 @@ AnimatorController:
   m_Name: Enemy_Skeleton_AC
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: IsAttackWait
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: IsStunned
     m_Type: 4
     m_DefaultFloat: 0

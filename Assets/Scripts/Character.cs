@@ -39,7 +39,7 @@ public class Character : MonoBehaviour
     public float attackCheckRadius;
 
     [Header("Knockback info")]
-    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected Vector2 knockbackPower;
     [SerializeField] protected float knockbackDuration = 0.07f;
     protected bool isKnocbacked;
 
@@ -77,7 +77,6 @@ public class Character : MonoBehaviour
 
     public void DamageImpact(int knockbackDir) // Dir => 1 = right, -1 = left, 0 = nothing
     {
-        
         StartCoroutine("HitKnockback", knockbackDir);
     }
 
@@ -85,11 +84,18 @@ public class Character : MonoBehaviour
     {
         isKnocbacked = true;
 
-        Rb.velocity = new Vector2(knockbackDirection.x * knockbackDir, knockbackDirection.y);
+        Rb.velocity = new Vector2(knockbackPower.x * knockbackDir, knockbackPower.y);
 
         yield return new WaitForSeconds(knockbackDuration);
 
         isKnocbacked = false;
+        SetupZeroKnockbackPower();
+    }
+
+    public void SetupKnockbackPower(Vector2 knockbackPower) => this.knockbackPower = knockbackPower;
+
+    protected virtual void SetupZeroKnockbackPower()
+    {
     }
 
     public virtual void Die()
