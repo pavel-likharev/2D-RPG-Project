@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+using TMPro;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour, ISavePoint
@@ -13,12 +10,13 @@ public class Inventory : MonoBehaviour, ISavePoint
 
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
-    
+
     public List<InventoryItem> stash;
     public Dictionary<ItemData, InventoryItem> stashDictionary;
 
     public List<InventoryItem> equipment;
     public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
+
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventoryContainer;
@@ -39,7 +37,7 @@ public class Inventory : MonoBehaviour, ISavePoint
     private float armorCooldown;
 
     [Header("Data base")]
-    private List<ItemData> itemDataBase;
+    public ItemData[] itemDataBase;
     public List<InventoryItem> loadedItems;
     public List<ItemData_Equipment> loadedEquipment;
 
@@ -49,6 +47,8 @@ public class Inventory : MonoBehaviour, ISavePoint
             Instance = this;
         else
             Destroy(gameObject);
+
+        itemDataBase = Resources.LoadAll<ItemData>("");
     }
 
     private void Start()
@@ -67,11 +67,11 @@ public class Inventory : MonoBehaviour, ISavePoint
         equipmentSlots = equipmentContainer.GetComponentsInChildren<UI_EquipmentSlot>();
         statSlots = statSlotContainer.GetComponentsInChildren<UI_StatSlot>();
 
-        AddStartingInventory();
+        AddLoadingInventory();
         UpdateStatSlotsUI();
     }
 
-    private void AddStartingInventory()
+    private void AddLoadingInventory()
     {
         foreach (ItemData_Equipment item in loadedEquipment)
         {
@@ -117,7 +117,7 @@ public class Inventory : MonoBehaviour, ISavePoint
             AddToInventory(oldEquipment);
             UnequipItem(oldEquipment);
         }
-        
+
 
         equipment.Add(newItem);
         equipmentDictionary.Add(newEquipment, newItem);
@@ -143,7 +143,7 @@ public class Inventory : MonoBehaviour, ISavePoint
 
     public void AddItem(ItemData item)
     {
-        switch (item.itemType)  
+        switch (item.itemType)
         {
             case ItemType.Material:
                 AddToStash(item);
@@ -153,7 +153,7 @@ public class Inventory : MonoBehaviour, ISavePoint
                 break;
             default:
                 break;
-        } 
+        }
     }
 
     public bool CanAddItemToInventory() => inventory.Count < inventoryItemSlots.Length;
@@ -172,7 +172,7 @@ public class Inventory : MonoBehaviour, ISavePoint
         }
 
         UpdateInventorySlotsUI();
-        
+
     }
 
     private void AddToStash(ItemData item)
@@ -266,7 +266,7 @@ public class Inventory : MonoBehaviour, ISavePoint
                 Debug.Log("Not enough materials");
                 return false;
             }
-        }        
+        }
 
         foreach (InventoryItem item in materialsToRemove)
         {
@@ -330,7 +330,6 @@ public class Inventory : MonoBehaviour, ISavePoint
 
         if (armor)
         {
-            Debug.Log("is armor");
             bool canUseArmor = Time.time > lastTimeUsedArmor + armorCooldown;
 
             if (canUseArmor)
@@ -406,8 +405,6 @@ public class Inventory : MonoBehaviour, ISavePoint
 
     public void LoadData(GameData data)
     {
-        GetItemDataBase();
-
         foreach (KeyValuePair<string, int> kvp in data.inventory)
         {
             foreach (var item in itemDataBase)
@@ -453,20 +450,5 @@ public class Inventory : MonoBehaviour, ISavePoint
         {
             data.equipment.Add(pair.Key.itemId);
         }
-    }
-
-    private List<ItemData> GetItemDataBase()
-    {
-        itemDataBase = new List<ItemData>();
-        string[] assetNames = AssetDatabase.FindAssets("", new[] { "Assets/DataSO/Items" });
-
-        foreach (string assetName in assetNames)
-        {
-            var path = AssetDatabase.GUIDToAssetPath(assetName);
-            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(path);
-            itemDataBase.Add(itemData);
-        }
-
-        return itemDataBase;
     }
 }

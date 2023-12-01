@@ -146,7 +146,17 @@ public class Enemy : Character
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     #region Collusion
-    public RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance, playerLayer);
+    public RaycastHit2D IsPlayerDetected()
+    {
+        RaycastHit2D playerDetected = Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance, playerLayer);
+        RaycastHit2D wallDetected = Physics2D.Raycast(playerCheck.position, Vector2.right * MoveDir, playerCheckDistance + 1, groundLayer);
+
+        if (wallDetected)
+            return default(RaycastHit2D);
+
+        return playerDetected;
+
+    }
 
     protected override void OnDrawGizmos()
     {

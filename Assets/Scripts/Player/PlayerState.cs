@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerState 
+public class PlayerState
 {
     private const string VELOCITY_Y = "Velocity.y";
 
@@ -17,7 +14,7 @@ public class PlayerState
     protected float stateTimer;
     protected bool isTriggerCalled;
 
-    public PlayerState (Player player, PlayerStateMachine stateMachine, string animationBoolName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, string animationBoolName)
     {
         this.player = player;
         this.stateMachine = stateMachine;

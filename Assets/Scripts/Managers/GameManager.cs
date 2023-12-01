@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour, ISavePoint
 
     public void ExitGame()
     {
-        SaveManager.Instance.SaveGame();
         Application.Quit();
     }
 

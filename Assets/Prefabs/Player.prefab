@@ -226,23 +226,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d29519e461c594c87804f3428361ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
   hitMaterial: {fileID: 2100000, guid: 8de6b75f5f444534081b04bb92cb1743, type: 2}
   flashDuration: 0.2
   chillColor:
-  - {r: 0.14509805, g: 0.73333335, b: 0.9921569, a: 0}
-  - {r: 0.14901961, g: 0.73333335, b: 0.9921569, a: 0}
+  - {r: 0.14509805, g: 0.73333335, b: 0.9921569, a: 1}
+  - {r: 0.14901961, g: 0.73333335, b: 0.9921569, a: 1}
   igniteColor:
-  - {r: 1, g: 0.2901961, b: 0.2901961, a: 0}
-  - {r: 1, g: 0.4784314, b: 0.4784314, a: 0}
+  - {r: 1, g: 0.2901961, b: 0.2901961, a: 1}
+  - {r: 1, g: 0.4784314, b: 0.4784314, a: 1}
   shockColor:
-  - {r: 1, g: 0.8588236, b: 0.18823531, a: 0}
-  - {r: 1, g: 0.9294118, b: 0.5921569, a: 0}
+  - {r: 1, g: 0.8588236, b: 0.18823531, a: 1}
+  - {r: 1, g: 0.9294118, b: 0.5921569, a: 1}
   chillFX: {fileID: 2639032720317426397}
   igniteFX: {fileID: 3967586720196004447}
   shockFX: {fileID: 6812212719539007571}
   hitFx: {fileID: 1143977548828315528, guid: 3357db5f27b909b408927041b413dad3, type: 3}
   criticalHitFx: {fileID: 4177748826846381036, guid: d95d917df9347db4bbda9d94b6a02a85, type: 3}
-  textPopupPrefab: {fileID: 8694704203416743984, guid: 1c8960ddc90b03541afd47fe77bdcac3, type: 3}
   shakeMultiplier: 0.2
   shakePowerOnCatchSword: {x: 1, y: 0, z: 0}
   shakePowerOnHugeDamage: {x: 2, y: 2, z: 0}
